@@ -62,17 +62,73 @@ const EventsPage = () => {
     };
 
     const handleDeleteEvent = (eventId) => {
-
+        //TODO DELETE
+        const url = `https://api.yourservice.com/events/${eventId}`;
+        fetch(url, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete event');
+                }
+                setEvents(events.filter(event => event.id !== eventId));
+            })
+            .catch((error) => {
+                console.error("Failed to delete event:", error);
+                // Optionally, show an error message to the user
+            });
     };
 
     const handleSaveEvent = (formData) => {
-        if (currentEvent === null) {
-            //TODO POST
-
+        if (currentEvent) {
+            // Editing existing event
+            const url = `https://api.yourservice.com/events/${currentEvent.id}`;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update event');
+                    }
+                    setEvents(events.map(event => event.id === currentEvent.id ? {...formData, id: currentEvent.id} : event));
+                })
+                .catch((error) => {
+                    console.error("Failed to update event:", error);
+                    // Optionally, show an error message to the user
+                });
         } else {
-            //TODO PUT
-
+            // Adding new event
+            const url = `https://api.yourservice.com/events`;
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to add new event');
+                    }
+                    // Retrieve the newly added event with its ID
+                    return response.json();
+                })
+                .then(newEvent => {
+                    setEvents([...events, newEvent]);
+                })
+                .catch((error) => {
+                    console.error("Failed to add new event:", error);
+                    // Optionally, show an error message to the user
+                });
         }
+
         setIsAddingOrEditing(false);
     };
 
