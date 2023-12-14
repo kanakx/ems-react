@@ -39,7 +39,7 @@ const HomePage = () => {
 
     const navigate = useNavigate();
 
-    const handleExploreEvents = () => {
+    const handleExploreEventsButton = () => {
         navigate('/events');
     };
 
@@ -48,8 +48,8 @@ const HomePage = () => {
             <Header>
                 <StyledLogo alt="Logo" />
                 <IntroductionText>Welcome to Our Event Management System</IntroductionText>
-                <ExploreButton onClick={handleExploreEvents}>
-                    Explore Events
+                <ExploreButton onClick={handleExploreEventsButton}>
+                    Explore events
                 </ExploreButton>
             </Header>
         </Container>
