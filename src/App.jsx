@@ -18,6 +18,7 @@ const GlobalStyle = createGlobalStyle`
       4. Improve text rendering 
     */
     body {
+        font-family: 'Roboto', sans-serif;
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
     }
