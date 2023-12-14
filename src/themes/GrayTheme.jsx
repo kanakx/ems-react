@@ -1,26 +1,23 @@
 const grayTheme = {
     colors: {
-        primary: '#565656', // Button background color
-        secondary: 'lightgray', // Header background color
-        text: '#565656', // Button text color
+        primary: '#565656',
+        secondary: 'lightgray',
+        text: '#565656',
         buttonTextColor: 'lightgray',
-        background: 'white', // General background color
-        logoFill: 'white', // Logo fill color
+        background: 'white',
+        logoFill: 'white',
         errorMessage: '#ff4d4f'
     },
     typography: {
-        text: '16px', // Standard text size
-        introductionText: '20px', // Introduction text size
-        // Add more as needed
+        text: '16px',
+        introductionText: '20px'
     },
     spacing: {
         small: '10px',
         medium: '20px',
-        large: '30px',
-        // Add more as needed
+        large: '30px'
     },
-    borderRadius: '8px', // Standard border-radius
-    // Add more theme properties as needed
+    borderRadius: '8px'
 };
 
 export default grayTheme;
