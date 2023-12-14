@@ -26,7 +26,7 @@ const IntroductionText = styled.p`
     margin-top: 20px;
 `;
 
-const ExploreButton = styled.button`
+const StyledButton = styled.button`
     background-color: #61dafb;
     border: none;
     padding: 10px 20px;
@@ -43,14 +43,24 @@ const HomePage = () => {
         navigate('/events');
     };
 
+    const handleAboutButton = () => {
+        navigate('/about');
+    };
+
     return (
         <Container>
             <Header>
                 <StyledLogo alt="Logo" />
                 <IntroductionText>Welcome to Our Event Management System</IntroductionText>
-                <ExploreButton onClick={handleExploreEventsButton}>
+                <StyledButton onClick={handleExploreEventsButton}>
                     Explore events
-                </ExploreButton>
+                </StyledButton>
+                {/*<StyledButton onClick={handleExploreEventsButton}>*/}
+                {/*    Your private events*/}
+                {/*</StyledButton>*/}
+                <StyledButton onClick={handleAboutButton}>
+                    About
+                </StyledButton>
             </Header>
         </Container>
     );
