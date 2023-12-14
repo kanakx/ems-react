@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {useState} from "react";
 
-// Styled components
 const Card = styled.div`
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -11,7 +10,7 @@ const Card = styled.div`
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: white;
     max-width: 400px;
-    cursor: pointer; // Added for better user indication
+    cursor: pointer;
 `;
 
 const EventName = styled.h3`
@@ -20,12 +19,23 @@ const EventName = styled.h3`
 `;
 
 const EventDetails = styled.div`
-    display: ${props => props['$show'] ? 'block' : 'none'};
+    display: ${props => props['$show'] ? 'flex' : 'none'};
+    align-items: center;
+    flex-direction: column;
     color: #666;
     font-size: 0.9em;
 `;
 
-const EventCard = ({ event }) => {
+const StyledButton = styled.button`
+    background-color: #61dafb;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+`;
+
+const EventCard = ({ event, onEdit, onDelete }) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleDetails = () => {
@@ -40,6 +50,9 @@ const EventCard = ({ event }) => {
                 <p>Location: {event.location}</p>
                 <p>Type: {event.type}</p>
                 <p>{event.description}</p>
+
+                <StyledButton onClick={() => onEdit(event.id)}>Edit</StyledButton>
+                <StyledButton onClick={() => onDelete(event.id)}>Delete</StyledButton>
             </EventDetails>
         </Card>
     );
@@ -52,7 +65,9 @@ EventCard.propTypes = {
         location: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    onEdit: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired
 };
 
 export default EventCard;

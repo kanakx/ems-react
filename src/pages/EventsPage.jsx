@@ -34,46 +34,63 @@ const StyledButton = styled.button`
 const EventsPage = () => {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
-    const [isAdding, setIsAdding] = useState(false);
+    const [isAddingOrEditing, setIsAddingOrEditing] = useState(false);
+    const [currentEvent, setCurrentEvent] = useState(null);
 
+    //TODO when fetched from an actual API add collection to dependency array so it will be refreshed
     useEffect(() => {
         setEvents(mockEvents);
     }, []);
 
     const handleAddNewButton = () => {
-        setIsAdding(true);
+        setCurrentEvent(null);
+        setIsAddingOrEditing(true);
     };
 
     const handleBackButton = () => {
-        if (isAdding) {
-            setIsAdding(false);
+        if (isAddingOrEditing) {
+            setIsAddingOrEditing(false);
         } else {
             navigate('/');
         }
     };
 
-    const handleSaveEvent = (newEvent) => {
-        //TODO POST to save new event
-        const updatedEvents = [...events, { ...newEvent, id: events.length + 1 }];
-        setEvents(updatedEvents);
-        setIsAdding(false);
+    const handleEditEvent = (eventId) => {
+        const eventToEdit = events.find(event => event.id === eventId);
+        setCurrentEvent(eventToEdit);
+        setIsAddingOrEditing(true);
+    };
+
+    const handleDeleteEvent = (eventId) => {
+
+    };
+
+    const handleSaveEvent = (formData) => {
+        if (currentEvent === null) {
+            //TODO POST
+
+        } else {
+            //TODO PUT
+
+        }
+        setIsAddingOrEditing(false);
     };
 
     return (
         <StyledEventsPage>
-            {isAdding ? (
-                <EventForm onSubmit={handleSaveEvent} />
+            {isAddingOrEditing ? (
+                <EventForm onSubmit={handleSaveEvent} initialEvent={currentEvent} />
             ) : (
                 <>
                     <PageTitle>Events</PageTitle>
-                    <EventList events={events} />
+                    <EventList events={events} onEdit={handleEditEvent} onDelete={handleDeleteEvent} />
                     <StyledButton onClick={handleAddNewButton}>
                         Add new
                     </StyledButton>
                 </>
             )}
             <StyledButton onClick={handleBackButton}>
-                {isAdding ? "Cancel" : "Back"}
+                {isAddingOrEditing ? "Cancel" : "Back"}
             </StyledButton>
         </StyledEventsPage>
     );
