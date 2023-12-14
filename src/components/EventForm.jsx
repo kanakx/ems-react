@@ -29,7 +29,7 @@ const FormInput = styled.input`
 
 const FormButton = styled.button`
     background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.buttonTextColor};
     border: none;
     padding: ${props => props.theme.spacing.small};
     border-radius: ${props => props.theme.borderRadius};

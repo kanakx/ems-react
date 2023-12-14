@@ -33,7 +33,7 @@ const StyledButton = styled.button`
     border-radius: ${props => props.theme.borderRadius};
     cursor: pointer;
     margin-top: ${props => props.theme.spacing.small};
-    color: ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.buttonTextColor};
 `;
 
 

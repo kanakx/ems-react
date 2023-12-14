@@ -34,7 +34,7 @@ const StyledButton = styled.button`
     border-radius: ${props => props.theme.borderRadius}; // Use theme border-radius
     cursor: pointer;
     margin-top: ${props => props.theme.spacing.medium}; // Use theme spacing
-    color: ${props => props.theme.colors.text}; // Use theme text color
+    color: ${props => props.theme.colors.buttonTextColor}; // Use theme text color
 `;
 
 
