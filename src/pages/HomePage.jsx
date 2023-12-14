@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LogoSVG from '../assets/logo.svg?react';
+import LogoSVG from '../assets/logoGray.svg?react';
 import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
