@@ -31,13 +31,19 @@ const StyledButton = styled.button`
     margin-top: 20px;
 `;
 
+const ErrorMessage = styled.p`
+    color: red;
+    font-size: 0.8em;
+`;
+
+
 const EventsPage = () => {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const [isAddingOrEditing, setIsAddingOrEditing] = useState(false);
     const [currentEvent, setCurrentEvent] = useState(null);
+    const [errorMessage, setErrorMessage] = useState('');
 
-    //TODO when fetched from an actual API add collection to dependency array so it will be refreshed
     useEffect(() => {
         setEvents(mockEvents);
     }, []);
@@ -45,6 +51,7 @@ const EventsPage = () => {
     const handleAddNewButton = () => {
         setCurrentEvent(null);
         setIsAddingOrEditing(true);
+        setErrorMessage('');
     };
 
     const handleBackButton = () => {
@@ -78,7 +85,7 @@ const EventsPage = () => {
             })
             .catch((error) => {
                 console.error("Failed to delete event:", error);
-                // Optionally, show an error message to the user
+                setErrorMessage('Failed to delete event. Please try again.');
             });
     };
 
@@ -101,7 +108,7 @@ const EventsPage = () => {
                 })
                 .catch((error) => {
                     console.error("Failed to update event:", error);
-                    // Optionally, show an error message to the user
+                    setErrorMessage('Failed to save event. Please try again.');
                 });
         } else {
             // Adding new event
@@ -125,7 +132,7 @@ const EventsPage = () => {
                 })
                 .catch((error) => {
                     console.error("Failed to add new event:", error);
-                    // Optionally, show an error message to the user
+                    setErrorMessage('Failed to update event. Please try again.');
                 });
         }
 
@@ -140,6 +147,7 @@ const EventsPage = () => {
                 <>
                     <PageTitle>Events</PageTitle>
                     <EventList events={events} onEdit={handleEditEvent} onDelete={handleDeleteEvent} />
+                    {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
                     <StyledButton onClick={handleAddNewButton}>
                         Add new
                     </StyledButton>

@@ -50,18 +50,18 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
         type: '',
         description: ''
     });
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         setEvent({...event, [e.target.name]: e.target.value});
-        setError(''); // Clear error message when user starts typing
+        setErrorMessage(''); // Clear error message when user starts typing
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Validate fields
         if (!event.name || !event.date || !event.location) {
-            setError('Please fill out all fields.');
+            setErrorMessage('Please fill out all fields.');
             return;
         }
         onSubmit(event);
@@ -76,7 +76,7 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
                 <FormInput type="text" name="location" placeholder="Location" value={event.location} onChange={handleChange}/>
                 <FormInput type="text" name="type" placeholder="Type" value={event.type} onChange={handleChange}/>
                 <FormInput type="text" name="description" placeholder="Description" value={event.description} onChange={handleChange}/>
-                {error && <ErrorMessage>{error}</ErrorMessage>}
+                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
                 <FormButton type="submit">Save Event</FormButton>
             </Form>
         </>
