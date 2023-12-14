@@ -1,10 +1,10 @@
-import HomePage from "./pages/HomePage.jsx";
+import MainRouter from "./routers/MainRouter.jsx";
 
 function App() {
 
   return (
     <>
-      <HomePage/>
+      <MainRouter/>
     </>
   );
 

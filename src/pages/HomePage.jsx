@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import LogoSVG from '../assets/logo.svg?react';
+import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
     text-align: center;
@@ -35,12 +36,19 @@ const ExploreButton = styled.button`
 `;
 
 const HomePage = () => {
+
+    const navigate = useNavigate();
+
+    const handleExploreEvents = () => {
+        navigate('/events');
+    };
+
     return (
         <Container>
             <Header>
                 <StyledLogo alt="Logo" />
                 <IntroductionText>Welcome to Our Event Management System</IntroductionText>
-                <ExploreButton onClick={() => console.log('Navigate to events page')}>
+                <ExploreButton onClick={handleExploreEvents}>
                     Explore Events
                 </ExploreButton>
             </Header>

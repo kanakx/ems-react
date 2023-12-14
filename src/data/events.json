@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Tech Conference 2023",
+    "date": "2023-03-15",
+    "location": "New York",
+    "type": "Conference",
+    "description": "An annual conference for tech enthusiasts and professionals."
+  },
+  {
+    "id": 2,
+    "name": "Art & Design Expo",
+    "date": "2023-04-22",
+    "location": "San Francisco",
+    "type": "Exhibition",
+    "description": "Explore the latest trends in art and design."
+  },
+  {
+    "id": 3,
+    "name": "Live Music Festival",
+    "date": "2023-05-30",
+    "location": "Austin",
+    "type": "Festival",
+    "description": "A festival celebrating the best of live music performances."
+  },
+  {
+    "id": 4,
+    "name": "Entrepreneurs Meetup",
+    "date": "2023-06-10",
+    "location": "Chicago",
+    "type": "Meetup",
+    "description": "A meetup for aspiring and established entrepreneurs."
+  },
+  {
+    "id": 5,
+    "name": "Health and Wellness Workshop",
+    "date": "2023-07-05",
+    "location": "Seattle",
+    "type": "Workshop",
+    "description": "A workshop focused on health, wellness, and personal growth."
+  }
+]
