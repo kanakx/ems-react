@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import {useState} from "react";
 
+// Styled components
 const Card = styled.div`
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -9,36 +11,38 @@ const Card = styled.div`
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: white;
     max-width: 400px;
+    cursor: pointer; // Added for better user indication
 `;
 
 const EventName = styled.h3`
-  color: #333;
-  margin-bottom: 5px;
+    color: #333;
+    margin-bottom: 5px;
 `;
 
-const EventInfo = styled.p`
-  color: #666;
-  margin: 5px 0;
-  font-size: 0.9em;
-`;
-
-const EventDescription = styled.p`
-  color: #444;
-  margin-top: 10px;
+const EventDetails = styled.div`
+    display: ${props => props['$show'] ? 'block' : 'none'};
+    color: #666;
+    font-size: 0.9em;
 `;
 
 const EventCard = ({ event }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const toggleDetails = () => {
+        setIsExpanded(!isExpanded);
+    };
 
     return (
-        <Card>
+        <Card onClick={toggleDetails}>
             <EventName>{event.name}</EventName>
-            <EventInfo>Date: {event.date}</EventInfo>
-            <EventInfo>Location: {event.location}</EventInfo>
-            <EventInfo>Type: {event.type}</EventInfo>
-            <EventDescription>{event.description}</EventDescription>
+            <EventDetails $show={isExpanded}>
+                <p>Date: {event.date}</p>
+                <p>Location: {event.location}</p>
+                <p>Type: {event.type}</p>
+                <p>{event.description}</p>
+            </EventDetails>
         </Card>
     );
-
 };
 
 EventCard.propTypes = {
