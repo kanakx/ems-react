@@ -5,11 +5,15 @@ import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
 
+const Container = styled.div`
+    background-color: ${props => props.theme.colors.background}; // Use theme background color
+`;
+
 const StyledEventsPage = styled.div`
     text-align: center;
-    background-color: #282c34;
+    background-color: ${props => props.theme.colors.background};
     min-height: 100vh;
-    color: white;
+    color: ${props => props.theme.colors.text};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,21 +22,22 @@ const StyledEventsPage = styled.div`
 `;
 
 const PageTitle = styled.h1`
-  margin-top: 20px;
-  margin-bottom: 30px;
+    margin-top: ${props => props.theme.spacing.medium};
+    margin-bottom: ${props => props.theme.spacing.large};
 `;
 
 const StyledButton = styled.button`
-    background-color: #61dafb;
+    background-color: ${props => props.theme.colors.primary};
     border: none;
     padding: 10px 20px;
-    border-radius: 8px;
+    border-radius: ${props => props.theme.borderRadius};
     cursor: pointer;
     margin-top: 20px;
+    color: ${props => props.theme.colors.text};
 `;
 
 const ErrorMessage = styled.p`
-    color: red;
+    color: ${props => props.theme.colors.error};
     font-size: 0.8em;
 `;
 

@@ -8,37 +8,37 @@ const PageTitle = styled.h1`
 `;
 
 const Form = styled.form`
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    background-color: ${props => props.theme.colors.background};
+    padding: ${props => props.theme.spacing.medium};
+    border-radius: ${props => props.theme.borderRadius};
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 400px;
-    margin: 20px auto;
+    margin: ${props => props.theme.spacing.medium} auto;
     display: flex;
     flex-direction: column;
     align-items: center;
 `;
 
 const FormInput = styled.input`
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: ${props => props.theme.spacing.small};
+    margin: ${props => props.theme.spacing.small} 0;
+    border: 1px solid #ddd;  // Consider adding a border color to your theme
+    border-radius: ${props => props.theme.borderRadius};
     width: 100%;
 `;
 
 const FormButton = styled.button`
-    background-color: #61dafb;
-    color: white;
+    background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.text};
     border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
+    padding: ${props => props.theme.spacing.small};
+    border-radius: ${props => props.theme.borderRadius};
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: ${props => props.theme.spacing.small};
 `;
 
 const ErrorMessage = styled.p`
-    color: red;
+    color: ${props => props.theme.colors.error};
     font-size: 0.8em;
 `;
 
