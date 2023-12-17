@@ -4,36 +4,17 @@ import mockEvents from '../data/events.json';
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
-
-// const Container = styled.div`
-//     background-color: ${props => props.theme.colors.background}; // Use theme background color
-// `;
+import {PageLayout, PageTitle, StyledButton} from "../components/SharedComponents.jsx";
 
 const StyledEventsPage = styled.div`
     background-color: ${props => props.theme.colors.secondary};
     color: ${props => props.theme.colors.text};
-    text-align: center;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-`;
-
-const PageTitle = styled.h1`
-    margin-top: ${props => props.theme.spacing.medium};
-    margin-bottom: ${props => props.theme.spacing.large};
-`;
-
-const StyledButton = styled.button`
-    background-color: ${props => props.theme.colors.primary};
-    color: ${props => props.theme.colors.buttonTextColor};
-    border-radius: ${props => props.theme.borders.borderRadius};
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 20px;
 `;
 
 const ErrorMessage = styled.p`
@@ -145,7 +126,7 @@ const EventsPage = () => {
     };
 
     return (
-            <StyledEventsPage>
+            <PageLayout>
                 {isAddingOrEditing ? (
                     <EventForm onSubmit={handleSaveEvent} initialEvent={currentEvent} />
                 ) : (
@@ -161,7 +142,7 @@ const EventsPage = () => {
                 <StyledButton onClick={handleBackButton}>
                     {isAddingOrEditing ? "Cancel" : "Back"}
                 </StyledButton>
-            </StyledEventsPage>
+            </PageLayout>
     );
 };
 

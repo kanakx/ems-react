@@ -10,7 +10,7 @@ const grayTheme = {
     },
     typography: {
         text: '1rem',
-        introductionText: '2rem'
+        header: '2rem'
     },
     spacing: {
         small: '0.625rem',

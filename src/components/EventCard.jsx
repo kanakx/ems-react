@@ -1,41 +1,32 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {useState} from "react";
+import {StyledButton} from "./SharedComponents.jsx";
 
 const Card = styled.div`
-    border: 1px solid #ddd;  // Consider adding a border color to your theme
+    border: ${props => props.theme.borders.border};
     border-radius: ${props => props.theme.borders.borderRadius};
-    padding: ${props => props.theme.spacing.medium};
+    padding: ${props => props.theme.spacing.small};
     margin: ${props => props.theme.spacing.small} 0;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: ${props => props.theme.colors.background};
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     max-width: 25rem;
     cursor: pointer;
+    text-align: center;
 `;
 
 const EventName = styled.h3`
-    color: ${props => props.theme.colors.primary};  // Adjust if a different color is needed
+    color: ${props => props.theme.colors.primary};
     margin-bottom: ${props => props.theme.spacing.small};
 `;
 
 const EventDetails = styled.div`
     display: ${props => props['$show'] ? 'flex' : 'none'};
-    align-items: center;
-    flex-direction: column;
     color: ${props => props.theme.colors.text};
     font-size: ${props => props.theme.typography.text};
+    align-items: center;
+    flex-direction: column;
 `;
-
-const StyledButton = styled.button`
-    background-color: ${props => props.theme.colors.primary};
-    border: none;
-    padding: ${props => props.theme.spacing.small};
-    border-radius: ${props => props.theme.borders.borderRadius};
-    cursor: pointer;
-    margin-top: ${props => props.theme.spacing.small};
-    color: ${props => props.theme.colors.buttonTextColor};
-`;
-
 
 const EventCard = ({ event, onEdit, onDelete }) => {
     const [isExpanded, setIsExpanded] = useState(false);

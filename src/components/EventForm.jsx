@@ -1,10 +1,7 @@
 import styled from 'styled-components';
 import {useState} from "react";
 import PropTypes from "prop-types";
-
-const PageTitle = styled.h1`
-    margin-bottom: 0;
-`;
+import {PageTitle} from "./SharedComponents.jsx";
 
 const Form = styled.form`
     background-color: ${props => props.theme.colors.background};
