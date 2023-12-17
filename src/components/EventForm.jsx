@@ -3,8 +3,8 @@ import {useState} from "react";
 import PropTypes from "prop-types";
 
 const PageTitle = styled.h1`
-    margin-top: 20px;
-    margin-bottom: 30px;
+    margin-top: ${props => props.theme.spacing.medium};
+    margin-bottom: ${props => props.theme.spacing.large};
 `;
 
 const Form = styled.form`
@@ -12,7 +12,7 @@ const Form = styled.form`
     padding: ${props => props.theme.spacing.medium};
     border-radius: ${props => props.theme.borderRadius};
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
+    max-width: 25rem;
     margin: ${props => props.theme.spacing.medium} auto;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@ const Form = styled.form`
 const FormInput = styled.input`
     padding: ${props => props.theme.spacing.small};
     margin: ${props => props.theme.spacing.small} 0;
-    border: 1px solid #ddd;  // Consider adding a border color to your theme
+    border: 1px solid #ddd;
     border-radius: ${props => props.theme.borderRadius};
     width: 100%;
 `;

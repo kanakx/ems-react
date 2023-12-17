@@ -9,15 +9,15 @@ const grayTheme = {
         errorMessage: '#ff4d4f'
     },
     typography: {
-        text: '16px',
-        introductionText: '20px'
+        text: '1rem',
+        introductionText: '2rem'
     },
     spacing: {
-        small: '10px',
-        medium: '20px',
-        large: '30px'
+        small: '0.625rem',
+        medium: '1.25rem',
+        large: '1.875rem'
     },
-    borderRadius: '8px'
+    borderRadius: '0.5rem'
 };
 
 export default grayTheme;

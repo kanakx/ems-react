@@ -23,7 +23,6 @@ const StyledLogo = styled(LogoSVG)`
 `;
 
 const IntroductionText = styled.p`
-    margin-top: 20px;
     font-size: ${props => props.theme.typography.introductionText}; // Use theme typography
 `;
 
@@ -54,7 +53,7 @@ const HomePage = () => {
         <Container>
             <Header>
                 <StyledLogo alt="Logo" />
-                <IntroductionText>Welcome to Our Event Management System</IntroductionText>
+                <IntroductionText>Event Management System</IntroductionText>
                 <StyledButton onClick={handleExploreEventsButton}>
                     Explore events
                 </StyledButton>

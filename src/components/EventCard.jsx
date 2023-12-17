@@ -9,7 +9,7 @@ const Card = styled.div`
     margin: ${props => props.theme.spacing.small} 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     background-color: ${props => props.theme.colors.background};
-    max-width: 400px;
+    max-width: 25rem;
     cursor: pointer;
 `;
 
