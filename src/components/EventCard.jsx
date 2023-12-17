@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {useState} from "react";
 import {StyledButton} from "./SharedComponents.jsx";
+import {FaEdit, FaTrashAlt} from "react-icons/fa";
 
 const Card = styled.div`
     border: ${props => props.theme.borders.border};
@@ -28,7 +29,13 @@ const EventDetails = styled.div`
     flex-direction: column;
 `;
 
-const EventCard = ({ event, onEdit, onDelete }) => {
+const ActionButtonsGroup = styled.div`
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+`;
+
+const EventCard = ({event, onEdit, onDelete}) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const toggleDetails = () => {
@@ -44,8 +51,14 @@ const EventCard = ({ event, onEdit, onDelete }) => {
                 <p>Type: {event.type}</p>
                 <p>{event.description}</p>
 
-                <StyledButton onClick={() => onEdit(event.id)}>Edit</StyledButton>
-                <StyledButton onClick={() => onDelete(event.id)}>Delete</StyledButton>
+                <ActionButtonsGroup>
+                    <StyledButton onClick={() => onDelete(event.id)}>
+                        <FaTrashAlt/>
+                    </StyledButton>
+                    <StyledButton onClick={() => onEdit(event.id)}>
+                        <FaEdit/>
+                    </StyledButton>
+                </ActionButtonsGroup>
             </EventDetails>
         </Card>
     );

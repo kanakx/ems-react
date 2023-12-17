@@ -6,22 +6,10 @@ import {useNavigate} from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
 import {PageLayout, PageTitle, StyledButton} from "../components/SharedComponents.jsx";
 
-const StyledEventsPage = styled.div`
-    background-color: ${props => props.theme.colors.secondary};
-    color: ${props => props.theme.colors.text};
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-`;
-
 const ErrorMessage = styled.p`
     color: ${props => props.theme.colors.error};
     font-size: 0.8em;
 `;
-
 
 const EventsPage = () => {
     const navigate = useNavigate();
@@ -90,7 +78,10 @@ const EventsPage = () => {
                     if (!response.ok) {
                         throw new Error('Failed to update event');
                     }
-                    setEvents(events.map(event => event.id === currentEvent.id ? {...formData, id: currentEvent.id} : event));
+                    setEvents(events.map(event => event.id === currentEvent.id ? {
+                        ...formData,
+                        id: currentEvent.id
+                    } : event));
                 })
                 .catch((error) => {
                     console.error("Failed to update event:", error);
@@ -126,23 +117,23 @@ const EventsPage = () => {
     };
 
     return (
-            <PageLayout>
-                {isAddingOrEditing ? (
-                    <EventForm onSubmit={handleSaveEvent} initialEvent={currentEvent} />
-                ) : (
-                    <>
-                        <PageTitle>Events</PageTitle>
-                        <EventList events={events} onEdit={handleEditEvent} onDelete={handleDeleteEvent} />
-                        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                        <StyledButton onClick={handleAddNewButton}>
-                            Add new
-                        </StyledButton>
-                    </>
-                )}
-                <StyledButton onClick={handleBackButton}>
-                    {isAddingOrEditing ? "Cancel" : "Back"}
-                </StyledButton>
-            </PageLayout>
+        <PageLayout>
+            {isAddingOrEditing ? (
+                <EventForm onSubmit={handleSaveEvent} initialEvent={currentEvent}/>
+            ) : (
+                <>
+                    <PageTitle>Events</PageTitle>
+                    <EventList events={events} onEdit={handleEditEvent} onDelete={handleDeleteEvent}/>
+                    {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+                    <StyledButton onClick={handleAddNewButton}>
+                        Add new
+                    </StyledButton>
+                </>
+            )}
+            <StyledButton onClick={handleBackButton}>
+                {isAddingOrEditing ? "Cancel" : "Back"}
+            </StyledButton>
+        </PageLayout>
     );
 };
 
