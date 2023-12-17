@@ -10,10 +10,10 @@ import EventForm from "../components/EventForm.jsx";
 // `;
 
 const StyledEventsPage = styled.div`
-    text-align: center;
     background-color: ${props => props.theme.colors.secondary};
-    min-height: 100vh;
     color: ${props => props.theme.colors.text};
+    text-align: center;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,12 +28,12 @@ const PageTitle = styled.h1`
 
 const StyledButton = styled.button`
     background-color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.buttonTextColor};
+    border-radius: ${props => props.theme.borders.borderRadius};
     border: none;
     padding: 10px 20px;
-    border-radius: ${props => props.theme.borderRadius};
     cursor: pointer;
     margin-top: 20px;
-    color: ${props => props.theme.colors.buttonTextColor};
 `;
 
 const ErrorMessage = styled.p`

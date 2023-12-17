@@ -4,7 +4,7 @@ import {useState} from "react";
 
 const Card = styled.div`
     border: 1px solid #ddd;  // Consider adding a border color to your theme
-    border-radius: ${props => props.theme.borderRadius};
+    border-radius: ${props => props.theme.borders.borderRadius};
     padding: ${props => props.theme.spacing.medium};
     margin: ${props => props.theme.spacing.small} 0;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -30,7 +30,7 @@ const StyledButton = styled.button`
     background-color: ${props => props.theme.colors.primary};
     border: none;
     padding: ${props => props.theme.spacing.small};
-    border-radius: ${props => props.theme.borderRadius};
+    border-radius: ${props => props.theme.borders.borderRadius};
     cursor: pointer;
     margin-top: ${props => props.theme.spacing.small};
     color: ${props => props.theme.colors.buttonTextColor};

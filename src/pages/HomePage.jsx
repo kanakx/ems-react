@@ -4,11 +4,11 @@ import {useNavigate} from "react-router-dom";
 
 const Container = styled.div`
     text-align: center;
-    background-color: ${props => props.theme.colors.background}; // Use theme background color
+    background-color: ${props => props.theme.colors.background};
 `;
 
 const Header = styled.header`
-    background-color: ${props => props.theme.colors.secondary}; // Use theme secondary color
+    background-color: ${props => props.theme.colors.secondary};
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,23 +17,23 @@ const Header = styled.header`
 `;
 
 const StyledLogo = styled(LogoSVG)`
+    fill: ${props => props.theme.colors.logoFill};
     max-width: 150px;
     max-height: 150px;
-    fill: ${props => props.theme.colors.logoFill}; // Use theme logoFill color
 `;
 
 const IntroductionText = styled.p`
-    font-size: ${props => props.theme.typography.introductionText}; // Use theme typography
+    font-size: ${props => props.theme.typography.introductionText};
 `;
 
 const StyledButton = styled.button`
-    background-color: ${props => props.theme.colors.primary}; // Use theme primary color
+    color: ${props => props.theme.colors.buttonTextColor};
+    background-color: ${props => props.theme.colors.primary};
+    padding: ${props => props.theme.spacing.small};
+    border-radius: ${props => props.theme.borders.borderRadius};
+    margin-top: ${props => props.theme.spacing.medium};
     border: none;
-    padding: ${props => props.theme.spacing.small}; // Use theme spacing
-    border-radius: ${props => props.theme.borderRadius}; // Use theme border-radius
     cursor: pointer;
-    margin-top: ${props => props.theme.spacing.medium}; // Use theme spacing
-    color: ${props => props.theme.colors.buttonTextColor}; // Use theme text color
 `;
 
 

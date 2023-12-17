@@ -17,7 +17,10 @@ const grayTheme = {
         medium: '1.25rem',
         large: '1.875rem'
     },
-    borderRadius: '0.5rem'
+    borders: {
+        border: '1px solid #ddd',
+        borderRadius: '0.5rem'
+    }
 };
 
 export default grayTheme;
