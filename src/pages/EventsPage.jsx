@@ -2,9 +2,8 @@ import EventList from "../components/EventList";
 import styled from 'styled-components';
 import mockEvents from '../data/events.json';
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
-import {PageLayout, PageTitle, StyledButton} from "../components/SharedComponents.jsx";
+import {PageLayout, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 
 const ErrorMessage = styled.p`
     color: ${props => props.theme.colors.error};
@@ -12,7 +11,6 @@ const ErrorMessage = styled.p`
 `;
 
 const EventsPage = () => {
-    const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     const [isAddingOrEditing, setIsAddingOrEditing] = useState(false);
     const [currentEvent, setCurrentEvent] = useState(null);
@@ -26,14 +24,6 @@ const EventsPage = () => {
         setCurrentEvent(null);
         setIsAddingOrEditing(true);
         setErrorMessage('');
-    };
-
-    const handleBackButton = () => {
-        if (isAddingOrEditing) {
-            setIsAddingOrEditing(false);
-        } else {
-            navigate('/');
-        }
     };
 
     const handleEditEvent = (eventId) => {
@@ -130,9 +120,6 @@ const EventsPage = () => {
                     </StyledButton>
                 </>
             )}
-            <StyledButton onClick={handleBackButton}>
-                {isAddingOrEditing ? "Cancel" : "Back"}
-            </StyledButton>
         </PageLayout>
     );
 };

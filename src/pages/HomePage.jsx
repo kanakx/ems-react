@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 import LogoSVG from '../assets/logoGray.svg?react';
 import {useNavigate} from "react-router-dom";
-import {PageLayout, StyledButton} from "../components/SharedComponents.jsx";
+import {PageLayout, StyledButton} from "../themes/SharedStyles.jsx";
 
 
 //TODO page title close to logo and further from buttons
 
 
 const StyledLogo = styled(LogoSVG)`
-    //fill: ${props => props.theme.colors.logoFill};
     max-width: 150px;
     max-height: 150px;
-    //margin-bottom: ${props => props.theme.spacing.small};
     margin: -20px;
 `;
 

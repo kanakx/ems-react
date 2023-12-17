@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import {useState} from "react";
 import PropTypes from "prop-types";
-import {PageTitle} from "./SharedComponents.jsx";
+import {ActionButtonsGroup, PageTitle} from "../themes/SharedStyles.jsx";
+import {FaCheck, FaTimes} from "react-icons/fa";
+import {useNavigate} from "react-router-dom";
 
 const Form = styled.form`
     background-color: ${props => props.theme.colors.background};
@@ -52,6 +54,8 @@ const ErrorMessage = styled.p`
 `;
 
 const EventForm = ({ onSubmit, initialEvent = {} }) => {
+    const navigate = useNavigate();
+
     const [event, setEvent] = useState(initialEvent || {
         name: '',
         date: '',
@@ -76,6 +80,12 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
         onSubmit(event);
     };
 
+    const handleCancelButton = () => {
+        console.log("before navigate")
+      navigate('/events');
+        console.log("after navigate")
+    };
+
     return (
         <>
             <PageTitle>Event details</PageTitle>
@@ -86,7 +96,14 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
                 <FormInput type="text" name="type" placeholder="Type" value={event.type} onChange={handleChange}/>
                 <FormTextArea name="description" placeholder="Description" value={event.description} onChange={handleChange}/>
                 {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                <FormButton type="submit">Save</FormButton>
+                <ActionButtonsGroup>
+                    <FormButton type="button" onClick={handleCancelButton}>
+                        <FaTimes/>
+                    </FormButton>
+                    <FormButton type="submit">
+                        <FaCheck/>
+                    </FormButton>
+                </ActionButtonsGroup>
             </Form>
         </>
     );

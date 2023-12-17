@@ -8,6 +8,7 @@ const MainRouter = () => {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/events" element={<EventsPage />} />
+                <Route path="/events/edit/:eventId" element={<EditEventPage />} />
                 {/*<Route path="/workouts/add" element={<AddWorkoutForm />} />*/}
             </Routes>
         </BrowserRouter>

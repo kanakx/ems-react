@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {useState} from "react";
-import {StyledButton} from "./SharedComponents.jsx";
+import {ActionButtonsGroup, StyledButton} from "../themes/SharedStyles.jsx";
 import {FaEdit, FaTrashAlt} from "react-icons/fa";
 
 const Card = styled.div`
@@ -27,12 +27,6 @@ const EventDetails = styled.div`
     font-size: ${props => props.theme.typography.text};
     align-items: center;
     flex-direction: column;
-`;
-
-const ActionButtonsGroup = styled.div`
-    width: 25%;
-    display: flex;
-    justify-content: space-between;
 `;
 
 const EventCard = ({event, onEdit, onDelete}) => {

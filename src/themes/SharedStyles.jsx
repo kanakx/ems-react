@@ -38,3 +38,10 @@ export const PageLayout = styled.div`
 export const Header = styled.header`
     color: ${props => props.theme.colors.text};
 `;
+
+export const ActionButtonsGroup = styled.div`
+    min-width: 5rem;
+    width: 25%;
+    display: flex;
+    justify-content: space-between;
+`;
