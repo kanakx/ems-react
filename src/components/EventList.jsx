@@ -1,10 +1,15 @@
 import EventCard from './EventCard';
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const EventListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const EventList = ({events, onEdit, onDelete}) => {
-
     return (
-        <div>
+        <EventListContainer>
             {events.map(event => (
                 <EventCard
                     key={event.id}
@@ -13,7 +18,7 @@ const EventList = ({events, onEdit, onDelete}) => {
                     onDelete={onDelete}
                 />
             ))}
-        </div>
+        </EventListContainer>
     );
 
 };

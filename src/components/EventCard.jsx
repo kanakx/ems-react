@@ -14,6 +14,7 @@ const Card = styled.div`
     max-width: 25rem;
     cursor: pointer;
     text-align: center;
+    //width: 100%;
 `;
 
 const EventName = styled.h3`
@@ -60,6 +61,7 @@ const EventCard = ({event, onEdit, onDelete}) => {
 
 EventCard.propTypes = {
     event: PropTypes.shape({
+        id: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
         date: PropTypes.string.isRequired,
         location: PropTypes.string.isRequired,

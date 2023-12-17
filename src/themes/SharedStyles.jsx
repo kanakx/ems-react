@@ -15,17 +15,6 @@ export const PageTitle = styled.h1`
     color: ${props => props.theme.colors.text};
 `;
 
-export const PageContainer = styled.div`
-    background-color: ${props => props.theme.colors.background};
-    text-align: center;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: ${props => props.theme.spacing.medium};
-`;
-
 export const PageLayout = styled.div`
     background-color: ${props => props.theme.colors.secondary};
     min-height: 100vh;
@@ -35,13 +24,14 @@ export const PageLayout = styled.div`
     justify-content: center;
 `;
 
-export const Header = styled.header`
-    color: ${props => props.theme.colors.text};
-`;
-
 export const ActionButtonsGroup = styled.div`
     min-width: 5rem;
     width: 25%;
     display: flex;
     justify-content: space-between;
+`;
+
+export const ErrorMessage = styled.p`
+    color: ${props => props.theme.colors.error};
+    font-size: 0.8em;
 `;

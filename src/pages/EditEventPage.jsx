@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import EventForm from '../components/EventForm';
-import { fetchEvent } from '../api';
+import {getById, updateById} from '../services/eventService.js'
 import {useEffect, useState} from "react";
 
 const EditEventPage = () => {
@@ -9,11 +9,12 @@ const EditEventPage = () => {
     const [eventData, setEventData] = useState(null);
 
     useEffect(() => {
-        fetchEvent(eventId).then(data => setEventData(data));
+        getById(eventId)
+            .then(fetchedData => setEventData(fetchedData));
     }, [eventId]);
 
     const handleSubmit = (updatedEventData) => {
-        // Update event logic
+        updateById(updatedEventData);
         navigate('/events');
     };
 

@@ -3,10 +3,6 @@ import LogoSVG from '../assets/logoGray.svg?react';
 import {useNavigate} from "react-router-dom";
 import {PageLayout, StyledButton} from "../themes/SharedStyles.jsx";
 
-
-//TODO page title close to logo and further from buttons
-
-
 const StyledLogo = styled(LogoSVG)`
     max-width: 150px;
     max-height: 150px;
