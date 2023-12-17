@@ -9,16 +9,18 @@ const EventListContainer = styled.div`
 
 const EventList = ({events, onEdit, onDelete}) => {
     return (
-        <EventListContainer>
-            {events.map(event => (
-                <EventCard
-                    key={event.id}
-                    event={event}
-                    onEdit={onEdit}
-                    onDelete={onDelete}
-                />
-            ))}
-        </EventListContainer>
+            <EventListContainer>
+                <>
+                    {events.map(event => (
+                        <EventCard
+                            key={event.id}
+                            event={event}
+                            onEdit={onEdit}
+                            onDelete={onDelete}
+                        />
+                    ))}
+                </>
+            </EventListContainer>
     );
 
 };

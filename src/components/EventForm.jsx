@@ -81,9 +81,7 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
     };
 
     const handleCancelButton = () => {
-        console.log("before navigate")
       navigate('/events');
-        console.log("after navigate")
     };
 
     return (

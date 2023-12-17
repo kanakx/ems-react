@@ -3,6 +3,7 @@ import mockEvents from '../data/events.json';
 import {useEffect, useState} from "react";
 import {ErrorMessage, PageLayout, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 import {useNavigate} from "react-router-dom";
+import {deleteById} from "../services/eventService.js";
 
 const EventsPage = () => {
     const [events, setEvents] = useState([]);
@@ -22,16 +23,19 @@ const EventsPage = () => {
       navigate('/');
     };
 
-    const handleEditEvent = (updatedEvent) => {
-        //TODO API PUT
-
-        setEvents(currentEvents => currentEvents.map(event => event.id === updatedEvent.id ? updatedEvent : event));
+    const handleEditEvent = (eventId) => {
+        navigate(`/events/edit/${eventId}`);
     };
 
+    //TODO Inform user about the success
     const handleDeleteEvent = (eventId) => {
         //TODO API DELETE
-
-        setEvents(currentEvents => currentEvents.filter(event => event.id !== eventId));
+        deleteById(eventId)
+            .then(() => navigate('/events'))
+            .catch(error => {
+                console.error('Failed to delete event: ', error);
+                //TODO Message to the user. What happens here?
+            });
     };
 
     return (

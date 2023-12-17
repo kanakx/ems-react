@@ -6,6 +6,7 @@ import {PageLayout} from "../themes/SharedStyles.jsx";
 const AddEventPage = () => {
     const navigate = useNavigate();
 
+    //TODO Inform user about the success
     const handleSubmit = (newEventData) => {
         save(newEventData)
             .then(() => navigate('/events'))
@@ -17,7 +18,7 @@ const AddEventPage = () => {
 
     return (
         <PageLayout>
-            <EventForm onSubmit={handleSubmit}/>
+            <EventForm onSubmit={handleSubmit} initialEvent={null}/>
         </PageLayout>);
 }
 
