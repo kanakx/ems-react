@@ -2,6 +2,7 @@ import {useParams, useNavigate} from 'react-router-dom';
 import EventForm from '../components/EventForm';
 import {getById, updateById} from '../services/eventService.js'
 import {useEffect, useState} from "react";
+import Loading from "../components/Loading.jsx";
 
 const EditEventPage = () => {
     const {eventId} = useParams();
@@ -28,7 +29,7 @@ const EditEventPage = () => {
             });
     };
 
-    if (!eventData) return <div>Loading...</div>;
+    if (!eventData) return <Loading/>;
 
     return (
         <EventForm onSubmit={handleSubmit} initialEvent={eventData}/>
