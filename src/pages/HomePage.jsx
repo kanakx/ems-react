@@ -8,14 +8,16 @@ import {PageLayout, StyledButton} from "../components/SharedComponents.jsx";
 
 
 const StyledLogo = styled(LogoSVG)`
-    fill: ${props => props.theme.colors.logoFill};
+    //fill: ${props => props.theme.colors.logoFill};
     max-width: 150px;
     max-height: 150px;
+    //margin-bottom: ${props => props.theme.spacing.small};
+    margin: -20px;
 `;
 
 const Header = styled.p`
     font-size: ${props => props.theme.typography.header};
-    //color: ${props => props.theme.colors.text};
+    margin-bottom: ${props => props.theme.spacing.medium};
 `;
 
 const HomePage = () => {
