@@ -1,12 +1,18 @@
-import HomePage from "./pages/HomePage.jsx";
+import MainRouter from "./routers/MainRouter.jsx";
+import {ThemeProvider} from 'styled-components';
+import GlobalStyle from "./themes/GlobalStyles.jsx";
+import GrayTheme from "./themes/GrayTheme.jsx";
 
 function App() {
 
-  return (
-    <>
-      <HomePage/>
-    </>
-  );
+    return (
+        <>
+            <ThemeProvider theme={GrayTheme}>
+                <GlobalStyle/>
+                <MainRouter/>
+            </ThemeProvider>
+        </>
+    );
 
 }
 
