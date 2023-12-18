@@ -1,17 +1,18 @@
 import EventList from "../components/EventList";
 import mockEvents from '../data/events.json';
 import {useEffect, useState} from "react";
-import {ErrorMessage, PageLayout, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
+import {PageLayout, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 import {useNavigate} from "react-router-dom";
 import {deleteById} from "../services/eventService.js";
+import Notification from "../components/Notification.jsx";
 
 const EventsPage = () => {
-    const [events, setEvents] = useState([]);
-    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const [events, setEvents] = useState([]);
+    const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
-        //TODO API GET
+        //TODO API GET + error handling like in EditEventPage
         setEvents(mockEvents);
     }, []);
 
@@ -20,7 +21,7 @@ const EventsPage = () => {
     };
 
     const handleBackButton = () => {
-      navigate('/');
+        navigate('/');
     };
 
     const handleEditEvent = (eventId) => {
@@ -31,24 +32,27 @@ const EventsPage = () => {
     const handleDeleteEvent = (eventId) => {
         //TODO API DELETE
         deleteById(eventId)
-            .then(() => navigate('/events'))
+            .then(() => {
+                setNotification({ message: 'Event deleted successfully!', type: 'error' });
+                setTimeout(() => navigate('/events'), 4000);
+            })
             .catch(error => {
                 console.error('Failed to delete event: ', error);
-                //TODO Message to the user. What happens here?
+                setNotification({ message: 'Failed to delete event.', type: 'error' });
             });
     };
 
     return (
         <PageLayout>
-                    <PageTitle>Events</PageTitle>
-                    <EventList events={events} onEdit={handleEditEvent} onDelete={handleDeleteEvent}/>
-                    {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                    <StyledButton onClick={handleAddNewButton}>
-                        Add new
-                    </StyledButton>
-                    <StyledButton onClick={handleBackButton}>
-                        Back
-                    </StyledButton>
+            <PageTitle>Events</PageTitle>
+            <EventList events={events} onEdit={handleEditEvent} onDelete={handleDeleteEvent}/>
+            {notification.message && <Notification message={notification.message} type={notification.type}/>}
+            <StyledButton onClick={handleAddNewButton}>
+                Add new
+            </StyledButton>
+            <StyledButton onClick={handleBackButton}>
+                Back
+            </StyledButton>
         </PageLayout>
     );
 };
