@@ -13,6 +13,7 @@ const grayTheme = {
         header: '2rem'
     },
     spacing: {
+        xsmall: '0.3125rem',
         small: '0.625rem',
         medium: '1.25rem',
         large: '1.875rem'

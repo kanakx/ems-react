@@ -30,6 +30,22 @@ const EventDetails = styled.div`
     flex-direction: column;
 `;
 
+const DetailItem = styled.div`
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: center;
+    padding: ${props => props.theme.spacing.xsmall} 0;
+`;
+
+const Label = styled.span`
+    font-weight: bold;
+`;
+
+const Value = styled.span`
+    // Styles for the value
+`;
+
 const EventCard = ({event, onEdit, onDelete}) => {
     const [isExpanded, setIsExpanded] = useState(false);
 
@@ -41,10 +57,22 @@ const EventCard = ({event, onEdit, onDelete}) => {
         <Card onClick={toggleDetails}>
             <EventName>{event.name}</EventName>
             <EventDetails $show={isExpanded}>
-                <p>Date: {event.date}</p>
-                <p>Location: {event.location}</p>
-                <p>Type: {event.type}</p>
-                <p>{event.description}</p>
+                <DetailItem>
+                    <Label>Date:</Label>
+                    <Value>{event.date}</Value>
+                </DetailItem>
+                <DetailItem>
+                    <Label>Location:</Label>
+                    <Value>{event.location}</Value>
+                </DetailItem>
+                <DetailItem>
+                    <Label>Type:</Label>
+                    <Value>{event.type}</Value>
+                </DetailItem>
+                <DetailItem>
+                    <Value>{event.description}</Value>
+                </DetailItem>
+
 
                 <ActionButtonsGroup>
                     <StyledButton onClick={() => onDelete(event.id)}>

@@ -28,7 +28,6 @@ const EventsPage = () => {
         navigate(`/events/edit/${eventId}`);
     };
 
-    //TODO Inform user about the success
     const handleDeleteEvent = (eventId) => {
         //TODO API DELETE
         deleteById(eventId)
