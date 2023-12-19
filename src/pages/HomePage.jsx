@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import LogoSVG from '../assets/logoGray.svg?react';
 import {useNavigate} from "react-router-dom";
 import {PageLayout, StyledButton} from "../themes/SharedStyles.jsx";
+import {useUserContext} from "../contexts/UserContext.jsx";
 
 const StyledLogo = styled(LogoSVG)`
     max-width: 150px;
@@ -15,11 +16,15 @@ const Header = styled.p`
 `;
 
 const HomePage = () => {
-
     const navigate = useNavigate();
+    const { isAuth } = useUserContext();
 
     const handleExploreEventsButton = () => {
         navigate('/events');
+    };
+
+    const handleLoginButton = () => {
+        navigate('/login');
     };
 
     const handleAboutButton = () => {
@@ -33,6 +38,11 @@ const HomePage = () => {
             <StyledButton onClick={handleExploreEventsButton}>
                 Explore events
             </StyledButton>
+            {!isAuth && (
+                <StyledButton onClick={handleLoginButton}>
+                    Login
+                </StyledButton>
+            )}
             <StyledButton onClick={handleAboutButton}>
                 About
             </StyledButton>
