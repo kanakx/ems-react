@@ -4,6 +4,7 @@ import EventForm from "../components/EventForm";
 import Notification from "../components/Notification"; // Import Notification component
 import { getById, updateById } from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
+import {PageTitle} from "../themes/SharedStyles.jsx";
 
 const EditEventPage = () => {
     const { eventId } = useParams();
@@ -39,6 +40,7 @@ const EditEventPage = () => {
     return (
         <>
             {notification.message && <Notification message={notification.message} type={notification.type} />}
+            <PageTitle>Event details</PageTitle>
             <EventForm onSubmit={handleSubmit} initialEvent={eventData} />
         </>
     );

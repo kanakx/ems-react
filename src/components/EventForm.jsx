@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {useState} from "react";
 import PropTypes from "prop-types";
-import {ActionButtonsGroup, PageTitle} from "../themes/SharedStyles.jsx";
+import {ActionButtonsGroup} from "../themes/SharedStyles.jsx";
 import {FaCheck, FaTimes} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 
@@ -85,8 +85,6 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
     };
 
     return (
-        <>
-            <PageTitle>Event details</PageTitle>
             <Form onSubmit={handleSubmit}>
                 <FormInput type="text" name="name" placeholder="Name" value={event.name} onChange={handleChange}/>
                 <FormInput type="date" name="date" placeholder="Date" value={event.date} onChange={handleChange}/>
@@ -103,7 +101,6 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
                     </FormButton>
                 </ActionButtonsGroup>
             </Form>
-        </>
     );
 };
 

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
 import Notification from "../components/Notification";
 import { save } from "../services/eventService.js";
-import { PageLayout } from "../themes/SharedStyles.jsx";
+import {PageLayout, PageTitle} from "../themes/SharedStyles.jsx";
 
 const AddEventPage = () => {
     const navigate = useNavigate();
@@ -25,6 +25,7 @@ const AddEventPage = () => {
     return (
         <PageLayout>
             {notification.message && <Notification message={notification.message} type={notification.type} />}
+            <PageTitle>Add new</PageTitle>
             <EventForm onSubmit={handleSubmit} initialEvent={null} />
         </PageLayout>
     );
