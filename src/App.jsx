@@ -2,6 +2,7 @@ import MainRouter from "./routers/MainRouter.jsx";
 import {ThemeProvider} from 'styled-components';
 import GlobalStyle from "./themes/GlobalStyles.jsx";
 import GrayTheme from "./themes/GrayTheme.jsx";
+import {UserContextProvider} from "./contexts/UserContext.jsx";
 
 function App() {
 
@@ -9,7 +10,9 @@ function App() {
         <>
             <ThemeProvider theme={GrayTheme}>
                 <GlobalStyle/>
-                <MainRouter/>
+                <UserContextProvider>
+                    <MainRouter/>
+                </UserContextProvider>
             </ThemeProvider>
         </>
     );

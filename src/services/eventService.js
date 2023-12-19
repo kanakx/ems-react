@@ -1,4 +1,4 @@
-const API_URL = '${API_URL}';
+const API_URL = 'myapi.api.com';
 
 const getAll = () =>
     fetch(`${API_URL}`)
