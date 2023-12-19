@@ -7,7 +7,7 @@ const EventListContainer = styled.div`
   flex-direction: column;
 `;
 
-const EventList = ({events, onEdit, onDelete}) => {
+const EventList = ({events}) => {
     return (
             <EventListContainer>
                 <>
@@ -15,8 +15,6 @@ const EventList = ({events, onEdit, onDelete}) => {
                         <EventCard
                             key={event.id}
                             event={event}
-                            onEdit={onEdit}
-                            onDelete={onDelete}
                         />
                     ))}
                 </>
@@ -26,9 +24,7 @@ const EventList = ({events, onEdit, onDelete}) => {
 };
 
 EventList.propTypes = {
-    events: PropTypes.arrayOf(PropTypes.object).isRequired,
-    onEdit: PropTypes.func.isRequired,
-    onDelete: PropTypes.func.isRequired
+    events: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 
 export default EventList;
