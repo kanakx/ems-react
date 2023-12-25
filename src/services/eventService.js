@@ -23,7 +23,7 @@ const getById = (eventId) =>
         })
         .catch(error => console.error('Error fetching event:', error));
 
-const save = (eventData) => {
+const save = (eventData) =>
     fetch(`${API_URL}`, {
         method: 'POST',
         headers: {
@@ -38,7 +38,6 @@ const save = (eventData) => {
             return response.json();
         })
         .catch(error => console.error('Error saving event:', error));
-}
 
 
 const updateById = (eventId, updatedEventData) =>
