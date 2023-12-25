@@ -10,8 +10,9 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
 
     const [event, setEvent] = useState(initialEvent || {
         name: '',
-        date: '',
-        location: '',
+        startTimestamp: '',
+        endTimestamp: '',
+        locationName: '',
         type: '',
         description: ''
     });
@@ -25,7 +26,7 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!event.name || !event.date || !event.location) {
+        if (!event.name || !event.startTimestamp || !event.endTimestamp || !event.locationName || !event.type) {
             setErrorMessage('Please fill out all fields.');
             return;
         }
@@ -39,8 +40,10 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
     return (
             <StyledForm onSubmit={handleSubmit}>
                 <StyledFormInput type="text" name="name" placeholder="Name" value={event.name} onChange={handleChange}/>
-                <StyledFormInput type="date" name="date" placeholder="Date" value={event.date} onChange={handleChange}/>
-                <StyledFormInput type="text" name="location" placeholder="Location" value={event.location} onChange={handleChange}/>
+                <StyledFormInput type="datetime-local" name="startTimestamp" placeholder="Start Date" value={event.startTimestamp} onChange={handleChange}/>
+                <StyledFormInput type="datetime-local" name="endTimestamp" placeholder="End Date" value={event.endTimestamp} onChange={handleChange}/>
+                <StyledFormInput type="text" name="locationName" placeholder="Location" value={event.locationName} onChange={handleChange}/>
+                {/*//TODO select cuz it'll be enum value*/}
                 <StyledFormInput type="text" name="type" placeholder="Type" value={event.type} onChange={handleChange}/>
                 <StyledFormTextArea name="description" placeholder="Description" value={event.description} onChange={handleChange}/>
                 {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}

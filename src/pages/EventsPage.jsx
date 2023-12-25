@@ -17,7 +17,7 @@ const EventsPage = () => {
                 console.error('Failed to fetch events: ', error);
                 setNotification({ message: 'Failed to load events.', type: 'error' });
             });
-    }, [events]);
+    }, []);
 
     const handleAddNewButton = () => {
         navigate('/events/add');
