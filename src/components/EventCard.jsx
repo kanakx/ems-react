@@ -24,7 +24,7 @@ const EventCard = ({ event }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/events/${event.id}`);
+        navigate(`/events/${event.idEvent}`);
     };
 
     return (
@@ -36,10 +36,11 @@ const EventCard = ({ event }) => {
 
 EventCard.propTypes = {
     event: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        idEvent: PropTypes.number.isRequired,
         name: PropTypes.string.isRequired,
-        date: PropTypes.string.isRequired,
-        location: PropTypes.string.isRequired,
+        startTimestamp: PropTypes.string.isRequired,
+        endTimestamp: PropTypes.string.isRequired,
+        locationName: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
         description: PropTypes.string.isRequired
     }).isRequired

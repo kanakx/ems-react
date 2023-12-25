@@ -1,9 +1,9 @@
 import EventList from "../components/EventList";
-import mockEvents from '../data/events.json';
 import {useEffect, useState} from "react";
 import {PageLayout, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 import {useNavigate} from "react-router-dom";
 import Notification from "../components/Notification.jsx";
+import {getAll} from "../services/eventService.js";
 
 const EventsPage = () => {
     const navigate = useNavigate();
@@ -11,9 +11,13 @@ const EventsPage = () => {
     const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
-        //TODO API GET + error handling like in EditEventPage
-        setEvents(mockEvents);
-    }, []);
+        getAll()
+            .then(data => setEvents(data))
+            .catch(error => {
+                console.error('Failed to fetch events: ', error);
+                setNotification({ message: 'Failed to load events.', type: 'error' });
+            });
+    }, [events]);
 
     const handleAddNewButton = () => {
         navigate('/events/add');

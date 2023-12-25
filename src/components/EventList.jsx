@@ -13,7 +13,7 @@ const EventList = ({events}) => {
                 <>
                     {events.map(event => (
                         <EventCard
-                            key={event.id}
+                            key={event.idEvent}
                             event={event}
                         />
                     ))}

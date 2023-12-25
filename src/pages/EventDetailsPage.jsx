@@ -13,14 +13,6 @@ const EventName = styled.h3`
     margin-bottom: ${props => props.theme.spacing.small};
 `;
 
-// const EventDetails = styled.div`
-//     display: ${props => props['$show'] ? 'flex' : 'none'};
-//     color: ${props => props.theme.colors.text};
-//     font-size: ${props => props.theme.typography.text};
-//     align-items: center;
-//     flex-direction: column;
-// `;
-
 const DetailItem = styled.div`
     display: grid;
     grid-template-columns: auto 1fr;
@@ -34,7 +26,7 @@ const Label = styled.span`
 `;
 
 const Value = styled.span`
-    // Styles for the value
+    
 `;
 
 const EventDetailsPage = () => {
@@ -78,12 +70,16 @@ const EventDetailsPage = () => {
         <PageLayout>
             <EventName>{event.name}</EventName>
             <DetailItem>
-                <Label>Date:</Label>
-                <Value>{event.date}</Value>
+                <Label>Start:</Label>
+                <Value>{event.startTimestamp}</Value>
+            </DetailItem>
+            <DetailItem>
+                <Label>End:</Label>
+                <Value>{event.endTimestamp}</Value>
             </DetailItem>
             <DetailItem>
                 <Label>Location:</Label>
-                <Value>{event.location}</Value>
+                <Value>{event.locationName}</Value>
             </DetailItem>
             <DetailItem>
                 <Label>Type:</Label>
