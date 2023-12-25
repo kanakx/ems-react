@@ -11,6 +11,7 @@ import {FaEdit, FaTrashAlt} from "react-icons/fa";
 const EventName = styled.h3`
     color: ${props => props.theme.colors.primary};
     margin-bottom: ${props => props.theme.spacing.small};
+    font-size: ${props => props.theme.typography.header};
 `;
 
 const DetailItem = styled.div`
@@ -64,6 +65,10 @@ const EventDetailsPage = () => {
         }
     };
 
+    const handleBackButton = () => {
+        navigate('/events');
+    };
+
     if (!event) return <Loading/>;
 
     return (
@@ -104,6 +109,10 @@ const EventDetailsPage = () => {
             {notification.message && (
                 <Notification message={notification.message} type={notification.type}/>
             )}
+
+            <StyledButton onClick={handleBackButton}>
+                Back
+            </StyledButton>
         </PageLayout>
     );
 };
