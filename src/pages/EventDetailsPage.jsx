@@ -69,7 +69,7 @@ const EventDetailsPage = () => {
         navigate('/events');
     };
 
-    if (!event) return <Loading/>;
+    if (!event) return <Loading onBack={handleBackButton}/>;
 
     return (
         <PageLayout>

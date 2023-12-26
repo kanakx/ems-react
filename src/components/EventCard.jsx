@@ -17,7 +17,7 @@ const Card = styled.div`
 
 const EventName = styled.h3`
     color: ${props => props.theme.colors.primary};
-     margin-bottom: ${props => props.theme.spacing.small};
+    margin-bottom: ${props => props.theme.spacing.small};
 `;
 
 const EventCard = ({ event }) => {
