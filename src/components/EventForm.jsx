@@ -3,7 +3,14 @@ import PropTypes from "prop-types";
 import {ActionButtonsGroup, ErrorMessage} from "../themes/SharedStyles.jsx";
 import {FaCheck, FaTimes} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
-import {StyledForm, StyledFormButton, StyledFormInput, StyledFormTextArea} from "../themes/FormStyles.jsx";
+import {
+    FormLabel,
+    StyledForm,
+    StyledFormButton,
+    StyledFormInput,
+    StyledFormSelect,
+    StyledFormTextArea
+} from "../themes/FormStyles.jsx";
 
 const EventForm = ({ onSubmit, initialEvent = {} }) => {
     const navigate = useNavigate();
@@ -38,24 +45,40 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
     };
 
     return (
-            <StyledForm onSubmit={handleSubmit}>
-                <StyledFormInput type="text" name="name" placeholder="Name" value={event.name} onChange={handleChange}/>
-                <StyledFormInput type="datetime-local" name="startTimestamp" placeholder="Start Date" value={event.startTimestamp} onChange={handleChange}/>
-                <StyledFormInput type="datetime-local" name="endTimestamp" placeholder="End Date" value={event.endTimestamp} onChange={handleChange}/>
-                <StyledFormInput type="text" name="locationName" placeholder="Location" value={event.locationName} onChange={handleChange}/>
-                {/*//TODO select cuz it'll be enum value*/}
-                <StyledFormInput type="text" name="type" placeholder="Type" value={event.type} onChange={handleChange}/>
-                <StyledFormTextArea name="description" placeholder="Description" value={event.description} onChange={handleChange}/>
-                {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-                <ActionButtonsGroup>
-                    <StyledFormButton type="button" onClick={handleCancelButton}>
-                        <FaTimes/>
-                    </StyledFormButton>
-                    <StyledFormButton type="submit">
-                        <FaCheck/>
-                    </StyledFormButton>
-                </ActionButtonsGroup>
-            </StyledForm>
+        <StyledForm onSubmit={handleSubmit}>
+            <StyledFormInput type="text" name="name" placeholder="Name" value={event.name} onChange={handleChange}/>
+
+            <FormLabel htmlFor="startTimestamp">Start timestamp:</FormLabel>
+            <StyledFormInput type="datetime-local" name="startTimestamp" placeholder="Start Date"
+                             value={event.startTimestamp} onChange={handleChange}/>
+
+            <FormLabel htmlFor="startTimestamp">End timestamp:</FormLabel>
+            <StyledFormInput type="datetime-local" name="endTimestamp" placeholder="End Date" value={event.endTimestamp}
+                             onChange={handleChange}/>
+
+            <StyledFormInput type="text" name="locationName" placeholder="Location" value={event.locationName}
+                             onChange={handleChange}/>
+
+            <StyledFormSelect name="type" value={event.type} onChange={handleChange}>
+                <option value="">Type</option>
+                <option value="Conference">Conference</option>
+                <option value="Seminar">Seminar</option>
+                <option value="Workshop">Workshop</option>
+            </StyledFormSelect>
+
+
+            <StyledFormTextArea name="description" placeholder="Description" value={event.description}
+                                onChange={handleChange}/>
+            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+            <ActionButtonsGroup>
+                <StyledFormButton type="button" onClick={handleCancelButton}>
+                    <FaTimes/>
+                </StyledFormButton>
+                <StyledFormButton type="submit">
+                    <FaCheck/>
+                </StyledFormButton>
+            </ActionButtonsGroup>
+        </StyledForm>
     );
 };
 

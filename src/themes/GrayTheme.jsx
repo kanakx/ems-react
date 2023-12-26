@@ -9,6 +9,7 @@ const grayTheme = {
         errorMessage: '#ff4d4f'
     },
     typography: {
+        label: '0.8rem',
         text: '1rem',
         header: '2rem'
     },

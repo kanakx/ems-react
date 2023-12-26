@@ -22,6 +22,24 @@ const StyledFormInput = styled.input`
     width: 100%;
 `;
 
+const StyledFormSelect = styled.select`
+    padding: ${props => props.theme.spacing.small};
+    margin: ${props => props.theme.spacing.small} 0;
+    border: ${props => props.theme.borders.border};
+    border-radius: ${props => props.theme.borders.borderRadius};
+    background-color: ${props => props.theme.colors.background};
+    color: ${props => props.theme.colors.text};
+    text-align: center;
+    width: 100%;
+    font-size: ${props => props.theme.typography.text};
+    box-sizing: border-box; // Ensures padding doesn't affect overall width
+
+    &:focus {
+        outline: none;
+        border-color: ${props => props.theme.colors.primary};
+    }
+`;
+
 const StyledFormTextArea = styled.textarea`
     padding: ${props => props.theme.spacing.small};
     margin: ${props => props.theme.spacing.small} 0;
@@ -43,4 +61,11 @@ const StyledFormButton = styled.button`
     cursor: pointer;
 `;
 
-export {StyledForm, StyledFormInput, StyledFormTextArea, StyledFormButton};
+const FormLabel = styled.label`
+    margin-top: ${props => props.theme.spacing.small};
+    color: ${props => props.theme.colors.text};
+    display: block;
+    font-size: ${props => props.theme.typography.label};
+`;
+
+export {StyledForm, StyledFormInput, StyledFormSelect, StyledFormTextArea, StyledFormButton, FormLabel};
