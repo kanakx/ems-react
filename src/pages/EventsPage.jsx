@@ -4,6 +4,7 @@ import {PageLayout, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 import {useNavigate} from "react-router-dom";
 import Notification from "../components/Notification.jsx";
 import {getAll} from "../services/eventService.js";
+import Loading from "../components/Loading.jsx";
 
 const EventsPage = () => {
     const navigate = useNavigate();
@@ -26,6 +27,16 @@ const EventsPage = () => {
     const handleBackButton = () => {
         navigate('/');
     };
+
+    if (!events) {
+        return(
+            <>
+                <Loading onBack={handleBackButton}/>
+
+            </>
+        );
+
+    }
 
     return (
         <PageLayout>

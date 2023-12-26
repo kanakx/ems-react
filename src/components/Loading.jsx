@@ -1,4 +1,6 @@
 import styled, { keyframes } from 'styled-components';
+import {StyledButton} from "../themes/SharedStyles.jsx";
+import PropTypes from "prop-types";
 
 const rotate = keyframes`
   from {
@@ -10,11 +12,12 @@ const rotate = keyframes`
 `;
 
 const LoadingContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: ${props => props.theme.colors.background};
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: ${props => props.theme.colors.background};
 `;
 
 const Spinner = styled.div`
@@ -26,10 +29,17 @@ const Spinner = styled.div`
   animation: ${rotate} 2s linear infinite;
 `;
 
-const Loading = () => (
+const Loading = ( {onBack} ) => (
     <LoadingContainer>
         <Spinner />
+        <StyledButton onClick={onBack}>
+            Back
+        </StyledButton>
     </LoadingContainer>
 );
+
+Loading.propTypes = {
+  onBack: PropTypes.func.isRequired
+};
 
 export default Loading;
