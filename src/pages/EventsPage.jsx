@@ -1,6 +1,6 @@
 import EventList from "../components/EventList";
 import {useEffect, useState} from "react";
-import {PageLayout, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
+import {PageLayout, PageSubtitle, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 import {useNavigate} from "react-router-dom";
 import Notification from "../components/Notification.jsx";
 import {getAll} from "../services/eventService.js";
@@ -15,19 +15,30 @@ const NoEventsMessage = styled.p`
 
 const EventsPage = () => {
     const navigate = useNavigate();
-    const [events, setEvents] = useState([]);
+    const [publicEvents, setPublicEvents] = useState([]);
+    const [privateEvents, setPrivateEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
-        getAll()
-            .then(data => {
-                setEvents(data);
+        getAll(true)
+            .then(fetchedPublicEvents => {
+                setPublicEvents(fetchedPublicEvents);
                 setLoading(false);
             })
             .catch(error => {
-                console.error('Failed to fetch events: ', error);
-                setNotification({ message: 'Failed to load events.', type: 'error' });
+                console.error('Failed to fetch public events: ', error);
+                setNotification({ message: 'Failed to load public events.', type: 'error' });
+            });
+
+        getAll(false)
+            .then(fetchedPrivateEvents => {
+                setPrivateEvents(fetchedPrivateEvents);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Failed to fetch private events: ', error);
+                setNotification({ message: 'Failed to load private events.', type: 'error' });
             });
     }, []);
 
@@ -44,12 +55,23 @@ const EventsPage = () => {
     return (
         <PageLayout>
             <PageTitle>Events</PageTitle>
-            {events && events.length > 0 ? (
-                <EventList events={events}/>
+
+            <PageSubtitle>Public</PageSubtitle>
+            {publicEvents && publicEvents.length > 0 ? (
+                <EventList events={publicEvents}/>
             ) : (
-                <NoEventsMessage>No events available</NoEventsMessage>
+                <NoEventsMessage>No public events available</NoEventsMessage>
             )}
             {notification.message && <Notification message={notification.message} type={notification.type}/>}
+
+            <PageSubtitle>Your private</PageSubtitle>
+            {privateEvents && privateEvents.length > 0 ? (
+                <EventList events={privateEvents}/>
+            ) : (
+                <NoEventsMessage>No private events available</NoEventsMessage>
+            )}
+            {notification.message && <Notification message={notification.message} type={notification.type}/>}
+
             <StyledButton onClick={handleAddNewButton}>
                 Add new
             </StyledButton>

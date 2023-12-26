@@ -15,6 +15,11 @@ export const PageTitle = styled.h1`
     color: ${props => props.theme.colors.text};
 `;
 
+export const PageSubtitle = styled.p`
+    margin-bottom: 0;
+    color: ${props => props.theme.colors.text};
+`;
+
 export const PageLayout = styled.div`
     background-color: ${props => props.theme.colors.secondary};
     min-height: 100vh;
