@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getById, deleteById } from "../services/eventService.js";
 import { useUserContext } from '../contexts/UserContext';
-import {ActionButtonsGroup, PageLayout, StyledButton} from "../themes/SharedStyles.jsx";
+import {ActionButtonsGroup, Card, PageLayout, StyledButton} from "../themes/SharedStyles.jsx";
 import Notification from "../components/Notification.jsx";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
@@ -69,50 +69,55 @@ const EventDetailsPage = () => {
         navigate('/events');
     };
 
+    const capitalizeFirstLetter = (string) => {
+        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    };
+
     if (!event) return <Loading onBack={handleBackButton}/>;
 
     return (
         <PageLayout>
-            <EventName>{event.name}</EventName>
-            <DetailItem>
-                <Label>Start:</Label>
-                <Value>{event.startTimestamp}</Value>
-            </DetailItem>
-            <DetailItem>
-                <Label>End:</Label>
-                <Value>{event.endTimestamp}</Value>
-            </DetailItem>
-            <DetailItem>
-                <Label>Location:</Label>
-                <Value>{event.locationName}</Value>
-            </DetailItem>
-            <DetailItem>
-                <Label>Type:</Label>
-                <Value>{event.type}</Value>
-            </DetailItem>
-            <DetailItem>
-                <Label>Description:</Label>
-                <Value>{event.description}</Value>
-            </DetailItem>
+            <Card>
+                <EventName>{event.name}</EventName>
+                <DetailItem>
+                    <Label>Start:</Label>
+                    <Value>{event.startTimestamp}</Value>
+                </DetailItem>
+                <DetailItem>
+                    <Label>End:</Label>
+                    <Value>{event.endTimestamp}</Value>
+                </DetailItem>
+                <DetailItem>
+                    <Label>Location:</Label>
+                    <Value>{event.locationName}</Value>
+                </DetailItem>
+                <DetailItem>
+                    <Label>Type:</Label>
+                    <Value>{capitalizeFirstLetter(event.type)}</Value>
+                </DetailItem>
+                <DetailItem>
+                    <Value>{event.description}</Value>
+                </DetailItem>
 
-            {isAuth && (
-                <ActionButtonsGroup>
-                    <StyledButton onClick={handleDelete}>
-                        <FaTrashAlt/>
-                    </StyledButton>
-                    <StyledButton onClick={handleEdit}>
-                        <FaEdit/>
-                    </StyledButton>
-                </ActionButtonsGroup>
-            )}
+                {isAuth && (
+                    <ActionButtonsGroup>
+                        <StyledButton onClick={handleDelete}>
+                            <FaTrashAlt/>
+                        </StyledButton>
+                        <StyledButton onClick={handleEdit}>
+                            <FaEdit/>
+                        </StyledButton>
+                    </ActionButtonsGroup>
+                )}
 
-            {notification.message && (
-                <Notification message={notification.message} type={notification.type}/>
-            )}
+                {notification.message && (
+                    <Notification message={notification.message} type={notification.type}/>
+                )}
 
-            <StyledButton onClick={handleBackButton}>
-                Back
-            </StyledButton>
+                <StyledButton onClick={handleBackButton}>
+                    Back
+                </StyledButton>
+            </Card>
         </PageLayout>
     );
 };
