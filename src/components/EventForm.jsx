@@ -21,7 +21,8 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
         endTimestamp: '',
         locationName: '',
         type: '',
-        description: ''
+        description: '',
+        isPublic: ''
     });
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -66,9 +67,15 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
                 <option value="Workshop">Workshop</option>
             </StyledFormSelect>
 
-
             <StyledFormTextArea name="description" placeholder="Description" value={event.description}
                                 onChange={handleChange}/>
+
+            <StyledFormSelect name="isPublic" value={event.isPublic} onChange={handleChange}>
+                <option value="">Access</option>
+                <option value="Public">Public</option>
+                <option value="Private">Private</option>
+            </StyledFormSelect>
+
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             <ActionButtonsGroup>
                 <StyledFormButton type="button" onClick={handleCancelButton}>
