@@ -1,70 +1,54 @@
+import axios from 'axios';
+
 const API_URL = 'http://localhost:8080/api/v1/events';
 
-const getAll = () =>
-    fetch(`${API_URL}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch events');
-            }
-            return response.json();
-        })
-        .catch(error => console.error('Error fetching events:', error));
+const getAll = (isPublic) => {
+    const params = {};
+    if (isPublic !== undefined) {
+        params.isPublic = isPublic;
+    }
 
+    return axios.get(API_URL, { params })
+        .then(response => response.data)
+        .catch(error => {
+            console.error('Error fetching events:', error);
+            throw error;
+        });
+};
 
-const getById = (eventId) =>
-    fetch(`${API_URL}/${eventId}`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch the event');
-            }
-            return response.json();
-        })
-        .catch(error => console.error('Error fetching event:', error));
+const getById = (eventId) => {
+    return axios.get(`${API_URL}/${eventId}`)
+        .then(response => response.data)
+        .catch(error => {
+            console.error('Error fetching event:', error);
+            throw error;
+        });
+};
 
-const save = (eventData) =>
-    fetch(`${API_URL}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(eventData)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to save the event');
-            }
-            return response.json();
-        })
-        .catch(error => console.error('Error saving event:', error));
+const save = (eventData) => {
+    return axios.post(API_URL, eventData)
+        .then(response => response.data)
+        .catch(error => {
+            console.error('Error saving event:', error);
+            throw error;
+        });
+};
 
+const updateById = (eventId, updatedEventData) => {
+    return axios.put(`${API_URL}/${eventId}`, updatedEventData)
+        .then(response => response.data)
+        .catch(error => {
+            console.error('Error updating event:', error);
+            throw error;
+        });
+};
 
-const updateById = (eventId, updatedEventData) =>
-    fetch(`${API_URL}/${eventId}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedEventData)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to update the event');
-            }
-            return response.json();
-        })
-        .catch(error => console.error('Error updating event:', error));
+const deleteById = (eventId) => {
+    return axios.delete(`${API_URL}/${eventId}`)
+        .catch(error => {
+            console.error('Error deleting event:', error);
+            throw error;
+        });
+};
 
-
-
-const deleteById = (eventId) =>
-    fetch(`${API_URL}/${eventId}`, {
-        method: 'DELETE'
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to delete the event');
-            }
-        })
-        .catch(error => console.error('Error deleting event:', error));
-
-export {getAll, getById, save, updateById, deleteById};
+export { getAll, getById, save, updateById, deleteById };
