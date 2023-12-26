@@ -1,34 +1,24 @@
-const API_URL = 'YOUR_API_URL'; // Replace with your actual API URL
+import axios from 'axios';
+
+const API_URL = 'YOUR_API_URL'; //TODO Replace with actual URL
 
 const login = (credentials) => {
-    return fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    })
+    return axios.post(`${API_URL}/login`, credentials)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to login');
-            }
-            return response.json();
-        })
-        .then(data => {
-            localStorage.setItem('token', data.token); // Store the token
-            return data; // This should include user data
+            const { data } = response;
+            localStorage.setItem('token', data.token);
+            return data;
         })
         .catch(error => {
             console.error('Error logging in:', error);
-            throw error; // Re-throw to allow catching in context or components
+            throw error;
         });
 };
 
-//TODO how does it exactly work
 const logout = () => {
     return new Promise((resolve, reject) => {
         try {
-            localStorage.removeItem('token'); // Remove the token
+            localStorage.removeItem('token');
             resolve('Logged out successfully');
         } catch (error) {
             console.error('Error logging out:', error);
