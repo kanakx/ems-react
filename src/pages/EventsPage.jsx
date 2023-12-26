@@ -44,7 +44,6 @@ const EventsPage = () => {
     return (
         <PageLayout>
             <PageTitle>Events</PageTitle>
-            {/*<EventList events={events}/>*/}
             {events && events.length > 0 ? (
                 <EventList events={events}/>
             ) : (

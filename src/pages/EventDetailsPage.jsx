@@ -73,6 +73,12 @@ const EventDetailsPage = () => {
         return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
     };
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        return new Intl.DateTimeFormat('en-US', options).format(date);
+    };
+
     if (!event) return <Loading onBack={handleBackButton}/>;
 
     return (
@@ -81,11 +87,11 @@ const EventDetailsPage = () => {
                 <EventName>{event.name}</EventName>
                 <DetailItem>
                     <Label>Start:</Label>
-                    <Value>{event.startTimestamp}</Value>
+                    <Value>{formatDate(event.startTimestamp)}</Value>
                 </DetailItem>
                 <DetailItem>
                     <Label>End:</Label>
-                    <Value>{event.endTimestamp}</Value>
+                    <Value>{formatDate(event.endTimestamp)}</Value>
                 </DetailItem>
                 <DetailItem>
                     <Label>Location:</Label>
