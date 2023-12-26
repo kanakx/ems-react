@@ -2,41 +2,51 @@
   {
     "id": 1,
     "name": "Tech Conference 2023",
-    "date": "2023-03-15",
-    "location": "New York",
-    "type": "Conference",
-    "description": "An annual conference for tech enthusiasts and professionals."
+    "startTimestamp": "2023-03-15T09:00:00",
+    "endTimestamp": "2023-03-15T17:00:00",
+    "locationName": "New York",
+    "type": "CONFERENCE",
+    "description": "An annual conference for tech enthusiasts and professionals.",
+    "isPublic": true
   },
   {
     "id": 2,
     "name": "Art & Design Expo",
-    "date": "2023-04-22",
-    "location": "San Francisco",
-    "type": "Exhibition",
-    "description": "Explore the latest trends in art and design."
+    "startTimestamp": "2023-04-22T10:00:00",
+    "endTimestamp": "2023-04-22T18:00:00",
+    "locationName": "San Francisco",
+    "type": "EXHIBITION",
+    "description": "Explore the latest trends in art and design.",
+    "isPublic": true
   },
   {
     "id": 3,
     "name": "Live Music Festival",
-    "date": "2023-05-30",
-    "location": "Austin",
-    "type": "Festival",
-    "description": "A festival celebrating the best of live music performances."
+    "startTimestamp": "2023-05-30T12:00:00",
+    "endTimestamp": "2023-05-30T23:00:00",
+    "locationName": "Austin",
+    "type": "FESTIVAL",
+    "description": "A festival celebrating the best of live music performances.",
+    "isPublic": true
   },
   {
     "id": 4,
     "name": "Entrepreneurs Meetup",
-    "date": "2023-06-10",
-    "location": "Chicago",
-    "type": "Meetup",
-    "description": "A meetup for aspiring and established entrepreneurs."
+    "startTimestamp": "2023-06-10T14:00:00",
+    "endTimestamp": "2023-06-10T20:00:00",
+    "locationName": "Chicago",
+    "type": "MEETUP",
+    "description": "A meetup for aspiring and established entrepreneurs.",
+    "isPublic": true
   },
   {
     "id": 5,
     "name": "Health and Wellness Workshop",
-    "date": "2023-07-05",
-    "location": "Seattle",
-    "type": "Workshop",
-    "description": "A workshop focused on health, wellness, and personal growth."
+    "startTimestamp": "2023-07-05T09:00:00",
+    "endTimestamp": "2023-07-05T16:00:00",
+    "locationName": "Seattle",
+    "type": "WORKSHOP",
+    "description": "A workshop focused on health, wellness, and personal growth.",
+    "isPublic": true
   }
 ]
