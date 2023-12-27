@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import LogoSVG from '../assets/logoGray.svg?react';
 import {useNavigate} from "react-router-dom";
 import PageLayout from "../components/PageLayout.jsx";
-import {StyledButton} from "../themes/SharedStyles.jsx";
+import {PageSubtitle, StyledButton} from "../themes/SharedStyles.jsx";
+import {useUserContext} from "../contexts/UserContext.jsx";
 
 const StyledLogo = styled(LogoSVG)`
     max-width: 150px;
@@ -17,6 +18,7 @@ const Header = styled.p`
 
 const HomePage = () => {
     const navigate = useNavigate();
+    const {isAuth, user} = useUserContext();
 
     const handleExploreEventsButton = () => {
         navigate('/events');
@@ -30,6 +32,11 @@ const HomePage = () => {
         <PageLayout>
             <StyledLogo alt="Logo"/>
             <Header>Event Management System</Header>
+
+            {isAuth && user && (
+                <PageSubtitle>Welcome, {user.fullName}</PageSubtitle>
+            )}
+
             <StyledButton onClick={handleExploreEventsButton}>
                 Explore events
             </StyledButton>

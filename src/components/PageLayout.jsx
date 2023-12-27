@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import AuthButton from "./AuthButton.jsx";
 import styled from "styled-components";
+import NavBar from "./NavBar.jsx";
 
 export const StyledPageLayout = styled.div`
     background-color: ${props => props.theme.colors.secondary};
@@ -14,7 +14,7 @@ export const StyledPageLayout = styled.div`
 const PageLayout = ({children}) => {
     return (
         <StyledPageLayout>
-            <AuthButton/>
+            <NavBar/>
             {children}
         </StyledPageLayout>
     );

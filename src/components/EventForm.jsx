@@ -72,6 +72,7 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
             <StyledFormTextArea name="description" placeholder="Description" value={event.description}
                                 onChange={handleChange}/>
 
+            //TODO Maybe notification here? To consider
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             <ActionButtonsGroup>
                 <StyledFormButton type="button" onClick={handleCancelButton}>
