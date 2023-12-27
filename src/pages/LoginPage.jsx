@@ -10,7 +10,7 @@ const LoginPage = () => {
     const [notification, setNotification] = useState('');
 
     const handleBackButton = () => {
-        navigate('/');
+        navigate(-1);
     };
 
     return (

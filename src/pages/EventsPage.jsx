@@ -39,7 +39,7 @@ const EventsPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate('/');
+        navigate(-1);
     };
 
     if (loading) return <Loading onBack={handleBackButton}/>

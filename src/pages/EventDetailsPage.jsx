@@ -90,7 +90,7 @@ const EventDetailsPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate('/events');
+        navigate(-1);
     };
 
     const formatDate = (dateString) => {

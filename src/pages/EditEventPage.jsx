@@ -37,7 +37,7 @@ const EditEventPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate('/events');
+        navigate(-1);
     };
 
     if (!eventData) return <Loading onBack={handleBackButton} />;
