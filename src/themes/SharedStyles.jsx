@@ -21,10 +21,9 @@ export const PageSubtitle = styled.p`
 `;
 
 export const ActionButtonsGroup = styled.div`
-    min-width: 5rem;
-    width: 25%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    gap: 1rem;
 `;
 
 export const ErrorMessage = styled.p`

@@ -6,7 +6,7 @@ import {ActionButtonsGroup, Card, StyledButton} from "../themes/SharedStyles.jsx
 import Notification from "../components/Notification.jsx";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
-import {FaEdit, FaTrashAlt} from "react-icons/fa";
+import {FaCheck, FaEdit, FaTimes, FaTrashAlt} from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
 import {getAttendee, getAttendeeEvents} from "../services/attendeeService.js";
 
@@ -38,6 +38,7 @@ const EventDetailsPage = () => {
     const {isAuth, user} = useUserContext();
     const [event, setEvent] = useState(null);
     const [canEditAndDelete, setCanEditAndDelete] = useState(false);
+    const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
     const [notification, setNotification] = useState({message: '', type: ''});
 
     useEffect(() => {
@@ -58,7 +59,7 @@ const EventDetailsPage = () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                setNotification({ message: 'Error loading event', type: 'error' });
+                setNotification({message: 'Error loading event', type: 'error'});
             });
     }, [eventId, user, isAuth, event]);
 
@@ -66,27 +67,31 @@ const EventDetailsPage = () => {
         navigate(`/events/edit/${eventId}`);
     };
 
-    const handleDelete = () => {
-        if (window.confirm("Are you sure you want to delete this event?")) {
-            deleteEventById(eventId)
-                .then(() => {
-                    setNotification({message: 'Event deleted successfully!', type: 'success'});
-                    setTimeout(() => navigate('/events'), 2000);
-                })
-                .catch(error => {
-                    console.error('Failed to delete event: ', error);
-                    setNotification({message: 'Failed to delete event.', type: 'error'});
-                });
-        }
+    const handleDeleteClick = () => {
+        setShowDeleteConfirmation(true);
+    };
+
+    const confirmDelete = () => {
+        setShowDeleteConfirmation(false);
+
+        deleteEventById(eventId)
+            .then(() => {
+                setNotification({message: 'Event deleted successfully!', type: 'success'});
+                setTimeout(() => navigate('/events'), 2000);
+            })
+            .catch(error => {
+                console.error('Failed to delete event: ', error);
+                setNotification({message: 'Failed to delete event.', type: 'error'});
+            });
+    };
+
+    const cancelDelete = () => {
+        setShowDeleteConfirmation(false);
     };
 
     const handleBackButton = () => {
         navigate('/events');
     };
-
-    // const capitalizeFirstLetter = (string) => {
-    //     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-    // };
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -122,12 +127,25 @@ const EventDetailsPage = () => {
 
                 {isAuth && canEditAndDelete && (
                     <ActionButtonsGroup>
-                        <StyledButton onClick={handleDelete}>
-                            <FaTrashAlt/>
-                        </StyledButton>
-                        <StyledButton onClick={handleEdit}>
-                            <FaEdit/>
-                        </StyledButton>
+                        {showDeleteConfirmation ? (
+                            <>
+                                <StyledButton onClick={cancelDelete}>
+                                    <FaTimes/>
+                                </StyledButton>
+                                <StyledButton onClick={confirmDelete}>
+                                    <FaCheck/>
+                                </StyledButton>
+                            </>
+                        ) : (
+                            <>
+                                <StyledButton onClick={handleDeleteClick}>
+                                    <FaTrashAlt/>
+                                </StyledButton>
+                                <StyledButton onClick={handleEdit}>
+                                    <FaEdit/>
+                                </StyledButton>
+                            </>
+                        )}
                     </ActionButtonsGroup>
                 )}
 
