@@ -42,5 +42,8 @@ export const Card = styled.div`
     max-width: 25rem;
     cursor: pointer;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     //width: 100%;
 `;

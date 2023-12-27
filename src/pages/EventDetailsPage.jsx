@@ -84,9 +84,9 @@ const EventDetailsPage = () => {
         navigate('/events');
     };
 
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
-    };
+    // const capitalizeFirstLetter = (string) => {
+    //     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+    // };
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -114,7 +114,7 @@ const EventDetailsPage = () => {
                 </DetailItem>
                 <DetailItem>
                     <Label>Type:</Label>
-                    <Value>{capitalizeFirstLetter(event.type)}</Value>
+                    <Value>{event.type}</Value>
                 </DetailItem>
                 <DetailItem>
                     <Value>{event.description}</Value>

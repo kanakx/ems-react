@@ -5,6 +5,7 @@ import Notification from "../components/Notification"; // Import Notification co
 import { getEventById, updateById } from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
 import {PageTitle} from "../themes/SharedStyles.jsx";
+import PageLayout from "../components/PageLayout.jsx";
 
 const EditEventPage = () => {
     const { eventId } = useParams();
@@ -14,8 +15,8 @@ const EditEventPage = () => {
 
     useEffect(() => {
         getEventById(eventId)
-            .then(fetchedData => {
-                setEventData(fetchedData)
+            .then(fetchedEvent => {
+                setEventData(fetchedEvent)
             })
             .catch(error => {
                 console.error('Failed to fetch event to update: ', error);
@@ -35,14 +36,18 @@ const EditEventPage = () => {
             });
     };
 
-    if (!eventData) return <Loading />;
+    const handleBackButton = () => {
+        navigate('/events');
+    };
+
+    if (!eventData) return <Loading onBack={handleBackButton} />;
 
     return (
-        <>
+        <PageLayout>
             {notification.message && <Notification message={notification.message} type={notification.type} />}
             <PageTitle>Event details</PageTitle>
             <EventForm onSubmit={handleSubmit} initialEvent={eventData} />
-        </>
+        </PageLayout>
     );
 };
 

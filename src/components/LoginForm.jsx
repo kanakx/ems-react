@@ -19,7 +19,7 @@ const LoginForm = () => {
         e.preventDefault();
         loginUser(credentials)
             .then(() => {
-                navigate('/dashboard'); // Redirect to homepage or dashboard after login
+                navigate('/dashboard'); //TODO Redirect to homepage or dashboard after login
             })
             .catch(error => {
                 console.error(error);
