@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { getById, deleteById } from "../services/eventService.js";
-import { useUserContext } from '../contexts/UserContext';
-import {ActionButtonsGroup, Card, PageLayout, StyledButton} from "../themes/SharedStyles.jsx";
+import {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
+import {deleteById, getById} from "../services/eventService.js";
+import {useUserContext} from '../contexts/UserContext';
+import {ActionButtonsGroup, Card, StyledButton} from "../themes/SharedStyles.jsx";
 import Notification from "../components/Notification.jsx";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {FaEdit, FaTrashAlt} from "react-icons/fa";
+import PageLayout from "../components/PageLayout.jsx";
 
 const EventName = styled.h3`
     color: ${props => props.theme.colors.primary};

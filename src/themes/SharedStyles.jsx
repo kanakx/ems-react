@@ -20,15 +20,6 @@ export const PageSubtitle = styled.p`
     color: ${props => props.theme.colors.text};
 `;
 
-export const PageLayout = styled.div`
-    background-color: ${props => props.theme.colors.secondary};
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-`;
-
 export const ActionButtonsGroup = styled.div`
     min-width: 5rem;
     width: 25%;

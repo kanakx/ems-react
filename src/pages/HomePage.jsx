@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import LogoSVG from '../assets/logoGray.svg?react';
 import {useNavigate} from "react-router-dom";
-import {PageLayout, StyledButton} from "../themes/SharedStyles.jsx";
 import {useUserContext} from "../contexts/UserContext.jsx";
+import PageLayout from "../components/PageLayout.jsx";
+import {StyledButton} from "../themes/SharedStyles.jsx";
 
 const StyledLogo = styled(LogoSVG)`
     max-width: 150px;
