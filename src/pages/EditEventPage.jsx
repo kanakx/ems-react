@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import EventForm from "../components/EventForm";
 import Notification from "../components/Notification"; // Import Notification component
-import { getEventById, updateById } from "../services/eventService.js";
+import { getEventById, updateEventById } from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
 import {PageTitle} from "../themes/SharedStyles.jsx";
 import PageLayout from "../components/PageLayout.jsx";
@@ -25,7 +25,7 @@ const EditEventPage = () => {
     }, [eventId]);
 
     const handleSubmit = (updatedEventData) => {
-        updateById(updatedEventData)
+        updateEventById(updatedEventData)
             .then(() => {
                 setNotification({ message: 'Event updated successfully!', type: 'success' });
                 setTimeout(() => navigate('/events'), 4000);

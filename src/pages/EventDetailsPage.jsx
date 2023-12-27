@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {deleteById, getEventById} from "../services/eventService.js";
+import {deleteEventById, getEventById} from "../services/eventService.js";
 import {useUserContext} from '../contexts/UserContext';
 import {ActionButtonsGroup, Card, StyledButton} from "../themes/SharedStyles.jsx";
 import Notification from "../components/Notification.jsx";
@@ -68,7 +68,7 @@ const EventDetailsPage = () => {
 
     const handleDelete = () => {
         if (window.confirm("Are you sure you want to delete this event?")) {
-            deleteById(eventId)
+            deleteEventById(eventId)
                 .then(() => {
                     setNotification({message: 'Event deleted successfully!', type: 'success'});
                     setTimeout(() => navigate('/events'), 2000);

@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {PageSubtitle, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 import {useNavigate} from "react-router-dom";
 import Notification from "../components/Notification.jsx";
-import {getAll} from "../services/eventService.js";
+import {getAllEvents} from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {useUserContext} from "../contexts/UserContext.jsx";
@@ -23,7 +23,7 @@ const EventsPage = () => {
     const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
-        getAll(true)
+        getAllEvents(true)
             .then(fetchedEvents => {
                 setEvents(fetchedEvents);
                 setLoading(false);

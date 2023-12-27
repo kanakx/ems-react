@@ -2,7 +2,7 @@ import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
 import Notification from "../components/Notification";
-import {save} from "../services/eventService.js";
+import {saveEvents} from "../services/eventService.js";
 import {PageTitle} from "../themes/SharedStyles.jsx";
 import PageLayout from "../components/PageLayout.jsx";
 
@@ -11,7 +11,7 @@ const AddEventPage = () => {
     const [notification, setNotification] = useState({ message: '', type: '' });
 
     const handleSubmit = (newEventData) => {
-        save(newEventData)
+        saveEvents(newEventData)
             .then(() => {
                 setNotification({ message: 'Event saved successfully!', type: 'success' });
                 setTimeout(() => navigate('/events'), 4000);

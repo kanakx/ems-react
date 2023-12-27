@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api/v1/events';
 
-const getAll = (isPublic) => {
+const getAllEvents = (isPublic) => {
     const params = {};
     if (isPublic !== undefined) {
         params.isPublic = isPublic;
@@ -25,7 +25,7 @@ const getEventById = (eventId) => {
         });
 };
 
-const save = (eventData) => {
+const saveEvents = (eventData) => {
     return axios.post(API_URL, eventData)
         .then(response => response.data)
         .catch(error => {
@@ -34,7 +34,7 @@ const save = (eventData) => {
         });
 };
 
-const updateById = (eventId, updatedEventData) => {
+const updateEventById = (eventId, updatedEventData) => {
     return axios.put(`${API_URL}/${eventId}`, updatedEventData)
         .then(response => response.data)
         .catch(error => {
@@ -43,7 +43,7 @@ const updateById = (eventId, updatedEventData) => {
         });
 };
 
-const deleteById = (eventId) => {
+const deleteEventById = (eventId) => {
     return axios.delete(`${API_URL}/${eventId}`)
         .catch(error => {
             console.error('Error deleting event:', error);
@@ -51,4 +51,4 @@ const deleteById = (eventId) => {
         });
 };
 
-export { getAll, getEventById, save, updateById, deleteById };
+export { getAllEvents, getEventById, saveEvents, updateEventById, deleteEventById };
