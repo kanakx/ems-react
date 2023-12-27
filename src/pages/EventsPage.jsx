@@ -54,7 +54,7 @@ const EventsPage = () => {
             )}
             {notification.message && <Notification message={notification.message} type={notification.type}/>}
 
-            <PageSubtitle>Sign in to add events</PageSubtitle>
+            {!isAuth && <PageSubtitle>Sign in to add events</PageSubtitle>}
             {isAuth && (
                 <>
                     <StyledButton onClick={handleAddNewButton}>

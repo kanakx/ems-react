@@ -16,7 +16,7 @@ const getAll = (isPublic) => {
         });
 };
 
-const getById = (eventId) => {
+const getEventById = (eventId) => {
     return axios.get(`${API_URL}/${eventId}`)
         .then(response => response.data)
         .catch(error => {
@@ -51,4 +51,4 @@ const deleteById = (eventId) => {
         });
 };
 
-export { getAll, getById, save, updateById, deleteById };
+export { getAll, getEventById, save, updateById, deleteById };

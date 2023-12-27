@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import LogoSVG from '../assets/logoGray.svg?react';
 import {useNavigate} from "react-router-dom";
-import {useUserContext} from "../contexts/UserContext.jsx";
 import PageLayout from "../components/PageLayout.jsx";
 import {StyledButton} from "../themes/SharedStyles.jsx";
 
@@ -18,14 +17,9 @@ const Header = styled.p`
 
 const HomePage = () => {
     const navigate = useNavigate();
-    const { isAuth } = useUserContext();
 
     const handleExploreEventsButton = () => {
         navigate('/events');
-    };
-
-    const handleLoginButton = () => {
-        navigate('/login');
     };
 
     const handleAboutButton = () => {
@@ -39,11 +33,6 @@ const HomePage = () => {
             <StyledButton onClick={handleExploreEventsButton}>
                 Explore events
             </StyledButton>
-            {!isAuth && (
-                <StyledButton onClick={handleLoginButton}>
-                    Login
-                </StyledButton>
-            )}
             <StyledButton onClick={handleAboutButton}>
                 About
             </StyledButton>

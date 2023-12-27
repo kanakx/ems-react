@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import EventForm from "../components/EventForm";
 import Notification from "../components/Notification"; // Import Notification component
-import { getById, updateById } from "../services/eventService.js";
+import { getEventById, updateById } from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
 import {PageTitle} from "../themes/SharedStyles.jsx";
 
@@ -13,7 +13,7 @@ const EditEventPage = () => {
     const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
-        getById(eventId)
+        getEventById(eventId)
             .then(fetchedData => {
                 setEventData(fetchedData)
             })

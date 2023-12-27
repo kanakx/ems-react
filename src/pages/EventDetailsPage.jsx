@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {deleteById, getById} from "../services/eventService.js";
+import {deleteById, getEventById} from "../services/eventService.js";
 import {useUserContext} from '../contexts/UserContext';
 import {ActionButtonsGroup, Card, StyledButton} from "../themes/SharedStyles.jsx";
 import Notification from "../components/Notification.jsx";
@@ -8,6 +8,7 @@ import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {FaEdit, FaTrashAlt} from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
+import {getAttendee, getAttendeeEvents} from "../services/attendeeService.js";
 
 const EventName = styled.h3`
     color: ${props => props.theme.colors.primary};
@@ -28,40 +29,53 @@ const Label = styled.span`
 `;
 
 const Value = styled.span`
-    
+
 `;
 
 const EventDetailsPage = () => {
-    const { eventId } = useParams();
     const navigate = useNavigate();
-    const { isAuth } = useUserContext();
+    const {eventId} = useParams();
+    const {isAuth, user} = useUserContext();
     const [event, setEvent] = useState(null);
-    const [notification, setNotification] = useState({ message: '', type: '' });
+    const [canEditAndDelete, setCanEditAndDelete] = useState(false);
+    const [notification, setNotification] = useState({message: '', type: ''});
 
     useEffect(() => {
-        getById(eventId)
-            .then(data => setEvent(data))
+        getEventById(eventId)
+            .then(eventData => {
+                setEvent(eventData);
+                if (isAuth && user) {
+                    return getAttendeeEvents(user.idAttendee);
+                }
+            })
+            .then(userEvents => {
+                if (userEvents && event) {
+                    const canEditAndDelete = userEvents.some(userEvent =>
+                        userEvent.eventDto.idEvent === event.idEvent
+                    );
+                    setCanEditAndDelete(canEditAndDelete);
+                }
+            })
             .catch(error => {
-                console.error('Failed to fetch event: ', error);
-                setNotification({ message: 'Failed to load event.', type: 'error' });
+                console.error('Error:', error);
+                setNotification({ message: 'Error loading event', type: 'error' });
             });
-    }, [eventId]);
+    }, [eventId, user, isAuth, event]);
 
     const handleEdit = () => {
         navigate(`/events/edit/${eventId}`);
     };
 
     const handleDelete = () => {
-        // Confirm before deleting
         if (window.confirm("Are you sure you want to delete this event?")) {
             deleteById(eventId)
                 .then(() => {
-                    setNotification({ message: 'Event deleted successfully!', type: 'success' });
+                    setNotification({message: 'Event deleted successfully!', type: 'success'});
                     setTimeout(() => navigate('/events'), 2000);
                 })
                 .catch(error => {
                     console.error('Failed to delete event: ', error);
-                    setNotification({ message: 'Failed to delete event.', type: 'error' });
+                    setNotification({message: 'Failed to delete event.', type: 'error'});
                 });
         }
     };
@@ -76,7 +90,7 @@ const EventDetailsPage = () => {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+        const options = {year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'};
         return new Intl.DateTimeFormat('en-US', options).format(date);
     };
 
@@ -106,7 +120,7 @@ const EventDetailsPage = () => {
                     <Value>{event.description}</Value>
                 </DetailItem>
 
-                {isAuth && (
+                {isAuth && canEditAndDelete && (
                     <ActionButtonsGroup>
                         <StyledButton onClick={handleDelete}>
                             <FaTrashAlt/>

@@ -8,20 +8,52 @@ export const UserContextProvider = ({ children }) => {
     //TODO Change initial values to the actual
     const userData = {
         idAttendee: '1',
-        fullName: 'John Doe'
+        fullName: 'John Doe',
+        attendeeEventDtoList: [
+            {
+                "idAttendeeEvent": 1,
+                "eventDto": {
+                    "idEvent": 1,
+                    "name": "Tech Conference 2023",
+                    "type": "CONFERENCE",
+                    "startTimestamp": "2023-03-15T09:00:00",
+                    "endTimestamp": "2023-03-15T17:00:00",
+                    "locationName": "New York",
+                    "description": "An annual conference for tech enthusiasts and professionals.",
+                    "isPublic": true
+                },
+                "status": "ACCEPTED",
+                "invited": false
+            },
+            {
+                "idAttendeeEvent": 2,
+                "eventDto": {
+                    "idEvent": 2,
+                    "name": "Art & Design Expo",
+                    "type": "EXHIBITION",
+                    "startTimestamp": "2023-04-22T10:00:00",
+                    "endTimestamp": "2023-04-22T18:00:00",
+                    "locationName": "San Francisco",
+                    "description": "Explore the latest trends in art and design.",
+                    "isPublic": true
+                },
+                "status": "DECLINED",
+                "invited": false
+            }
+        ]
+
     };
     const [user, setUser] = useState(userData);
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState(true);
 
     const loginUser = (credentials) => {
         authService.login(credentials)
             .then(userData => {
-                setUser(userData); // Assuming userData contains user details
+                setUser(userData);
                 setIsAuth(true);
             })
             .catch(error => {
                 console.error('Login failed:', error);
-                // Optionally, handle login failure with additional logic
             });
     };
 
