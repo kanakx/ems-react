@@ -6,6 +6,7 @@ import Notification from "../components/Notification.jsx";
 import {getAll} from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
+import {useUserContext} from "../contexts/UserContext.jsx";
 
 const NoEventsMessage = styled.p`
     text-align: center;
@@ -15,30 +16,20 @@ const NoEventsMessage = styled.p`
 
 const EventsPage = () => {
     const navigate = useNavigate();
-    const [publicEvents, setPublicEvents] = useState([]);
-    const [privateEvents, setPrivateEvents] = useState([]);
+    const { isAuth } = useUserContext();
+    const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
         getAll(true)
-            .then(fetchedPublicEvents => {
-                setPublicEvents(fetchedPublicEvents);
+            .then(fetchedEvents => {
+                setEvents(fetchedEvents);
                 setLoading(false);
             })
             .catch(error => {
-                console.error('Failed to fetch public events: ', error);
-                setNotification({ message: 'Failed to load public events.', type: 'error' });
-            });
-
-        getAll(false)
-            .then(fetchedPrivateEvents => {
-                setPrivateEvents(fetchedPrivateEvents);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('Failed to fetch private events: ', error);
-                setNotification({ message: 'Failed to load private events.', type: 'error' });
+                console.error('Failed to fetch events: ', error);
+                setNotification({ message: 'Failed to load events.', type: 'error' });
             });
     }, []);
 
@@ -55,26 +46,21 @@ const EventsPage = () => {
     return (
         <PageLayout>
             <PageTitle>Events</PageTitle>
-
-            <PageSubtitle>Public</PageSubtitle>
-            {publicEvents && publicEvents.length > 0 ? (
-                <EventList events={publicEvents}/>
+            {events && events.length > 0 ? (
+                <EventList events={events}/>
             ) : (
                 <NoEventsMessage>No public events available</NoEventsMessage>
             )}
             {notification.message && <Notification message={notification.message} type={notification.type}/>}
 
-            <PageSubtitle>Your private</PageSubtitle>
-            {privateEvents && privateEvents.length > 0 ? (
-                <EventList events={privateEvents}/>
-            ) : (
-                <NoEventsMessage>No private events available</NoEventsMessage>
+            <PageSubtitle>Sign in to add events</PageSubtitle>
+            {isAuth && (
+                <>
+                    <StyledButton onClick={handleAddNewButton}>
+                        Add new
+                    </StyledButton>
+                </>
             )}
-            {notification.message && <Notification message={notification.message} type={notification.type}/>}
-
-            <StyledButton onClick={handleAddNewButton}>
-                Add new
-            </StyledButton>
             <StyledButton onClick={handleBackButton}>
                 Back
             </StyledButton>

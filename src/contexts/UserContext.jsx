@@ -5,7 +5,12 @@ import authService from "../services/authService.js";
 const UserContext = createContext(null);
 
 export const UserContextProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    //TODO Change initial values to the actual
+    const userData = {
+        idAttendee: '1',
+        fullName: 'John Doe'
+    };
+    const [user, setUser] = useState(userData);
     const [isAuth, setIsAuth] = useState(false);
 
     const loginUser = (credentials) => {
