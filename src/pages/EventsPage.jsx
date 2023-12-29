@@ -1,13 +1,12 @@
 import EventList from "../components/EventList";
-import { useEffect, useState } from "react";
-import { PageSubtitle, PageTitle, StyledButton } from "../themes/SharedStyles.jsx";
-import { useNavigate } from "react-router-dom";
-import { getAllEvents } from "../services/eventService.js";
+import {useEffect, useState} from "react";
+import {PageSubtitle, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
+import {useNavigate} from "react-router-dom";
+import {getAllEvents} from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
-import { useUserContext } from "../contexts/UserContext.jsx";
+import {useUserContext} from "../contexts/UserContext.jsx";
 import PageLayout from "../components/PageLayout.jsx";
-import { toast } from "react-toastify";
 
 const NoEventsMessage = styled.p`
     text-align: center;
@@ -27,10 +26,6 @@ const EventsPage = () => {
         getAllEvents(true)
             .then(fetchedEvents => {
                 setEvents(fetchedEvents);
-            })
-            .catch(error => {
-                console.error('Failed to fetch events: ', error);
-                toast.error('Failed to load events.');
             })
             .finally(() => {
                 setIsLoading(false);

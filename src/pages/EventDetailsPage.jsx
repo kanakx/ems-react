@@ -29,7 +29,7 @@ const Label = styled.span`
 `;
 
 const Value = styled.span`
-    // Styles for the value
+    
 `;
 
 const EventDetailsPage = () => {
@@ -58,10 +58,6 @@ const EventDetailsPage = () => {
                     });
                 }
             })
-            .catch(error => {
-                console.error('Error:', error);
-                toast.error('Error loading event');
-            })
             .finally(() => {
                 setIsLoading(false);
             });
@@ -83,10 +79,6 @@ const EventDetailsPage = () => {
             .then(() => {
                 toast.success('Event deleted successfully!');
                 setTimeout(() => navigate('/events'), 2000);
-            })
-            .catch(error => {
-                console.error('Failed to delete event: ', error);
-                toast.error('Failed to delete event.');
             });
     };
 

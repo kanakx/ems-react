@@ -12,11 +12,7 @@ const AddEventPage = () => {
         saveEvents(newEventData)
             .then(() => {
                 toast.success('Event saved successfully!');
-                setTimeout(() => navigate('/events'), 4000);
-            })
-            .catch(error => {
-                console.error('Failed to save event: ', error);
-                toast.error('Failed to save event.');
+                setTimeout(() => navigate('/events'), 2000);
             });
     };
 

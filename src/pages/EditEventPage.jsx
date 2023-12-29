@@ -14,24 +14,14 @@ const EditEventPage = () => {
 
     useEffect(() => {
         getEventById(eventId)
-            .then(fetchedEvent => {
-                setEventData(fetchedEvent)
-            })
-            .catch(error => {
-                console.error('Failed to fetch event to update: ', error);
-                toast.error('Failed to load event data.');
-            });
+            .then(fetchedEvent => setEventData(fetchedEvent))
     }, [eventId]);
 
     const handleSubmit = (updatedEventData) => {
         updateEventById(eventId, updatedEventData)
             .then(() => {
                 toast.success('Event updated successfully!');
-                setTimeout(() => navigate('/events'), 4000);
-            })
-            .catch(error => {
-                console.error('Failed to update event: ', error);
-                toast.error('Failed to update the event.');
+                setTimeout(() => navigate('/events'), 2000);
             });
     };
 
