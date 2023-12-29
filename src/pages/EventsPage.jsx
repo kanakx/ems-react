@@ -46,7 +46,7 @@ const EventsPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate(-1);
+        navigate('/events');
     };
 
     if (isLoading) return <Loading onBack={handleBackButton}/>
