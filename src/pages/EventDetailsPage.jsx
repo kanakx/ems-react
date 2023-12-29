@@ -8,7 +8,7 @@ import styled from "styled-components";
 import { FaCheck, FaEdit, FaTimes, FaTrashAlt } from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
 import { getAttendeeEvents } from "../services/attendeeService.js";
-import { toast } from 'react-toastify'; // Import toast
+import { toast } from 'react-toastify';
 
 const EventName = styled.h3`
     color: ${props => props.theme.colors.primary};
@@ -42,11 +42,11 @@ const EventDetailsPage = () => {
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     useEffect(() => {
-        let timer = setTimeout(() => setIsLoading(true), 2000);
+        let loadingTimeout = setTimeout(() => setIsLoading(true), 500);
 
         getEventById(eventId)
             .then(eventData => {
-                clearTimeout(timer);
+                clearTimeout(loadingTimeout);
                 setEvent(eventData);
                 if (isAuth && user) {
                     return getAttendeeEvents(user.idAttendee);
@@ -61,10 +61,12 @@ const EventDetailsPage = () => {
                 }
             })
             .catch(error => {
+                clearTimeout(loadingTimeout);
                 console.error('Error:', error);
-                clearTimeout(timer);
                 toast.error('Error loading event');
             });
+
+        return () => clearTimeout(loadingTimeout);
     }, [eventId, user, isAuth, event]);
 
     const handleEdit = () => {
@@ -102,7 +104,7 @@ const EventDetailsPage = () => {
         return new Intl.DateTimeFormat('en-US', options).format(date);
     };
 
-    if (!event) return <Loading onBack={handleBackButton}/>;
+    if (isLoading || !event) return <Loading onBack={handleBackButton}/>;
 
     return (
         <PageLayout>

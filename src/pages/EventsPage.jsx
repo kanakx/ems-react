@@ -22,19 +22,23 @@ const EventsPage = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        let timer = setTimeout(() => setIsLoading(true), 2000);
+        let loadingTimeout = setTimeout(() => {
+            setIsLoading(true);
 
-        getAllEvents(true)
-            .then(fetchedEvents => {
-                clearTimeout(timer);
-                setEvents(fetchedEvents);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                console.error('Failed to fetch events: ', error);
-                clearTimeout(timer);
-                toast.error('Failed to load events.');
-            });
+            getAllEvents(true)
+                .then(fetchedEvents => {
+                    setEvents(fetchedEvents);
+                })
+                .catch(error => {
+                    console.error('Failed to fetch events: ', error);
+                    toast.error('Failed to load events.');
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        }, 500);
+
+        return () => clearTimeout(loadingTimeout);
     }, []);
 
     const handleAddNewButton = () => {
