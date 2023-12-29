@@ -37,12 +37,16 @@ const EventDetailsPage = () => {
     const { eventId } = useParams();
     const { isAuth, user } = useUserContext();
     const [event, setEvent] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
     const [canEditAndDelete, setCanEditAndDelete] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     useEffect(() => {
+        let timer = setTimeout(() => setIsLoading(true), 2000);
+
         getEventById(eventId)
             .then(eventData => {
+                clearTimeout(timer);
                 setEvent(eventData);
                 if (isAuth && user) {
                     return getAttendeeEvents(user.idAttendee);
@@ -58,7 +62,8 @@ const EventDetailsPage = () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                // toast.error('Error loading event');
+                clearTimeout(timer);
+                toast.error('Error loading event');
             });
     }, [eventId, user, isAuth, event]);
 

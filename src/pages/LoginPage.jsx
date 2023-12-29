@@ -1,6 +1,5 @@
 import {useNavigate} from 'react-router-dom';
 import {PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
-import Notification from "../components/Notification.jsx";
 import LoginForm from "../components/LoginForm.jsx";
 import {useState} from "react";
 import PageLayout from "../components/PageLayout.jsx";
