@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useUserContext} from "../contexts/UserContext.jsx";
 import NavBarButton from "./NavBarButton.jsx";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const StyledNavBar = styled.nav`
     position: absolute;

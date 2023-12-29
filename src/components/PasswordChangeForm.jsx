@@ -1,20 +1,16 @@
 import {StyledForm, StyledFormButton, StyledFormInput} from "../themes/FormStyles.jsx";
-import Notification from "./Notification.jsx";
 import {useState} from "react";
 import {ActionButtonsGroup} from "../themes/SharedStyles.jsx";
 import {FaCheck, FaTimes} from "react-icons/fa";
-import {useNavigate} from "react-router-dom";
-import {useUserContext} from "../contexts/UserContext.jsx";
+import {toast} from "react-toastify";
+import PropTypes from "prop-types";
 
 const PasswordChangeForm = ({onFormClose}) => {
-    const navigate = useNavigate();
-    const {user} = useUserContext();
     const [passwords, setPasswords] = useState({
         currentPassword: '',
         newPassword: '',
         confirmNewPassword: ''
     });
-    const [notification, setNotification] = useState({message: '', type: ''});
 
     const handleChange = (e) => {
         setPasswords({ ...passwords, [e.target.name]: e.target.value });
@@ -23,7 +19,7 @@ const PasswordChangeForm = ({onFormClose}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (passwords.newPassword !== passwords.confirmNewPassword) {
-            setNotification({message: 'New passwords do not match.', type: 'error'});
+            toast.warning('New passwords do not match.');
         }
         //TODO Add logic here for password update API call
     };
@@ -58,9 +54,6 @@ const PasswordChangeForm = ({onFormClose}) => {
                 onChange={handleChange}
                 required
             />
-            {notification.message && (
-                <Notification message={notification.message} type={notification.type}/>
-            )}
             <ActionButtonsGroup>
                 <StyledFormButton type="button" onClick={handleCancelButton}>
                     <FaTimes/>
@@ -71,6 +64,10 @@ const PasswordChangeForm = ({onFormClose}) => {
             </ActionButtonsGroup>
         </StyledForm>
     );
+};
+
+PasswordChangeForm.propTypes = {
+  onFormClose: PropTypes.func.isRequired
 };
 
 export default PasswordChangeForm;

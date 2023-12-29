@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
 import EventForm from "../components/EventForm";
-import Notification from "../components/Notification"; // Import Notification component
-import { getEventById, updateEventById } from "../services/eventService.js";
+import {getEventById, updateEventById} from "../services/eventService.js";
 import Loading from "../components/Loading.jsx";
 import {PageTitle} from "../themes/SharedStyles.jsx";
 import PageLayout from "../components/PageLayout.jsx";
+import {toast} from "react-toastify";
 
 const EditEventPage = () => {
     const { eventId } = useParams();
     const navigate = useNavigate();
     const [eventData, setEventData] = useState(null);
-    const [notification, setNotification] = useState({ message: '', type: '' });
 
     useEffect(() => {
         getEventById(eventId)
@@ -20,19 +19,19 @@ const EditEventPage = () => {
             })
             .catch(error => {
                 console.error('Failed to fetch event to update: ', error);
-                setNotification({ message: 'Failed to load event data.', type: 'error' });
+                toast.error('Failed to load event data.');
             });
     }, [eventId]);
 
     const handleSubmit = (updatedEventData) => {
         updateEventById(updatedEventData)
             .then(() => {
-                setNotification({ message: 'Event updated successfully!', type: 'success' });
+                toast.success('Event updated successfully!');
                 setTimeout(() => navigate('/events'), 4000);
             })
             .catch(error => {
                 console.error('Failed to update event: ', error);
-                setNotification({ message: 'Failed to update event.', type: 'error' });
+                toast.success('Failed to update the event.');
             });
     };
 
@@ -44,7 +43,6 @@ const EditEventPage = () => {
 
     return (
         <PageLayout>
-            {notification.message && <Notification message={notification.message} type={notification.type} />}
             <PageTitle>Event details</PageTitle>
             <EventForm onSubmit={handleSubmit} initialEvent={eventData} />
         </PageLayout>

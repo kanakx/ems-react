@@ -1,14 +1,14 @@
-import {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
-import {deleteEventById, getEventById} from "../services/eventService.js";
-import {useUserContext} from '../contexts/UserContext';
-import {ActionButtonsGroup, Card, StyledButton} from "../themes/SharedStyles.jsx";
-import Notification from "../components/Notification.jsx";
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { deleteEventById, getEventById } from "../services/eventService.js";
+import { useUserContext } from '../contexts/UserContext';
+import { ActionButtonsGroup, Card, StyledButton } from "../themes/SharedStyles.jsx";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
-import {FaCheck, FaEdit, FaTimes, FaTrashAlt} from "react-icons/fa";
+import { FaCheck, FaEdit, FaTimes, FaTrashAlt } from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
-import {getAttendee, getAttendeeEvents} from "../services/attendeeService.js";
+import { getAttendeeEvents } from "../services/attendeeService.js";
+import { toast } from 'react-toastify'; // Import toast
 
 const EventName = styled.h3`
     color: ${props => props.theme.colors.primary};
@@ -29,17 +29,16 @@ const Label = styled.span`
 `;
 
 const Value = styled.span`
-
+    // Styles for the value
 `;
 
 const EventDetailsPage = () => {
     const navigate = useNavigate();
-    const {eventId} = useParams();
-    const {isAuth, user} = useUserContext();
+    const { eventId } = useParams();
+    const { isAuth, user } = useUserContext();
     const [event, setEvent] = useState(null);
     const [canEditAndDelete, setCanEditAndDelete] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-    const [notification, setNotification] = useState({message: '', type: ''});
 
     useEffect(() => {
         getEventById(eventId)
@@ -59,7 +58,7 @@ const EventDetailsPage = () => {
             })
             .catch(error => {
                 console.error('Error:', error);
-                setNotification({message: 'Error loading event', type: 'error'});
+                // toast.error('Error loading event');
             });
     }, [eventId, user, isAuth, event]);
 
@@ -73,15 +72,14 @@ const EventDetailsPage = () => {
 
     const confirmDelete = () => {
         setShowDeleteConfirmation(false);
-
         deleteEventById(eventId)
             .then(() => {
-                setNotification({message: 'Event deleted successfully!', type: 'success'});
+                toast.success('Event deleted successfully!');
                 setTimeout(() => navigate('/events'), 2000);
             })
             .catch(error => {
                 console.error('Failed to delete event: ', error);
-                setNotification({message: 'Failed to delete event.', type: 'error'});
+                toast.error('Failed to delete event.');
             });
     };
 
@@ -130,27 +128,23 @@ const EventDetailsPage = () => {
                         {showDeleteConfirmation ? (
                             <>
                                 <StyledButton onClick={cancelDelete}>
-                                    <FaTimes/>
+                                    <FaTimes />
                                 </StyledButton>
                                 <StyledButton onClick={confirmDelete}>
-                                    <FaCheck/>
+                                    <FaCheck />
                                 </StyledButton>
                             </>
                         ) : (
                             <>
                                 <StyledButton onClick={handleDeleteClick}>
-                                    <FaTrashAlt/>
+                                    <FaTrashAlt />
                                 </StyledButton>
                                 <StyledButton onClick={handleEdit}>
-                                    <FaEdit/>
+                                    <FaEdit />
                                 </StyledButton>
                             </>
                         )}
                     </ActionButtonsGroup>
-                )}
-
-                {notification.message && (
-                    <Notification message={notification.message} type={notification.type}/>
                 )}
 
                 <StyledButton onClick={handleBackButton}>
