@@ -1,4 +1,10 @@
-import { motion } from 'framer-motion';
+import {motion} from 'framer-motion';
+import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const StyledMotionDiv = styled(motion.div)`
+  
+`;
 
 const pageVariants = {
     initial: { opacity: 0 },
@@ -13,7 +19,7 @@ const pageTransition = {
 };
 
 const AnimatedRoute = ({ children }) => (
-    <motion.div
+    <StyledMotionDiv
         initial="initial"
         animate="in"
         exit="out"
@@ -21,7 +27,11 @@ const AnimatedRoute = ({ children }) => (
         transition={pageTransition}
     >
         {children}
-    </motion.div>
+    </StyledMotionDiv>
 );
+
+AnimatedRoute.propTypes = {
+  children: PropTypes.object.isRequired
+};
 
 export default AnimatedRoute;
