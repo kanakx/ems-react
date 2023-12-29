@@ -17,7 +17,6 @@ const UserProfileButton = () => {
 
     const handleClick = () => {
         if (isAuth) {
-            //TODO Implement actual routing
             navigate('/userProfile');
         } else {
             navigate('/login');

@@ -1,6 +1,6 @@
 import {useState} from "react";
 import PropTypes from "prop-types";
-import {ActionButtonsGroup, ErrorMessage} from "../themes/SharedStyles.jsx";
+import {ActionButtonsGroup} from "../themes/SharedStyles.jsx";
 import {FaCheck, FaTimes} from "react-icons/fa";
 import {useNavigate} from "react-router-dom";
 import {
@@ -25,7 +25,6 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
         description: '',
     });
 
-    // Clears error message when user starts writing
     const handleChange = (e) => {
         setEvent({...event, [e.target.name]: e.target.value});
     };
