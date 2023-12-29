@@ -24,7 +24,7 @@ const EditEventPage = () => {
     }, [eventId]);
 
     const handleSubmit = (updatedEventData) => {
-        updateEventById(updatedEventData)
+        updateEventById(eventId, updatedEventData)
             .then(() => {
                 toast.success('Event updated successfully!');
                 setTimeout(() => navigate('/events'), 4000);
