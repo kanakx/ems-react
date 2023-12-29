@@ -37,37 +37,42 @@ const EventDetailsPage = () => {
     const { eventId } = useParams();
     const { isAuth, user } = useUserContext();
     const [event, setEvent] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [canEditAndDelete, setCanEditAndDelete] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     useEffect(() => {
-        let loadingTimeout = setTimeout(() => setIsLoading(true), 500);
+        let loadingTimeout = setTimeout(() => {
+            setIsLoading(true);
 
-        getEventById(eventId)
-            .then(eventData => {
-                clearTimeout(loadingTimeout);
-                setEvent(eventData);
-                if (isAuth && user) {
-                    return getAttendeeEvents(user.idAttendee);
-                }
-            })
-            .then(userEvents => {
-                if (userEvents && event) {
-                    const canEditAndDelete = userEvents.some(userEvent =>
-                        userEvent.eventDto.idEvent === event.idEvent
-                    );
-                    setCanEditAndDelete(canEditAndDelete);
-                }
-            })
-            .catch(error => {
-                clearTimeout(loadingTimeout);
-                console.error('Error:', error);
-                toast.error('Error loading event');
-            });
+            getEventById(eventId)
+                .then(eventData => {
+                    setEvent(eventData);
+                    if (isAuth && user) {
+                        return getAttendeeEvents(user.idAttendee)
+                            .then(userEvents => {
+                                if (userEvents) {
+                                    const canEditAndDelete = userEvents.some(userEvent =>
+                                        userEvent.eventDto.idEvent === eventData.idEvent
+                                    );
+                                    setCanEditAndDelete(canEditAndDelete);
+                                }
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    toast.error('Error loading event');
+                })
+                .finally(() => {
+                    clearTimeout(loadingTimeout);
+                    setIsLoading(false);
+                });
+        }, 500);
 
         return () => clearTimeout(loadingTimeout);
-    }, [eventId, user, isAuth, event]);
+    }, [eventId, user, isAuth]);
+
 
     const handleEdit = () => {
         navigate(`/events/edit/${eventId}`);
@@ -95,7 +100,7 @@ const EventDetailsPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate(-1);
+        navigate('/events');
     };
 
     const formatDate = (dateString) => {
