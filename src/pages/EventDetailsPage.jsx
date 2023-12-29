@@ -42,35 +42,30 @@ const EventDetailsPage = () => {
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     useEffect(() => {
-        let loadingTimeout = setTimeout(() => {
-            setIsLoading(true);
+        setIsLoading(true);
 
-            getEventById(eventId)
-                .then(eventData => {
-                    setEvent(eventData);
-                    if (isAuth && user) {
-                        return getAttendeeEvents(user.idAttendee)
-                            .then(userEvents => {
-                                if (userEvents) {
-                                    const canEditAndDelete = userEvents.some(userEvent =>
-                                        userEvent.eventDto.idEvent === eventData.idEvent
-                                    );
-                                    setCanEditAndDelete(canEditAndDelete);
-                                }
-                            });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    toast.error('Error loading event');
-                })
-                .finally(() => {
-                    clearTimeout(loadingTimeout);
-                    setIsLoading(false);
-                });
-        }, 500);
+        getEventById(eventId)
+            .then(eventData => {
+                setEvent(eventData);
+                if (isAuth && user) {
+                    return getAttendeeEvents(user.idAttendee).then(userEvents => {
+                        if (userEvents) {
+                            const canEdit = userEvents.some(userEvent =>
+                                userEvent.eventDto.idEvent === eventData.idEvent
+                            );
+                            setCanEditAndDelete(canEdit);
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                toast.error('Error loading event');
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
 
-        return () => clearTimeout(loadingTimeout);
     }, [eventId, user, isAuth]);
 
 

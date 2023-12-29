@@ -31,7 +31,7 @@ const EditEventPage = () => {
             })
             .catch(error => {
                 console.error('Failed to update event: ', error);
-                toast.success('Failed to update the event.');
+                toast.error('Failed to update the event.');
             });
     };
 
