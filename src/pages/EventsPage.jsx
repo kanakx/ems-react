@@ -57,7 +57,7 @@ const EventsPage = () => {
             {events && events.length > 0 ? (
                 <EventList events={events}/>
             ) : (
-                <NoEventsMessage>No public events available</NoEventsMessage>
+                <NoEventsMessage>No events available</NoEventsMessage>
             )}
 
             {!isAuth && <PageSubtitle>Sign in to add events</PageSubtitle>}
