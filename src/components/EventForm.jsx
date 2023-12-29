@@ -11,6 +11,7 @@ import {
     StyledFormSelect,
     StyledFormTextArea
 } from "../themes/FormStyles.jsx";
+import {toast} from "react-toastify";
 
 const EventForm = ({ onSubmit, initialEvent = {} }) => {
     const navigate = useNavigate();
@@ -23,18 +24,16 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
         type: '',
         description: '',
     });
-    const [errorMessage, setErrorMessage] = useState('');
 
     // Clears error message when user starts writing
     const handleChange = (e) => {
         setEvent({...event, [e.target.name]: e.target.value});
-        setErrorMessage('');
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!event.name || !event.startTimestamp || !event.endTimestamp || !event.locationName || !event.type) {
-            setErrorMessage('Please fill out all fields.');
+            toast.warning('Please fill out all fields.');
             return;
         }
         onSubmit(event);
@@ -72,8 +71,6 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
             <StyledFormTextArea name="description" placeholder="Description" value={event.description}
                                 onChange={handleChange}/>
 
-            //TODO Maybe notification here? To consider
-            {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
             <ActionButtonsGroup>
                 <StyledFormButton type="button" onClick={handleCancelButton}>
                     <FaTimes/>
