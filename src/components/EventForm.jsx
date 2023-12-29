@@ -46,6 +46,16 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
         <StyledForm onSubmit={handleSubmit}>
             <StyledFormInput type="text" name="name" placeholder="Name" value={event.name} onChange={handleChange}/>
 
+            <StyledFormSelect name="type" value={event.type} onChange={handleChange}>
+                <option value="">Type</option>
+                <option value="CONFERENCE">CONFERENCE</option>
+                <option value="SEMINAR">SEMINAR</option>
+                <option value="WORKSHOP">WORKSHOP</option>
+                <option value="EXHIBITION">EXHIBITION</option>
+                <option value="FESTIVAL">FESTIVAL</option>
+                <option value="MEETUP">MEETUP</option>
+            </StyledFormSelect>
+
             <FormLabel htmlFor="startTimestamp">Start timestamp:</FormLabel>
             <StyledFormInput type="datetime-local" name="startTimestamp" placeholder="Start Date"
                              value={event.startTimestamp} onChange={handleChange}/>
@@ -56,16 +66,6 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
 
             <StyledFormInput type="text" name="locationName" placeholder="Location" value={event.locationName}
                              onChange={handleChange}/>
-
-            <StyledFormSelect name="type" value={event.type} onChange={handleChange}>
-                <option value="">Type</option>
-                <option value="CONFERENCE">CONFERENCE</option>
-                <option value="SEMINAR">SEMINAR</option>
-                <option value="WORKSHOP">WORKSHOP</option>
-                <option value="EXHIBITION">EXHIBITION</option>
-                <option value="FESTIVAL">FESTIVAL</option>
-                <option value="MEETUP">MEETUP</option>
-            </StyledFormSelect>
 
             <StyledFormTextArea name="description" placeholder="Description" value={event.description}
                                 onChange={handleChange}/>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledForm = styled.form`
+export const StyledForm = styled.form`
     background-color: ${props => props.theme.colors.background};
     padding: ${props => props.theme.spacing.medium};
     border-radius: ${props => props.theme.borders.borderRadius};
@@ -13,7 +13,7 @@ const StyledForm = styled.form`
     align-items: center;
 `;
 
-const StyledFormInput = styled.input`
+export const StyledFormInput = styled.input`
     padding: ${props => props.theme.spacing.small};
     margin: ${props => props.theme.spacing.small} 0;
     border: ${props => props.theme.borders.border};
@@ -22,7 +22,7 @@ const StyledFormInput = styled.input`
     width: 100%;
 `;
 
-const StyledFormSelect = styled.select`
+export const StyledFormSelect = styled.select`
     padding: ${props => props.theme.spacing.small};
     margin: ${props => props.theme.spacing.small} 0;
     border: ${props => props.theme.borders.border};
@@ -32,7 +32,6 @@ const StyledFormSelect = styled.select`
     text-align: center;
     width: 100%;
     font-size: ${props => props.theme.typography.text};
-    box-sizing: border-box; // Ensures padding doesn't affect overall width
 
     &:focus {
         outline: none;
@@ -40,7 +39,7 @@ const StyledFormSelect = styled.select`
     }
 `;
 
-const StyledFormTextArea = styled.textarea`
+export const StyledFormTextArea = styled.textarea`
     padding: ${props => props.theme.spacing.small};
     margin: ${props => props.theme.spacing.small} 0;
     border: ${props => props.theme.borders.border};
@@ -51,7 +50,7 @@ const StyledFormTextArea = styled.textarea`
     resize: vertical;
 `;
 
-const StyledFormButton = styled.button`
+export const StyledFormButton = styled.button`
     background-color: ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.buttonTextColor};
     padding: ${props => props.theme.spacing.small};
@@ -61,11 +60,9 @@ const StyledFormButton = styled.button`
     cursor: pointer;
 `;
 
-const FormLabel = styled.label`
+export const FormLabel = styled.label`
     margin-top: ${props => props.theme.spacing.small};
     color: ${props => props.theme.colors.text};
     display: block;
     font-size: ${props => props.theme.typography.label};
 `;
-
-export {StyledForm, StyledFormInput, StyledFormSelect, StyledFormTextArea, StyledFormButton, FormLabel};
