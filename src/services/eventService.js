@@ -3,13 +3,8 @@ import { handleApiResponse, handleApiError } from '../utils/apiHandler';
 
 const API_URL = 'http://localhost:8080/api/v1/events';
 
-export const getAllEvents = (isPublic) => {
-    const params = {};
-    if (isPublic !== undefined) {
-        params.isPublic = isPublic;
-    }
-
-    return axios.get(API_URL, { params })
+export const getAllEvents = () => {
+    return axios.get(API_URL)
         .then(handleApiResponse)
         .catch(handleApiError);
 };

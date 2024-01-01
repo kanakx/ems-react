@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:8080/api/v1/attendees';
 
-const getAttendee = (attendeeId) => {
+const getAttendeeById = (attendeeId) => {
     return axios.get(`${API_URL}/${attendeeId}`)
         .then(response => response.data)
         .catch(error => {
@@ -25,4 +25,4 @@ const getAttendeeEvents = (attendeeId) => {
 export { getAttendeeEvents };
 
 
-export { getAttendee };
+export { getAttendeeById };

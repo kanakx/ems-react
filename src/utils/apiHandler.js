@@ -6,7 +6,11 @@ export const handleApiResponse = response => {
 
 export const handleApiError = error => {
     console.error('API Error: ', error);
-    const errorMessage = error.response?.data?.message || 'An unexpected error occurred.';
-    toast.error(errorMessage);
+    if (error.message === "Network Error" || error.response === undefined) {
+        toast.error("Unable to connect to the server. Please try again later.");
+    } else {
+        const errorMessage = error.response?.data?.message || 'An unexpected error occurred.';
+        toast.error(errorMessage);
+    }
     throw error;
 };

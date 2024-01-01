@@ -64,7 +64,6 @@ const EventDetailsPage = () => {
 
     }, [eventId, user, isAuth]);
 
-
     const handleEdit = () => {
         navigate(`/events/edit/${eventId}`);
     };
