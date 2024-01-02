@@ -58,13 +58,11 @@ const EventsPage = () => {
                 <NoEventsMessage>No events available</NoEventsMessage>
             )}
 
-            {ownedEvents && ownedEvents.length > 0 ? (
+            {ownedEvents && ownedEvents.length > 0 && (
                 <>
                     <PageSubtitle>Owned by you</PageSubtitle>
                     <EventList events={ownedEvents}/>
                 </>
-            ) : (
-                <NoEventsMessage>No events available</NoEventsMessage>
             )}
 
             {!isAuth && <PageSubtitle>Sign in to add events</PageSubtitle>}
