@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {useUserContext} from "../contexts/UserContext.jsx";
 import NavBarButton from "./NavBarButton.jsx";
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const StyledNavBar = styled.nav`
     position: absolute;
@@ -14,6 +14,7 @@ const StyledNavBar = styled.nav`
 
 const NavBar = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const { isAuth, attendee, logout } = useUserContext();
 
     const handleUserProfileButtonClick = () => {
@@ -24,6 +25,8 @@ const NavBar = () => {
         navigate('/login');
     };
 
+    const isOnLoginPage = location.pathname === '/login';
+
     return (
         <StyledNavBar>
             {isAuth && attendee ? (
@@ -32,7 +35,7 @@ const NavBar = () => {
                     <NavBarButton buttonText="Sign Out" onClick={logout} />
                 </>
             ) : (
-                <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />
+                !isOnLoginPage && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />
             )}
         </StyledNavBar>
     );
