@@ -6,14 +6,21 @@ import PageLayout from "../components/PageLayout.jsx";
 const LoginPage = () => {
     const navigate = useNavigate();
 
+    const handleRegisterButton = () => {
+      navigate('/auth/register')
+    };
+
     const handleBackButton = () => {
         navigate(-1);
     };
 
     return (
         <PageLayout>
-            <PageTitle>Login</PageTitle>
+            <PageTitle>Log in</PageTitle>
             <LoginForm/>
+            <StyledButton onClick={handleRegisterButton}>
+                Create account
+            </StyledButton>
             <StyledButton onClick={handleBackButton}>
                 Back
             </StyledButton>

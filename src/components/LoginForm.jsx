@@ -43,7 +43,7 @@ const LoginForm = () => {
                 onChange={handleChange}
                 required
             />
-            <StyledFormButton type="submit">Login</StyledFormButton>
+            <StyledFormButton type="submit">Confirm</StyledFormButton>
         </StyledForm>
     );
 };
