@@ -7,7 +7,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
 
     const handleRegisterButton = () => {
-      navigate('/auth/register')
+      navigate('/register')
     };
 
     const handleBackButton = () => {

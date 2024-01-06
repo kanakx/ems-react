@@ -6,10 +6,20 @@ import {jwtDecode} from "jwt-decode";
 
 const UserContext = createContext(null);
 
-export const UserContextProvider = ({ children }) => {
+export const UserContextProvider = ({children}) => {
 
     const [attendee, setAttendee] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
+
+    const registerUser = (credentials) => {
+        return authService.register(credentials)
+            .then(response => {
+                console.log('Register successful:', response);
+            })
+            .catch(error => {
+                console.log('Register failed:', error);
+            })
+    };
 
     const loginUser = (credentials) => {
         return authService.login(credentials)
@@ -42,7 +52,7 @@ export const UserContextProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ attendee, isAuth, loginUser, logoutUser }}>
+        <UserContext.Provider value={{attendee, isAuth, registerUser, loginUser, logoutUser}}>
             {children}
         </UserContext.Provider>
     );

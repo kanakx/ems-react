@@ -9,6 +9,7 @@ import EditEventPage from "../pages/EditEventPage.jsx";
 import UserProfilePage from "../pages/UserProfilePage.jsx";
 import AnimatedRoute from "./AnimatedRoute.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
+import RegisterPage from "../pages/RegisterPage.jsx";
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -19,6 +20,11 @@ const AnimatedRoutes = () => {
                 <Route path="/" element={
                     <AnimatedRoute>
                         <HomePage />
+                    </AnimatedRoute>
+                }/>
+                <Route path="/register" element={
+                    <AnimatedRoute>
+                        <RegisterPage />
                     </AnimatedRoute>
                 }/>
                 <Route path="/login" element={

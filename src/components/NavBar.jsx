@@ -26,6 +26,7 @@ const NavBar = () => {
     };
 
     const isOnLoginPage = location.pathname === '/login';
+    const isOnRegisterPage = location.pathname === 'register';
 
     return (
         <StyledNavBar>
@@ -35,7 +36,7 @@ const NavBar = () => {
                     <NavBarButton buttonText="Sign Out" onClick={logoutUser} />
                 </>
             ) : (
-                !isOnLoginPage && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />
+                isOnLoginPage || isOnRegisterPage && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />
             )}
         </StyledNavBar>
     );

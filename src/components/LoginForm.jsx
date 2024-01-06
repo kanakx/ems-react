@@ -18,6 +18,7 @@ const LoginForm = () => {
         loginUser(credentials)
             .then(() => {
                 navigate('/events');
+                toast.success('Login successful.');
             })
             .catch(error => {
                 console.error(error);
