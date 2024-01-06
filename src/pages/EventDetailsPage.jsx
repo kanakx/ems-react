@@ -47,6 +47,8 @@ const EventDetailsPage = () => {
         getEventById(eventId)
             .then(eventData => {
                 setEvent(eventData);
+                console.log(isAuth);
+                console.log(attendee);
                 if (isAuth && attendee) {
                     return getAttendeeEvents(attendee.idAttendee).then(userEvents => {
                         if (userEvents) {

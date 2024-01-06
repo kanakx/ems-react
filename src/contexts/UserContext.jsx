@@ -32,6 +32,8 @@ export const UserContextProvider = ({children}) => {
             })
             .then(fetchedAttendee => {
                 setAttendee(fetchedAttendee);
+                //TODO delete
+                console.log(fetchedAttendee);
                 setIsAuth(true);
             })
             .catch(error => {
