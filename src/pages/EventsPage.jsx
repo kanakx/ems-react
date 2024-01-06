@@ -7,7 +7,7 @@ import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {useUserContext} from "../contexts/UserContext.jsx";
 import PageLayout from "../components/PageLayout.jsx";
-import {getAttendeeById, getAttendeeEvents} from "../services/attendeeService.js";
+import {getAttendeeEvents} from "../services/attendeeService.js";
 
 const NoEventsMessage = styled.p`
     text-align: center;
