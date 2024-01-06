@@ -7,7 +7,7 @@ import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {useUserContext} from "../contexts/UserContext.jsx";
 import PageLayout from "../components/PageLayout.jsx";
-import {getAttendeeById} from "../services/attendeeService.js";
+import {getAttendeeById, getAttendeeEvents} from "../services/attendeeService.js";
 
 const NoEventsMessage = styled.p`
     text-align: center;
@@ -26,11 +26,11 @@ const EventsPage = () => {
         setIsLoading(true);
         Promise.all([
             getAllEvents(),
-            getAttendeeById(attendee.idAttendee)
+            getAttendeeEvents(attendee.idAttendee)
         ])
-            .then(([allEventsData, attendeeData]) => {
-                const ownedEventIds = new Set(attendeeData.attendeeEventDtoList.map(ae => ae.eventDto.idEvent));
-                const owned = attendeeData.attendeeEventDtoList.map(ae => ae.eventDto);
+            .then(([allEventsData, attendeeEvents]) => {
+                const ownedEventIds = new Set(attendeeEvents.map(ae => ae.eventDto.idEvent));
+                const owned = attendeeEvents.map(ae => ae.eventDto);
                 const others = allEventsData.filter(event => !ownedEventIds.has(event.idEvent));
 
                 setAllEvents(others);
