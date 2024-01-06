@@ -8,6 +8,7 @@ import AddEventPage from "../pages/AddEventPage.jsx";
 import EditEventPage from "../pages/EditEventPage.jsx";
 import UserProfilePage from "../pages/UserProfilePage.jsx";
 import AnimatedRoute from "./AnimatedRoute.jsx";
+import ProtectedRoute from "./ProtectedRoute.jsx";
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -27,27 +28,37 @@ const AnimatedRoutes = () => {
                 }/>
                 <Route path="/events" element={
                     <AnimatedRoute>
-                        <EventsPage />
+                        <ProtectedRoute>
+                            <EventsPage />
+                        </ProtectedRoute>
                     </AnimatedRoute>
                 }/>
                 <Route path="/events/:eventId" element={
                     <AnimatedRoute>
-                        <EventDetailsPage />
+                        <ProtectedRoute>
+                            <EventDetailsPage />
+                        </ProtectedRoute>
                     </AnimatedRoute>
                 }/>
                 <Route path="/events/add" element={
                     <AnimatedRoute>
-                        <AddEventPage />
+                        <ProtectedRoute>
+                            <AddEventPage />
+                        </ProtectedRoute>
                     </AnimatedRoute>
                 }/>
                 <Route path="/events/edit/:eventId" element={
                     <AnimatedRoute>
-                        <EditEventPage />
+                        <ProtectedRoute>
+                            <EditEventPage />
+                        </ProtectedRoute>
                     </AnimatedRoute>
                 }/>
                 <Route path="/attendees/profile/:attendeeId" element={
                     <AnimatedRoute>
-                        <UserProfilePage />
+                        <ProtectedRoute>
+                            <UserProfilePage />
+                        </ProtectedRoute>
                     </AnimatedRoute>
                 }/>
             </Routes>

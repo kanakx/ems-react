@@ -17,7 +17,7 @@ const NoEventsMessage = styled.p`
 
 const EventsPage = () => {
     const navigate = useNavigate();
-    const {isAuth, user} = useUserContext();
+    const {isAuth, attendee } = useUserContext();
     const [allEvents, setAllEvents] = useState([]);
     const [ownedEvents, setOwnedEvents] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,7 @@ const EventsPage = () => {
         setIsLoading(true);
         Promise.all([
             getAllEvents(),
-            getAttendeeById(user.idAttendee)
+            getAttendeeById(attendee.idAttendee)
         ])
             .then(([allEventsData, attendeeData]) => {
                 const ownedEventIds = new Set(attendeeData.attendeeEventDtoList.map(ae => ae.eventDto.idEvent));
@@ -37,7 +37,7 @@ const EventsPage = () => {
                 setOwnedEvents(owned);
             })
             .finally(() => setIsLoading(false));
-    }, [user.idAttendee]);
+    }, [attendee.idAttendee]);
 
     const handleAddNewButton = () => {
         navigate('/events/add');
@@ -48,6 +48,9 @@ const EventsPage = () => {
     };
 
     if (isLoading) return <Loading onBack={handleBackButton}/>
+
+    //TODO maybe some error page or smth?
+    if (!attendee) return <div>Please log in to view events</div>
 
     return (
         <PageLayout>

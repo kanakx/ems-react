@@ -1,9 +1,14 @@
 import axios from 'axios';
 
-const API_URL = 'YOUR_API_URL'; //TODO Replace with actual URL
+const API_URL = 'http://localhost:8081/api/v1/auth';
+
+const getAuthorizationHeader = () => {
+    const token = localStorage.getItem('token');
+    return token ? { Authorization: `Bearer ${token}` } : {};
+};
 
 const login = (credentials) => {
-    return axios.post(`${API_URL}/login`, credentials)
+    return axios.post(`${API_URL}/login`, credentials, {headers: getAuthorizationHeader()})
         .then(response => {
             const { data } = response;
             localStorage.setItem('token', data.token);

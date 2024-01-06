@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { deleteEventById, getEventById } from "../services/eventService.js";
-import { useUserContext } from '../contexts/UserContext';
-import { ActionButtonsGroup, Card, StyledButton } from "../themes/SharedStyles.jsx";
+import {useEffect, useState} from 'react';
+import {useNavigate, useParams} from 'react-router-dom';
+import {deleteEventById, getEventById} from "../services/eventService.js";
+import {useUserContext} from '../contexts/UserContext';
+import {ActionButtonsGroup, Card, StyledButton} from "../themes/SharedStyles.jsx";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
-import { FaCheck, FaEdit, FaTimes, FaTrashAlt } from "react-icons/fa";
+import {FaCheck, FaEdit, FaTimes, FaTrashAlt} from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
-import { getAttendeeEvents } from "../services/attendeeService.js";
-import { toast } from 'react-toastify';
+import {getAttendeeEvents} from "../services/attendeeService.js";
+import {toast} from 'react-toastify';
 
 const EventName = styled.h3`
     color: ${props => props.theme.colors.primary};
@@ -35,7 +35,7 @@ const Value = styled.span`
 const EventDetailsPage = () => {
     const navigate = useNavigate();
     const { eventId } = useParams();
-    const { isAuth, user } = useUserContext();
+    const { isAuth, attendee } = useUserContext();
     const [event, setEvent] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [canEditAndDelete, setCanEditAndDelete] = useState(false);
@@ -47,8 +47,8 @@ const EventDetailsPage = () => {
         getEventById(eventId)
             .then(eventData => {
                 setEvent(eventData);
-                if (isAuth && user) {
-                    return getAttendeeEvents(user.idAttendee).then(userEvents => {
+                if (isAuth && attendee) {
+                    return getAttendeeEvents(attendee.idAttendee).then(userEvents => {
                         if (userEvents) {
                             const canEdit = userEvents.some(userEvent =>
                                 userEvent.eventDto.idEvent === eventData.idEvent
@@ -62,7 +62,7 @@ const EventDetailsPage = () => {
                 setIsLoading(false);
             });
 
-    }, [eventId, user, isAuth]);
+    }, [eventId, attendee, isAuth]);
 
     const handleEdit = () => {
         navigate(`/events/edit/${eventId}`);

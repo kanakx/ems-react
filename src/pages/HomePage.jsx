@@ -18,7 +18,7 @@ const Header = styled.p`
 
 const HomePage = () => {
     const navigate = useNavigate();
-    const {isAuth, user} = useUserContext();
+    const {isAuth, attendee} = useUserContext();
 
     const handleExploreEventsButton = () => {
         navigate('/events');
@@ -33,8 +33,8 @@ const HomePage = () => {
             <StyledLogo alt="Logo"/>
             <Header>Event Management System</Header>
 
-            {isAuth && user && (
-                <PageSubtitle>Welcome, {user.fullName}</PageSubtitle>
+            {isAuth && attendee && (
+                <PageSubtitle>Welcome, {attendee.fullName}</PageSubtitle>
             )}
 
             <StyledButton onClick={handleExploreEventsButton}>

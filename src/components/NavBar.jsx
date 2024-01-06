@@ -14,10 +14,10 @@ const StyledNavBar = styled.nav`
 
 const NavBar = () => {
     const navigate = useNavigate();
-    const { isAuth, user, logout } = useUserContext();
+    const { isAuth, attendee, logout } = useUserContext();
 
     const handleUserProfileButtonClick = () => {
-        navigate(`/attendees/profile/${user.idAttendee}`);
+        navigate(`/attendees/profile/${attendee.idAttendee}`);
     };
 
     const handleSignInButtonClick = () => {
@@ -26,9 +26,9 @@ const NavBar = () => {
 
     return (
         <StyledNavBar>
-            {isAuth && user ? (
+            {isAuth && attendee ? (
                 <>
-                    <NavBarButton buttonText={user.fullName} onClick={handleUserProfileButtonClick}/>
+                    <NavBarButton buttonText={attendee.fullName} onClick={handleUserProfileButtonClick}/>
                     <NavBarButton buttonText="Sign Out" onClick={logout} />
                 </>
             ) : (
