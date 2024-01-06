@@ -16,9 +16,9 @@ export const UserContextProvider = ({ children }) => {
             .then(response => {
                 localStorage.setItem('token', response.token);
                 const decodedToken = jwtDecode(response.token);
-                const idAttendee = decodedToken.sub;
-
-                return getAttendeeById(idAttendee);
+                //TODO what should be stored in the token? How to connect attendee and user?
+                const idUser = decodedToken.sub;
+                return getAttendeeById(idUser);
             })
             .then(fetchedAttendee => {
                 setAttendee(fetchedAttendee);

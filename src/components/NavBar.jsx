@@ -15,7 +15,7 @@ const StyledNavBar = styled.nav`
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { isAuth, attendee, logout } = useUserContext();
+    const { isAuth, attendee, logoutUser } = useUserContext();
 
     const handleUserProfileButtonClick = () => {
         navigate(`/attendees/profile/${attendee.idAttendee}`);
@@ -31,8 +31,8 @@ const NavBar = () => {
         <StyledNavBar>
             {isAuth && attendee ? (
                 <>
-                    <NavBarButton buttonText={attendee.fullName} onClick={handleUserProfileButtonClick}/>
-                    <NavBarButton buttonText="Sign Out" onClick={logout} />
+                    <NavBarButton buttonText={attendee.firstName} onClick={handleUserProfileButtonClick}/>
+                    <NavBarButton buttonText="Sign Out" onClick={logoutUser} />
                 </>
             ) : (
                 !isOnLoginPage && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />
