@@ -12,30 +12,33 @@ import {
     StyledFormTextArea
 } from "../themes/FormStyles.jsx";
 import {toast} from "react-toastify";
+import {useUserContext} from "../contexts/UserContext.jsx";
 
 const EventForm = ({ onSubmit, initialEvent = {} }) => {
     const navigate = useNavigate();
+    const { attendee } = useUserContext();
 
-    const [event, setEvent] = useState(initialEvent || {
+    const [addEventDto, setAddEventDto] = useState(initialEvent || {
         name: '',
         startTimestamp: '',
         endTimestamp: '',
         locationName: '',
         type: '',
         description: '',
+        idAttendee: attendee.idAttendee
     });
 
     const handleChange = (e) => {
-        setEvent({...event, [e.target.name]: e.target.value});
+        setAddEventDto({...addEventDto, [e.target.name]: e.target.value});
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!event.name || !event.startTimestamp || !event.endTimestamp || !event.locationName || !event.type) {
+        if (!addEventDto.name || !addEventDto.startTimestamp || !addEventDto.endTimestamp || !addEventDto.locationName || !addEventDto.type) {
             toast.warning('Please fill out all fields.');
             return;
         }
-        onSubmit(event);
+        onSubmit(addEventDto);
     };
 
     const handleCancelButton = () => {
@@ -44,9 +47,9 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
 
     return (
         <StyledForm onSubmit={handleSubmit}>
-            <StyledFormInput type="text" name="name" placeholder="Name" value={event.name} onChange={handleChange}/>
+            <StyledFormInput type="text" name="name" placeholder="Name" value={addEventDto.name} onChange={handleChange}/>
 
-            <StyledFormSelect name="type" value={event.type} onChange={handleChange}>
+            <StyledFormSelect name="type" value={addEventDto.type} onChange={handleChange}>
                 <option value="">Type</option>
                 <option value="CONFERENCE">CONFERENCE</option>
                 <option value="SEMINAR">SEMINAR</option>
@@ -58,16 +61,16 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
 
             <FormLabel htmlFor="startTimestamp">Start timestamp:</FormLabel>
             <StyledFormInput type="datetime-local" name="startTimestamp" placeholder="Start Date"
-                             value={event.startTimestamp} onChange={handleChange}/>
+                             value={addEventDto.startTimestamp} onChange={handleChange}/>
 
             <FormLabel htmlFor="startTimestamp">End timestamp:</FormLabel>
-            <StyledFormInput type="datetime-local" name="endTimestamp" placeholder="End Date" value={event.endTimestamp}
+            <StyledFormInput type="datetime-local" name="endTimestamp" placeholder="End Date" value={addEventDto.endTimestamp}
                              onChange={handleChange}/>
 
-            <StyledFormInput type="text" name="locationName" placeholder="Location" value={event.locationName}
+            <StyledFormInput type="text" name="locationName" placeholder="Location" value={addEventDto.locationName}
                              onChange={handleChange}/>
 
-            <StyledFormTextArea name="description" placeholder="Description" value={event.description}
+            <StyledFormTextArea name="description" placeholder="Description" value={addEventDto.description}
                                 onChange={handleChange}/>
 
             <ActionButtonsGroup>
