@@ -55,6 +55,7 @@ const EventsPage = () => {
     return (
         <PageLayout>
             <PageTitle>Events</PageTitle>
+            <PageSubtitle>You're invited to</PageSubtitle>
             {allEvents && allEvents.length > 0 ? (
                 <EventList events={allEvents}/>
             ) : (
