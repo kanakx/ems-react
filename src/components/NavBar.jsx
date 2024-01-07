@@ -36,7 +36,7 @@ const NavBar = () => {
                     <NavBarButton buttonText="Sign Out" onClick={logoutUser} />
                 </>
             ) : (
-                isOnLoginPage || isOnRegisterPage && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />
+                !(isOnLoginPage || isOnRegisterPage) && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />
             )}
         </StyledNavBar>
     );

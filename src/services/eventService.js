@@ -33,6 +33,6 @@ export const updateEventById = (eventId, updatedEventData) => {
 };
 
 export const deleteEventById = (eventId) => {
-    return axios.delete(`${API_URL}/${eventId}, {headers: getAuthorizationHeader()}`)
+    return axios.delete(`${API_URL}/${eventId}, {headers: getAuthorizationHeader()}`, {headers: getAuthorizationHeader()})
         .catch(handleApiError);
 };

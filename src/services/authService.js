@@ -27,6 +27,15 @@ export const login = (credentials) => {
         });
 };
 
+export const validateToken = (tokenDto) => {
+    return axios.post(`${API_URL}/validate`, tokenDto)
+        .then(response => response.data)
+        .catch(error => {
+            console.error('Token validation error:', error);
+            return {isValid: false}
+        })
+}
+
 export const logout = () => {
     return new Promise((resolve, reject) => {
         try {

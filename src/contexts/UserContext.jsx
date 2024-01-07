@@ -1,8 +1,9 @@
-import {createContext, useContext, useState} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import PropTypes from "prop-types";
-import authService from "../services/authService.js";
+import authService, {validateToken} from "../services/authService.js";
 import {getAttendeeById} from "../services/attendeeService.js";
 import {jwtDecode} from "jwt-decode";
+import {toast} from "react-toastify";
 
 const UserContext = createContext(null);
 
@@ -10,6 +11,19 @@ export const UserContextProvider = ({children}) => {
 
     const [attendee, setAttendee] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Initial token validation check
+        checkTokenValidity();
+
+        // Subsequent periodic checks
+        const interval = setInterval(() => {
+            checkTokenValidity();
+        }, 60 * 1000); // every minute
+
+        return () => clearInterval(interval);
+    }, []);
 
     const registerUser = (credentials) => {
         return authService.register(credentials)
@@ -26,19 +40,46 @@ export const UserContextProvider = ({children}) => {
             .then(response => {
                 localStorage.setItem('token', response.token);
                 const decodedToken = jwtDecode(response.token);
-                //TODO what should be stored in the token? How to connect attendee and user?
                 const idUser = decodedToken.sub;
                 return getAttendeeById(idUser);
             })
             .then(fetchedAttendee => {
                 setAttendee(fetchedAttendee);
-                //TODO delete
-                console.log(fetchedAttendee);
                 setIsAuth(true);
             })
             .catch(error => {
                 console.error('Login failed:', error);
+                throw error;
             });
+    };
+
+    const checkTokenValidity = () => {
+        const token = localStorage.getItem('token');
+        const tokenDto = {
+            token: token
+        };
+
+        if (token) {
+            validateToken(tokenDto)
+                .then(validationResponse => {
+                    if (!validationResponse.isValid) {
+                        logoutUser()
+                            .then(() => {
+                                setIsAuth(false);
+                            })
+                            .catch(error => {
+                                console.error('Logout failed', error);
+                            });
+                    }
+                })
+                .catch(error => {
+                    console.error('Token validation failed', error);
+                    toast.error('Token validation failed.');
+                })
+                .finally(() => setIsLoading(false));
+        } else {
+            setIsLoading(false);
+        }
     };
 
     const logoutUser = () => {
@@ -54,7 +95,7 @@ export const UserContextProvider = ({children}) => {
     };
 
     return (
-        <UserContext.Provider value={{attendee, isAuth, registerUser, loginUser, logoutUser}}>
+        <UserContext.Provider value={{attendee, isAuth, isLoading, registerUser, loginUser, logoutUser}}>
             {children}
         </UserContext.Provider>
     );
