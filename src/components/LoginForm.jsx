@@ -21,8 +21,7 @@ const LoginForm = () => {
                 toast.success('Login successful.');
             })
             .catch(error => {
-                console.error(error);
-                toast.error('Login failed. ', error);
+                toast.error('Invalid credentials. ', error);
             });
     };
 

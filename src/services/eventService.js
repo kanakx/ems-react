@@ -17,22 +17,22 @@ export const getAllEvents = () => {
 export const getEventById = (eventId) => {
     return axios.get(`${API_URL}/${eventId}`, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
-        .catch(handleApiError);
+        .catch(error => handleApiError(error));
 };
 
 export const saveEvents = (eventData) => {
     return axios.post(API_URL, eventData, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
-        .catch(handleApiError);
+        .catch(error => handleApiError(error));
 };
 
 export const updateEventById = (eventId, updatedEventData) => {
     return axios.put(`${API_URL}/${eventId}`, updatedEventData, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
-        .catch(handleApiError);
+        .catch(error => handleApiError(error));
 };
 
 export const deleteEventById = (eventId) => {
     return axios.delete(`${API_URL}/${eventId}, {headers: getAuthorizationHeader()}`, {headers: getAuthorizationHeader()})
-        .catch(handleApiError);
+        .catch(error => handleApiError(error));
 };

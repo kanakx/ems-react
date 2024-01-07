@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {handleApiError} from "../utils/apiHandler.js";
 
 const API_URL = 'http://localhost:8080/auth';
 
@@ -8,10 +9,7 @@ export const register = (credentials) => {
             console.log('Registration successful:', response.data);
             return response.data;
         })
-        .catch(error => {
-            console.error('Error registering:', error);
-            throw error;
-        });
+        .catch(error => handleApiError(error));
 };
 
 export const login = (credentials) => {
@@ -21,20 +19,17 @@ export const login = (credentials) => {
             localStorage.setItem('token', data.token);
             return data;
         })
-        .catch(error => {
-            console.error('Error logging in:', error);
-            throw error;
-        });
+        .catch(error => handleApiError(error));
 };
 
 export const validateToken = (tokenDto) => {
     return axios.post(`${API_URL}/validate`, tokenDto)
         .then(response => response.data)
         .catch(error => {
-            console.error('Token validation error:', error);
-            return {isValid: false}
+            handleApiError(error);
+            return {isValid: false};
         })
-}
+};
 
 export const logout = () => {
     return new Promise((resolve, reject) => {
@@ -43,6 +38,7 @@ export const logout = () => {
             resolve('Logged out successfully');
         } catch (error) {
             console.error('Error logging out:', error);
+            handleApiError(error);
             reject(error);
         }
     });
