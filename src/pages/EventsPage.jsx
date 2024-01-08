@@ -7,6 +7,7 @@ import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {useUserContext} from "../contexts/UserContext.jsx";
 import PageLayout from "../components/PageLayout.jsx";
+import Paginator from "../components/Paginator.jsx";
 
 const NoEventsMessage = styled.p`
     text-align: center;
@@ -16,20 +17,20 @@ const NoEventsMessage = styled.p`
 
 const EventsPage = () => {
     const navigate = useNavigate();
-    const {isAuth, attendee } = useUserContext();
+    const {isAuth, attendee} = useUserContext();
     const [events, setEvents] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        console.log(attendee)
-
-        setIsLoading(true);
-        getAllEvents()
-            .then(events => {
-                setEvents(events);
-            })
-            .finally(() => setIsLoading(false));
-    }, []);
+    // useEffect(() => {
+    //     console.log(attendee)
+    //
+    //     setIsLoading(true);
+    //     getAllEvents()
+    //         .then(events => {
+    //             setEvents(events);
+    //         })
+    //         .finally(() => setIsLoading(false));
+    // }, []);
 
     const handleAddNewButton = () => {
         navigate('/events/add');
@@ -48,11 +49,13 @@ const EventsPage = () => {
         <PageLayout>
             <PageTitle>Events</PageTitle>
             <PageSubtitle>You're invited to</PageSubtitle>
-            {events && events.length > 0 ? (
-                <EventList events={events}/>
-            ) : (
-                <NoEventsMessage>No events available</NoEventsMessage>
-            )}
+            {/*{events && events.length > 0 ? (*/}
+            {/*    <EventList events={events}/>*/}
+            {/*) : (*/}
+            {/*    <NoEventsMessage>No events available</NoEventsMessage>*/}
+            {/*)}*/}
+
+            <Paginator/>
 
             {!isAuth && <PageSubtitle>Sign in to add events</PageSubtitle>}
             {isAuth && (
