@@ -7,13 +7,7 @@ import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {useUserContext} from "../contexts/UserContext.jsx";
 import PageLayout from "../components/PageLayout.jsx";
-import Paginator from "../components/Paginator.jsx";
-
-const NoEventsMessage = styled.p`
-    text-align: center;
-    color: ${props => props.theme.colors.text};
-    margin-top: ${props => props.theme.spacing.medium};
-`;
+import EventsPaginator from "../components/EventsPaginator.jsx";
 
 const EventsPage = () => {
     const navigate = useNavigate();
@@ -40,7 +34,7 @@ const EventsPage = () => {
         navigate('/');
     };
 
-    if (isLoading) return <Loading onBack={handleBackButton}/>
+    // if (isLoading) return <Loading onBack={handleBackButton}/>
 
     //TODO maybe some error page or smth?
     if (!attendee) return <div>Please log in to view events</div>
@@ -55,7 +49,7 @@ const EventsPage = () => {
             {/*    <NoEventsMessage>No events available</NoEventsMessage>*/}
             {/*)}*/}
 
-            <Paginator pageSize={2}/>
+            <EventsPaginator pageSize={2}/>
 
             {!isAuth && <PageSubtitle>Sign in to add events</PageSubtitle>}
             {isAuth && (
