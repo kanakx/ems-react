@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loading from "./Loading.jsx";
 import {useNavigate} from "react-router-dom";
+import {StyledPaginator} from "../themes/PaginationStyling.jsx";
 
 const NoEventsMessage = styled.p`
     text-align: center;
@@ -52,17 +53,21 @@ const EventsPaginator = ({pageSize}) => {
                 <>
                     <EventList events={currentItems}/>
 
-                    <ReactPaginate
-                        previousLabel={'previous'}
-                        nextLabel={'next'}
-                        breakLabel={'...'}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageClick}
-                        containerClassName={'pagination'}
-                        activeClassName={'active'}
-                    />
+                    <StyledPaginator>
+                        <ReactPaginate
+                            previousLabel={'<'}
+                            nextLabel={'>'}
+                            previousLinkClassName={'page-button'}
+                            nextLinkClassName={'page-button'}
+                            breakLabel={'...'}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageClick}
+                            containerClassName={'pagination-container'}
+                            activeClassName={'active'}
+                        />
+                    </StyledPaginator>
                 </>
             ) : (
                 <NoEventsMessage>No events available</NoEventsMessage>
