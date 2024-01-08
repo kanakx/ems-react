@@ -48,14 +48,14 @@ const EventsPage = () => {
     return (
         <PageLayout>
             <PageTitle>Events</PageTitle>
-            <PageSubtitle>You're invited to</PageSubtitle>
+            <PageSubtitle>You are invited to</PageSubtitle>
             {/*{events && events.length > 0 ? (*/}
             {/*    <EventList events={events}/>*/}
             {/*) : (*/}
             {/*    <NoEventsMessage>No events available</NoEventsMessage>*/}
             {/*)}*/}
 
-            <Paginator/>
+            <Paginator pageSize={2}/>
 
             {!isAuth && <PageSubtitle>Sign in to add events</PageSubtitle>}
             {isAuth && (

@@ -3,12 +3,10 @@ import ReactPaginate from "react-paginate";
 import {getAllEvents} from "../services/eventService.js";
 import EventList from "./EventList.jsx";
 
-const Paginator = ({itemList}) => {
+const Paginator = ({pageSize}) => {
     const [currentItems, setCurrentItems] = useState([]);
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-
-    const pageSize = 2;
 
     const fetchPaginatedData = (pageNo) => {
         getAllEvents(null, pageNo, pageSize)
@@ -31,10 +29,8 @@ const Paginator = ({itemList}) => {
 
     return (
         <>
-            {/* Render your data here */}
             <EventList events={currentItems}/>
 
-            {/* Pagination Component */}
             <ReactPaginate
                 previousLabel={'previous'}
                 nextLabel={'next'}
