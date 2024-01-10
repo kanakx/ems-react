@@ -18,38 +18,33 @@ const EventsPage = () => {
     useEffect(() => {
         getAllEvents()
             .then(eventsPage => {
-                setEvents(eventsPage.content);
+                const sortedEvents = sortEvents(eventsPage.content, sortCriteria);
+                setEvents(sortedEvents);
             })
             .catch(error => console.log(error));
     }, []);
 
-    const sortEvents = (sortCriteria) => {
-        let sorted = [...events]; // Create a copy of the events array
+    const sortEvents = (events, sortCriteria) => {
         switch (sortCriteria) {
             case 'start date':
-                sorted.sort((a, b) => new Date(a.startTimestamp) - new Date(b.startTimestamp));
-                break;
+                return events.sort((a, b) => new Date(a.startTimestamp) - new Date(b.startTimestamp));
             case 'end date':
-                sorted.sort((a, b) => new Date(a.endTimestamp) - new Date(b.endTimestamp));
-                break;
+                return events.sort((a, b) => new Date(a.endTimestamp) - new Date(b.endTimestamp));
             case 'duration':
-                sorted.sort((a, b) =>
+                return events.sort((a, b) =>
                     (new Date(a.endTimestamp) - new Date(a.startTimestamp)) -
                     (new Date(b.endTimestamp) - new Date(b.startTimestamp))
                 );
-                break;
             case 'type':
-                sorted.sort((a, b) => a.type.localeCompare(b.type));
-                break;
+                return events.sort((a, b) => a.type.localeCompare(b.type));
             default:
-            // No sorting or default sorting logic
+                return events;
         }
-        return sorted;
     };
 
     const handleSortChange = (newSortCriteria) => {
         setSortCriteria(newSortCriteria);
-        setEvents(sortEvents(events));
+        setEvents(sortEvents(events, newSortCriteria));
     };
 
     //TODO maybe some error page or smth?
@@ -64,7 +59,7 @@ const EventsPage = () => {
                         Add new
                     </StyledButton>
 
-                    {/*<SortComponent onChange={handleSortChange}/>*/}
+                    <SortComponent onChange={handleSortChange}/>
 
                     <EventsPaginator events={events} pageSize={pageSize}/>
                 </>

@@ -1,4 +1,6 @@
-const SortComponent = ({ onChange }) => {
+import PropTypes from "prop-types";
+
+const SortComponent = ({onChange}) => {
     const handleSortChange = (event) => {
         onChange(event.target.value);
     };
@@ -12,6 +14,10 @@ const SortComponent = ({ onChange }) => {
             <option value="type">Type</option>
         </select>
     );
+};
+
+SortComponent.propTypes = {
+    onChange: PropTypes.func.isRequired
 };
 
 export default SortComponent;
