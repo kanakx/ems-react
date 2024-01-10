@@ -4,6 +4,8 @@ import EventList from "./EventList.jsx";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import {StyledPaginator} from "../themes/PaginationStyling.jsx";
+import AnimatedRoute from "./AnimatedRoute.jsx";
+import WaveAnimation from "./WaveAnimation.jsx";
 
 //TODO DELETE NODE MODULES BEFORE SENDING
 const NoEventsMessage = styled.p`
@@ -27,7 +29,9 @@ const EventsPaginator = ({events, pageSize}) => {
         <>
             {currentEvents && currentEvents.length > 0 ? (
                 <>
-                    <EventList events={currentEvents}/>
+                    <WaveAnimation key={currentPage}>
+                        <EventList events={currentEvents}/>
+                    </WaveAnimation>
 
                     <StyledPaginator>
                         <ReactPaginate
