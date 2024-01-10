@@ -10,7 +10,7 @@ export const StyledPaginator = styled.div`
         padding-inline-start: 0;
     }
 
-    .page-button {
+    .page-number-button {
         background-color: ${props => props.theme.colors.primary};
         color: ${props => props.theme.colors.buttonTextColor};
         border-radius: ${props => props.theme.borders.borderRadius};
@@ -18,6 +18,16 @@ export const StyledPaginator = styled.div`
         border: none;
         cursor: pointer;
         padding: 0.2rem;
+    }
+    
+    .page-prev-next-button {
+        background-color: ${props => props.theme.colors.primary};
+        color: ${props => props.theme.colors.buttonTextColor};
+        border-radius: ${props => props.theme.borders.borderRadius};
+        margin-top: ${props => props.theme.spacing.small};
+        border: none;
+        cursor: pointer;
+        padding: 0.4rem;
     }
 
     .page-link {

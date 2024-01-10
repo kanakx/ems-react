@@ -4,7 +4,6 @@ import EventList from "./EventList.jsx";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import {StyledPaginator} from "../themes/PaginationStyling.jsx";
-import RedirectAnimation from "./RedirectAnimation.jsx";
 import WaveAnimation from "./WaveAnimation.jsx";
 
 //TODO DELETE NODE MODULES BEFORE SENDING
@@ -37,9 +36,9 @@ const EventsPaginator = ({events, pageSize}) => {
                         <ReactPaginate
                             previousLabel={'<'}
                             nextLabel={'>'}
-                            previousLinkClassName={'page-button'}
-                            nextLinkClassName={'page-button'}
-                            pageLinkClassName={'page-button'}
+                            previousLinkClassName={'page-prev-next-button'}
+                            nextLinkClassName={'page-prev-next-button'}
+                            pageLinkClassName={'page-number-button'}
                             breakLabel={'...'}
                             pageCount={pageCount}
                             marginPagesDisplayed={2}
