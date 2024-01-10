@@ -7,7 +7,7 @@ import EventsPaginator from "../components/EventsPaginator.jsx";
 const EventsPage = () => {
     const navigate = useNavigate();
     const {isAuth, attendee} = useUserContext();
-    const pageSize = 2;
+    const pageSize = 4;
 
     const handleAddNewButton = () => {
         navigate('/events/add');
@@ -23,14 +23,15 @@ const EventsPage = () => {
     return (
         <PageLayout>
             <PageTitle>Events</PageTitle>
-            <PageSubtitle>You are invited to</PageSubtitle>
-            <EventsPaginator pageSize={pageSize}/>
-
-            {!isAuth && <PageSubtitle>Sign in to add events</PageSubtitle>}
-            {isAuth && (
-                <StyledButton onClick={handleAddNewButton}>
-                    Add new
-                </StyledButton>
+            {isAuth ? (
+                <>
+                    <StyledButton onClick={handleAddNewButton}>
+                        Add new
+                    </StyledButton>
+                    <EventsPaginator pageSize={pageSize}/>
+                </>
+            ) : (
+                <PageSubtitle>Sign in to add events</PageSubtitle>
             )}
 
             <StyledButton onClick={handleBackButton}>

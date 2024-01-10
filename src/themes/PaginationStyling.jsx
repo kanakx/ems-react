@@ -4,31 +4,29 @@ export const StyledPaginator = styled.div`
     .pagination-container {
         display: flex;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         list-style-type: none;
+        gap: 0.2rem;
+        padding-inline-start: 0;
     }
 
     .page-button {
         background-color: ${props => props.theme.colors.primary};
         color: ${props => props.theme.colors.buttonTextColor};
         border-radius: ${props => props.theme.borders.borderRadius};
-        padding: ${props => props.theme.spacing.xsmall};
         margin-top: ${props => props.theme.spacing.small};
         border: none;
         cursor: pointer;
+        padding: 0.2rem;
     }
 
     .page-link {
         padding: 5px;
         margin: 5px;
         cursor: pointer;
-        // additional styles for page links
     }
 
     .active {
         font-weight: bold;
-        // additional styles for the active page link
     }
-
-    // You can add more specific styles for other elements like previous/next buttons
 `;

@@ -59,6 +59,7 @@ const EventsPaginator = ({pageSize}) => {
                             nextLabel={'>'}
                             previousLinkClassName={'page-button'}
                             nextLinkClassName={'page-button'}
+                            pageLinkClassName={'page-button'}
                             breakLabel={'...'}
                             pageCount={pageCount}
                             marginPagesDisplayed={2}
