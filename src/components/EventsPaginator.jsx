@@ -1,57 +1,33 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import ReactPaginate from "react-paginate";
-import {getAllEvents} from "../services/eventService.js";
 import EventList from "./EventList.jsx";
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Loading from "./Loading.jsx";
-import {useNavigate} from "react-router-dom";
 import {StyledPaginator} from "../themes/PaginationStyling.jsx";
 
+//TODO DELETE NODE MODULES BEFORE SENDING
 const NoEventsMessage = styled.p`
     text-align: center;
     color: ${props => props.theme.colors.text};
     margin-top: ${props => props.theme.spacing.medium};
 `;
 
-const EventsPaginator = ({pageSize}) => {
-    const navigate = useNavigate();
-    const [currentItems, setCurrentItems] = useState([]);
-    const [pageCount, setPageCount] = useState(0);
+const EventsPaginator = ({events, pageSize}) => {
     const [currentPage, setCurrentPage] = useState(0);
-    const [isLoading, setIsLoading] = useState(true);
 
-    const fetchPaginatedData = (pageNo) => {
-        getAllEvents(null, pageNo, pageSize)
-            .then(eventsPage => {
-                setCurrentItems(eventsPage.content);
-                setPageCount(eventsPage.totalPages);
-            })
-            .catch(error => console.log(error))
-            .finally(() => setIsLoading(false));
-    };
-
-    useEffect(() => {
-        fetchPaginatedData(currentPage);
-    }, [currentPage]);
+    const currentEvents = events
+        .slice(currentPage * pageSize, currentPage*pageSize + pageSize);
+    const pageCount = Math.ceil(events.length / pageSize);
 
     const handlePageClick = (event) => {
-        const newPage = event.selected;
-        setCurrentPage(newPage);
-        fetchPaginatedData(newPage);
+        setCurrentPage(event.selected);
     };
-
-    const handleBackButton = () => {
-        navigate('/');
-    };
-
-    if (isLoading) return <Loading onBack={handleBackButton}/>
 
     return (
         <>
-            {currentItems && currentItems.length > 0 ? (
+            {currentEvents && currentEvents.length > 0 ? (
                 <>
-                    <EventList events={currentItems}/>
+                    <EventList events={currentEvents}/>
 
                     <StyledPaginator>
                         <ReactPaginate
@@ -78,6 +54,7 @@ const EventsPaginator = ({pageSize}) => {
 };
 
 EventsPaginator.propTypes = {
+    events: PropTypes.array.isRequired,
     pageSize: PropTypes.number.isRequired
 };
 

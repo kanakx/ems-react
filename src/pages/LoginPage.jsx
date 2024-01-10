@@ -11,7 +11,7 @@ const LoginPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate(-1);
+        navigate('/');
     };
 
     return (
