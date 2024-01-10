@@ -7,7 +7,7 @@ import EventDetailsPage from "../pages/EventDetailsPage.jsx";
 import AddEventPage from "../pages/AddEventPage.jsx";
 import EditEventPage from "../pages/EditEventPage.jsx";
 import UserProfilePage from "../pages/UserProfilePage.jsx";
-import AnimatedRoute from "./AnimatedRoute.jsx";
+import RedirectAnimation from "./RedirectAnimation.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
 
@@ -18,54 +18,54 @@ const AnimatedRoutes = () => {
         <AnimatePresence mode={'wait'}>
             <Routes location={location} key={location.pathname}>
                 <Route path="/" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <HomePage />
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
                 <Route path="/register" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <RegisterPage />
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
                 <Route path="/login" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <LoginPage />
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
                 <Route path="/events" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <ProtectedRoute>
                             <EventsPage />
                         </ProtectedRoute>
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
                 <Route path="/events/:eventId" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <ProtectedRoute>
                             <EventDetailsPage />
                         </ProtectedRoute>
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
                 <Route path="/events/add" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <ProtectedRoute>
                             <AddEventPage />
                         </ProtectedRoute>
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
                 <Route path="/events/edit/:eventId" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <ProtectedRoute>
                             <EditEventPage />
                         </ProtectedRoute>
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
                 <Route path="/attendees/profile/:attendeeId" element={
-                    <AnimatedRoute>
+                    <RedirectAnimation>
                         <ProtectedRoute>
                             <UserProfilePage />
                         </ProtectedRoute>
-                    </AnimatedRoute>
+                    </RedirectAnimation>
                 }/>
             </Routes>
         </AnimatePresence>

@@ -18,7 +18,7 @@ const pageTransition = {
     duration: 0.5
 };
 
-const AnimatedRoute = ({ children }) => (
+const RedirectAnimation = ({ children }) => (
     <StyledMotionDiv
         initial="initial"
         animate="in"
@@ -30,8 +30,8 @@ const AnimatedRoute = ({ children }) => (
     </StyledMotionDiv>
 );
 
-AnimatedRoute.propTypes = {
+RedirectAnimation.propTypes = {
   children: PropTypes.object.isRequired
 };
 
-export default AnimatedRoute;
+export default RedirectAnimation;
