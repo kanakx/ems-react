@@ -14,8 +14,8 @@ const EventsPage = () => {
 
     useEffect(() => {
         getAllEvents()
-            .then(eventsPage => {
-                setEvents(eventsPage.content);
+            .then(fetchedEvents => {
+                setEvents(fetchedEvents);
             })
             .catch(error => console.log(error));
     }, []);

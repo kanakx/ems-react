@@ -14,9 +14,9 @@ const waveVariants = {
 
 const waveTransition = {
     type: "spring",
-    stiffness: 100,
-    damping: 10,
-    duration: 0.5
+    stiffness: 150,
+    damping: 35,
+    duration: 1
 };
 
 const AnimatedRoute = ({ children }) => (
