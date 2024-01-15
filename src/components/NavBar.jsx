@@ -15,8 +15,9 @@ const StyledNavBar = styled.nav`
 const NavBar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { isAuth, attendee, logoutUser } = useUserContext();
+    const { isAuth, isAdmin, attendee, logoutUser } = useUserContext();
 
+    //TODO move from separate function to direct func in component
     const handleUserProfileButtonClick = () => {
         navigate(`/attendees/profile/${attendee.idAttendee}`);
     };
@@ -25,8 +26,12 @@ const NavBar = () => {
         navigate('/login');
     };
 
+    const handleAdminPanelClick = () => {
+        navigate('/admin');
+    };
+
     const isOnLoginPage = location.pathname === '/login';
-    const isOnRegisterPage = location.pathname === 'register';
+    const isOnRegisterPage = location.pathname === '/register';
 
     return (
         <StyledNavBar>
@@ -34,6 +39,7 @@ const NavBar = () => {
                 <>
                     <NavBarButton buttonText={attendee.firstName} onClick={handleUserProfileButtonClick}/>
                     <NavBarButton buttonText="Sign Out" onClick={logoutUser} />
+                    {isAdmin && <NavBarButton buttonText="Admin Panel" onClick={handleAdminPanelClick} />}
                 </>
             ) : (
                 !(isOnLoginPage || isOnRegisterPage) && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />

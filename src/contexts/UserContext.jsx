@@ -9,15 +9,13 @@ const UserContext = createContext(null);
 
 export const UserContextProvider = ({children}) => {
 
-    const [attendee, setAttendee] = useState(null);
     const [isAuth, setIsAuth] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [attendee, setAttendee] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Initial token validation check
         checkTokenValidity();
-
-        // Subsequent periodic checks
         const interval = setInterval(() => {
             checkTokenValidity();
         }, 60 * 1000); // every minute
@@ -40,6 +38,11 @@ export const UserContextProvider = ({children}) => {
             .then(response => {
                 localStorage.setItem('token', response.token);
                 const decodedToken = jwtDecode(response.token);
+                console.log(decodedToken);
+
+                const isUserAdmin = decodedToken.roles.includes('ADMIN');
+                setIsAdmin(isUserAdmin);
+
                 const idUser = decodedToken.sub;
                 return getAttendeeById(idUser);
             })
@@ -95,7 +98,7 @@ export const UserContextProvider = ({children}) => {
     };
 
     return (
-        <UserContext.Provider value={{attendee, isAuth, isLoading, registerUser, loginUser, logoutUser}}>
+        <UserContext.Provider value={{isAuth, isAdmin, attendee, isLoading, registerUser, loginUser, logoutUser}}>
             {children}
         </UserContext.Provider>
     );
