@@ -33,6 +33,7 @@ const GenericItemPaginator = ({ items, pageSize, renderItem, noItemsMessage }) =
                     />
                     <StyledPaginator>
                         <ReactPaginate
+                            forcePage={currentPage}
                             previousLabel={'<'}
                             nextLabel={'>'}
                             previousLinkClassName={'page-prev-next-button'}
