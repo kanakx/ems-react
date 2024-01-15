@@ -12,6 +12,9 @@ import ProtectedRoute from "./ProtectedRoute.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
 import AdminPanelPage from "../pages/AdminPanelPage.jsx";
 import AttendeesPage from "../pages/AttendeesPage.jsx";
+import AttendeeEventsPage from "../pages/AttendeeEventsPage.jsx";
+import AttendeeDetailsPage from "../pages/AttendeeDetailsPage.jsx";
+import EditAttendeePage from "../pages/EditAttendeePage.jsx";
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -45,10 +48,42 @@ const AnimatedRoutes = () => {
                     </RedirectAnimation>
                 }/>
 
-                <Route path="/admin/attendees" element={
+                <Route path="/attendees" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
                             <AttendeesPage/>
+                        </ProtectedRoute>
+                    </RedirectAnimation>
+                }/>
+
+                <Route path="/attendees/:idAttendee" element={
+                    <RedirectAnimation>
+                        <ProtectedRoute>
+                            <AttendeeDetailsPage/>
+                        </ProtectedRoute>
+                    </RedirectAnimation>
+                }/>
+
+                <Route path="/attendees/add" element={
+                    <RedirectAnimation>
+                        <ProtectedRoute>
+                            <AddAttendeePage/>
+                        </ProtectedRoute>
+                    </RedirectAnimation>
+                }/>
+
+                <Route path="/attendees/edit/:idAttendee" element={
+                    <RedirectAnimation>
+                        <ProtectedRoute>
+                            <EditAttendeePage/>
+                        </ProtectedRoute>
+                    </RedirectAnimation>
+                }/>
+
+                <Route path="/attendeeEvents" element={
+                    <RedirectAnimation>
+                        <ProtectedRoute>
+                            <AttendeeEventsPage/>
                         </ProtectedRoute>
                     </RedirectAnimation>
                 }/>
@@ -77,10 +112,28 @@ const AnimatedRoutes = () => {
                     </RedirectAnimation>
                 }/>
 
+                {/*//TODO Change to idEvent to maintain consistency*/}
                 <Route path="/events/edit/:eventId" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
                             <EditEventPage/>
+                        </ProtectedRoute>
+                    </RedirectAnimation>
+                }/>
+
+
+                {/*<Route path="/attendees/add" element={*/}
+                {/*    <RedirectAnimation>*/}
+                {/*        <ProtectedRoute>*/}
+                {/*            <AddAttendeePage/>*/}
+                {/*        </ProtectedRoute>*/}
+                {/*    </RedirectAnimation>*/}
+                {/*}/>*/}
+
+                <Route path="/attendees/edit/:idAttendee" element={
+                    <RedirectAnimation>
+                        <ProtectedRoute>
+                            <EditAttendeePage/>
                         </ProtectedRoute>
                     </RedirectAnimation>
                 }/>

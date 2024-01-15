@@ -6,15 +6,15 @@ const AdminPanelPage = () => {
     const navigate = useNavigate();
 
     const handleManageAttendees = () => {
-        navigate('/admin/attendees');
+        navigate('/attendees');
     };
 
     const handleManageAttendeeEvents = () => {
-        navigate('/admin/attendeeEvents');
+        navigate('/attendeeEvents');
     };
 
     const handleManageEvents = () => {
-        navigate('/admin/events');
+        navigate('/events');
     };
 
     const handleBackButton = () => {

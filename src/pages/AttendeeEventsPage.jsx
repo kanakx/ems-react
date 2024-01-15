@@ -7,13 +7,13 @@ import {getAllAttendees} from "../services/attendeeService.js";
 import GenericItemPaginator from "../components/GenericItemPaginator.jsx";
 import AttendeeCard from "../components/AttendeeCard.jsx";
 
-const AttendeesPage = () => {
+const AttendeeEventsPage = () => {
     const navigate = useNavigate();
     const {isAuth, isAdmin,  attendee} = useUserContext();
-    const [attendees, setAttendees] = useState([]);
+    const [attendeeEvents, setAttendeeEvents] = useState([]);
 
     useEffect(() => {
-        getAllAttendees()
+        getAllAttendeeEvents()
             .then(fetchedAttendees => {
                 setAttendees(fetchedAttendees);
             })
@@ -25,23 +25,23 @@ const AttendeesPage = () => {
 
     return (
         <PageLayout>
-            <PageTitle>Attendees</PageTitle>
+            <PageTitle>Attendee Events</PageTitle>
             {isAuth && isAdmin ? (
                 <>
                     {/*//TODO Form to add attendees just like events*/}
-                    <StyledButton onClick={() => navigate('/attendees/add')}>
+                    <StyledButton onClick={() => navigate('/attendeeEvents/add')}>
                         Add new
                     </StyledButton>
 
                     <GenericItemPaginator
-                        items={attendees}
+                        items={attendeeEvents}
                         pageSize={4}
-                        renderItem={attendee => <AttendeeCard key={attendee.idAttendee} attendee={attendee} />}
+                        renderItem={attendee => <AttendeeEventsCard key={attendee.idAttendee} attendee={attendee} />}
                         noItemsMessage="No events available"
                     />
                 </>
             ) : (
-                <PageSubtitle>Sign in to add events</PageSubtitle>
+                <PageSubtitle>Sign in to add attendee events</PageSubtitle>
             )}
 
             <StyledButton onClick={() => navigate('/')}>
@@ -51,4 +51,4 @@ const AttendeesPage = () => {
     );
 };
 
-export default AttendeesPage;
+export default AttendeeEventsPage;

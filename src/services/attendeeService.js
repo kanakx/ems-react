@@ -11,22 +11,25 @@ export const getAuthorizationHeader = () => {
 export const getAllAttendees = () => {
     return axios.get(API_URL, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
-        .catch(handleApiError);
+        .catch(error => handleApiError(error));
 };
 
 export const getAttendeeById = (attendeeId) => {
     return axios.get(`${API_URL}/${attendeeId}`, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
-        .catch(handleApiError);
+        .catch(error => handleApiError(error));
 };
 
-export const getAttendeeByUserId = (userId) => {
-    return axios.get(`${API_URL}/${userId}`, {headers: getAuthorizationHeader()})
-        .then(response => response.data)
+export const updateAttendeeById = (attendeeId, updatedAttendee) => {
+    return axios.put(`${API_URL}/${attendeeId}`, updatedAttendee, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
-        .catch(handleApiError);
+        .catch(error => handleApiError(error));
 };
 
+export const deleteAttendeeById = (attendeeId) => {
+    return axios.delete(`${API_URL}/${attendeeId}`, {headers: getAuthorizationHeader()})
+        .catch(error => handleApiError(error));
+};
 
 //TODO consistent handling. Check if it won't break anything (line 35)
 export const getAttendeeEvents = (attendeeId) => {

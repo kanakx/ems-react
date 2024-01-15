@@ -8,6 +8,7 @@ export const getAuthorizationHeader = () => {
     return token ? {Authorization: `Bearer ${token}`} : {};
 };
 
+//TODO probably no more pagination. Adjust
 export const getAllEvents = (type, pageNo, pageSize) => {
     return axios.get(API_URL, {
             headers: getAuthorizationHeader(),

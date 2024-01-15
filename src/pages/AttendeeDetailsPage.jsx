@@ -7,10 +7,11 @@ import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {FaCheck, FaEdit, FaTimes, FaTrashAlt} from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
-import {getAttendeeEvents} from "../services/attendeeService.js";
+import {deleteAttendeeById, getAttendeeById, getAttendeeEvents} from "../services/attendeeService.js";
 import {toast} from 'react-toastify';
 
-const EventName = styled.h3`
+//TODO SAME
+const AttendeeName = styled.h3`
     color: ${props => props.theme.colors.primary};
     margin-bottom: ${props => props.theme.spacing.small};
     font-size: ${props => props.theme.typography.header};
@@ -32,12 +33,11 @@ const Value = styled.span`
     
 `;
 
-const EventDetailsPage = () => {
+const AttendeeDetailsPage = () => {
     const navigate = useNavigate();
-    //TODO change to idEvent
-    const { eventId } = useParams();
-    const { isAuth, isAdmin, attendee } = useUserContext();
-    const [event, setEvent] = useState(null);
+    const { idAttendee } = useParams();
+    const { isAuth, isAdmin } = useUserContext();
+    const [attendee, setAttendee] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [canEditAndDelete, setCanEditAndDelete] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -45,29 +45,16 @@ const EventDetailsPage = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        getEventById(eventId)
-            .then(eventData => {
-                setEvent(eventData);
-
-                if (isAuth && attendee) {
-                    return getAttendeeEvents(attendee.idAttendee).then(userEvents => {
-                        if (userEvents) {
-                            const canEdit = userEvents.some(userEvent =>
-                                userEvent.eventDto.idEvent === eventData.idEvent
-                            );
-                            setCanEditAndDelete(canEdit);
-                        }
-                    });
-                }
+        getAttendeeById(idAttendee)
+            .then(fetchedAttendee => {
+                setAttendee(fetchedAttendee);
             })
-            .finally(() => {
-                setIsLoading(false);
-            });
+            .finally(() => setIsLoading(false));
 
-    }, [eventId, attendee, isAuth]);
+    }, [idAttendee]);
 
     const handleEdit = () => {
-        navigate(`/events/edit/${eventId}`);
+        navigate(`/attendees/edit/${idAttendee}`);
     };
 
     const handleDeleteClick = () => {
@@ -76,10 +63,10 @@ const EventDetailsPage = () => {
 
     const confirmDelete = () => {
         setShowDeleteConfirmation(false);
-        deleteEventById(eventId)
+        deleteAttendeeById(idAttendee)
             .then(() => {
-                toast.success('Event deleted successfully!');
-                setTimeout(() => navigate('/events'), 2000);
+                toast.success('Attendee deleted successfully!');
+                setTimeout(() => navigate('/attendees'), 2000);
             });
     };
 
@@ -88,39 +75,30 @@ const EventDetailsPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate('/events');
+        navigate('/attendees');
     };
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const options = {year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'};
-        return new Intl.DateTimeFormat('en-US', options).format(date);
-    };
-
-    if (isLoading || !event) return <Loading onBack={handleBackButton}/>;
+    if (isLoading || !attendee) return <Loading onBack={handleBackButton}/>;
 
     return (
         <PageLayout>
             <Card>
-                <EventName>{event.name}</EventName>
+                <AttendeeName>{'Attendee' + ' ' + attendee.idAttendee}</AttendeeName>
                 <DetailItem>
-                    <Label>Start:</Label>
-                    <Value>{formatDate(event.startTimestamp)}</Value>
+                    <Label>First name:</Label>
+                    <Value>{attendee.firstName}</Value>
                 </DetailItem>
                 <DetailItem>
-                    <Label>End:</Label>
-                    <Value>{formatDate(event.endTimestamp)}</Value>
+                    <Label>Last name:</Label>
+                    <Value>{attendee.lastName}</Value>
                 </DetailItem>
                 <DetailItem>
-                    <Label>Location:</Label>
-                    <Value>{event.locationName}</Value>
+                    <Label>Email:</Label>
+                    <Value>{attendee.userDto.email}</Value>
                 </DetailItem>
                 <DetailItem>
-                    <Label>Type:</Label>
-                    <Value>{event.type}</Value>
-                </DetailItem>
-                <DetailItem>
-                    <Value>{event.description}</Value>
+                    <Label>Role:</Label>
+                    <Value>{attendee.userDto.userRole}</Value>
                 </DetailItem>
 
                 {/*//TODO check if this condition works as expected*/}
@@ -156,4 +134,4 @@ const EventDetailsPage = () => {
     );
 };
 
-export default EventDetailsPage;
+export default AttendeeDetailsPage;
