@@ -1,10 +1,11 @@
 import {useState} from 'react';
 import ReactPaginate from "react-paginate";
-import EventList from "./EventList.jsx";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import {StyledPaginator} from "../themes/PaginationStyling.jsx";
 import WaveAnimation from "./WaveAnimation.jsx";
+import GenericList from "./GenericList.jsx";
+import EventCard from "./EventCard.jsx";
 
 //TODO DELETE NODE MODULES BEFORE SENDING
 const NoEventsMessage = styled.p`
@@ -29,7 +30,12 @@ const EventsPaginator = ({events, pageSize}) => {
             {currentEvents && currentEvents.length > 0 ? (
                 <>
                     <WaveAnimation key={currentPage}>
-                        <EventList events={currentEvents}/>
+                        <GenericList
+                            items={events}
+                            renderItem={(event) => (
+                                <EventCard key={event.idEvent} event={event} />
+                            )}
+                        />
                     </WaveAnimation>
 
                     <StyledPaginator>
