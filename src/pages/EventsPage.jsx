@@ -5,12 +5,13 @@ import PageLayout from "../components/PageLayout.jsx";
 import EventsPaginator from "../components/EventsPaginator.jsx";
 import {useEffect, useState} from "react";
 import {getAllEvents} from "../services/eventService.js";
+import EventCard from "../components/EventCard.jsx";
+import GenericItemPaginator from "../components/GenericItemPaginator.jsx";
 
 const EventsPage = () => {
     const navigate = useNavigate();
     const {isAuth, attendee} = useUserContext();
     const [events, setEvents] = useState([]);
-    const pageSize = 4;
 
     useEffect(() => {
         getAllEvents()
@@ -32,7 +33,12 @@ const EventsPage = () => {
                         Add new
                     </StyledButton>
 
-                    <EventsPaginator events={events} pageSize={pageSize}/>
+                    <GenericItemPaginator
+                        items={events}
+                        pageSize={4}
+                        renderItem={event => <EventCard key={event.idEvent} event={event} />}
+                        noItemsMessage="No events available"
+                    />
                 </>
             ) : (
                 <PageSubtitle>Sign in to add events</PageSubtitle>
