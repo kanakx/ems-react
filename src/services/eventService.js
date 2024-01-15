@@ -29,7 +29,7 @@ export const getEventById = (eventId) => {
         .catch(error => handleApiError(error));
 };
 
-export const saveEvents = (eventData) => {
+export const saveEvent = (eventData) => {
     return axios.post(API_URL, eventData, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
         .catch(error => handleApiError(error));

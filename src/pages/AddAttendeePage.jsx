@@ -1,18 +1,19 @@
 import {useNavigate} from "react-router-dom";
 import EventForm from "../components/EventForm.jsx";
-import {saveEvent} from "../services/eventService.js";
 import {PageTitle} from "../themes/SharedStyles.jsx";
 import PageLayout from "../components/PageLayout.jsx";
 import {toast} from "react-toastify";
+import {saveAttendee} from "../services/attendeeService.js";
 
-const AddEventPage = () => {
+//TODO potentially generic component
+const AddAttendeePage = () => {
     const navigate = useNavigate();
 
-    const handleSubmit = (newEventData) => {
-        saveEvent(newEventData)
+    const handleSubmit = (newAttendeeData) => {
+        saveAttendee(newAttendeeData)
             .then(() => {
-                toast.success('Event saved successfully!');
-                setTimeout(() => navigate('/events'), 2000);
+                toast.success('Attendee saved successfully!');
+                setTimeout(() => navigate('/attendees'), 2000);
             });
     };
 
@@ -24,4 +25,4 @@ const AddEventPage = () => {
     );
 }
 
-export default AddEventPage;
+export default AddAttendeePage;

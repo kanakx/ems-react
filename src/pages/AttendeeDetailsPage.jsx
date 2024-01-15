@@ -1,13 +1,12 @@
 import {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {deleteEventById, getEventById} from "../services/eventService.js";
 import {useUserContext} from '../contexts/UserContext';
 import {ActionButtonsGroup, Card, StyledButton} from "../themes/SharedStyles.jsx";
 import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {FaCheck, FaEdit, FaTimes, FaTrashAlt} from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
-import {deleteAttendeeById, getAttendeeById, getAttendeeEvents} from "../services/attendeeService.js";
+import {deleteAttendeeById, getAttendeeById} from "../services/attendeeService.js";
 import {toast} from 'react-toastify';
 
 //TODO SAME
@@ -39,7 +38,6 @@ const AttendeeDetailsPage = () => {
     const { isAuth, isAdmin } = useUserContext();
     const [attendee, setAttendee] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [canEditAndDelete, setCanEditAndDelete] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     useEffect(() => {
@@ -48,6 +46,7 @@ const AttendeeDetailsPage = () => {
         getAttendeeById(idAttendee)
             .then(fetchedAttendee => {
                 setAttendee(fetchedAttendee);
+
             })
             .finally(() => setIsLoading(false));
 
@@ -102,7 +101,7 @@ const AttendeeDetailsPage = () => {
                 </DetailItem>
 
                 {/*//TODO check if this condition works as expected*/}
-                {(isAuth && canEditAndDelete) || isAdmin && (
+                {(isAuth && isAdmin) && (
                     <ActionButtonsGroup>
                         {showDeleteConfirmation ? (
                             <>

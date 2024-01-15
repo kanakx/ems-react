@@ -20,6 +20,12 @@ export const getAttendeeById = (attendeeId) => {
         .catch(error => handleApiError(error));
 };
 
+export const saveAttendee = (attendeeData) => {
+    return axios.post(API_URL, attendeeData, {headers: getAuthorizationHeader()})
+        .then(handleApiResponse)
+        .catch(error => handleApiError(error));
+};
+
 export const updateAttendeeById = (attendeeId, updatedAttendee) => {
     return axios.put(`${API_URL}/${attendeeId}`, updatedAttendee, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
