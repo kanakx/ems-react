@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {handleApiError, handleApiResponse} from "../utils/apiHandler.js";
 
 const API_URL = 'http://localhost:8080/attendees';
 
@@ -7,24 +8,27 @@ export const getAuthorizationHeader = () => {
     return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
+export const getAllAttendees = () => {
+    return axios.get(API_URL, {headers: getAuthorizationHeader()})
+        .then(handleApiResponse)
+        .catch(handleApiError);
+};
+
 export const getAttendeeById = (attendeeId) => {
     return axios.get(`${API_URL}/${attendeeId}`, {headers: getAuthorizationHeader()})
-        .then(response => response.data)
-        .catch(error => {
-            console.error('Error fetching attendee:', error);
-            throw error;
-        });
+        .then(handleApiResponse)
+        .catch(handleApiError);
 };
 
 export const getAttendeeByUserId = (userId) => {
     return axios.get(`${API_URL}/${userId}`, {headers: getAuthorizationHeader()})
         .then(response => response.data)
-        .catch(error => {
-            console.error('Error fetching attendee by user ID:', error);
-            throw error;
-        });
+        .then(handleApiResponse)
+        .catch(handleApiError);
 };
 
+
+//TODO consistent handling. Check if it won't break anything (line 35)
 export const getAttendeeEvents = (attendeeId) => {
     return axios.get(`${API_URL}/${attendeeId}`, {headers: getAuthorizationHeader()})
         .then(response => {

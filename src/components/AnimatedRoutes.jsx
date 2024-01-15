@@ -10,6 +10,7 @@ import UserProfilePage from "../pages/UserProfilePage.jsx";
 import RedirectAnimation from "./RedirectAnimation.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import RegisterPage from "../pages/RegisterPage.jsx";
+import AdminPanelPage from "../pages/AdminPanelPage.jsx";
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -22,16 +23,25 @@ const AnimatedRoutes = () => {
                         <HomePage />
                     </RedirectAnimation>
                 }/>
+
                 <Route path="/register" element={
                     <RedirectAnimation>
                         <RegisterPage />
                     </RedirectAnimation>
                 }/>
+
                 <Route path="/login" element={
                     <RedirectAnimation>
                         <LoginPage />
                     </RedirectAnimation>
                 }/>
+
+                <Route path="/admin" element={
+                    <RedirectAnimation>
+                        <AdminPanelPage />
+                    </RedirectAnimation>
+                }/>
+
                 <Route path="/events" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
@@ -39,6 +49,7 @@ const AnimatedRoutes = () => {
                         </ProtectedRoute>
                     </RedirectAnimation>
                 }/>
+
                 <Route path="/events/:eventId" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
@@ -46,6 +57,7 @@ const AnimatedRoutes = () => {
                         </ProtectedRoute>
                     </RedirectAnimation>
                 }/>
+
                 <Route path="/events/add" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
@@ -53,6 +65,7 @@ const AnimatedRoutes = () => {
                         </ProtectedRoute>
                     </RedirectAnimation>
                 }/>
+
                 <Route path="/events/edit/:eventId" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
@@ -60,6 +73,7 @@ const AnimatedRoutes = () => {
                         </ProtectedRoute>
                     </RedirectAnimation>
                 }/>
+
                 <Route path="/attendees/profile/:attendeeId" element={
                     <RedirectAnimation>
                         <ProtectedRoute>

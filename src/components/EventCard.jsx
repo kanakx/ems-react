@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {useNavigate} from "react-router-dom";
 import {Card} from "../themes/SharedStyles.jsx";
 
-const EventName = styled.h3`
+const EventCardContent = styled.h3`
     color: ${props => props.theme.colors.primary};
     margin-bottom: ${props => props.theme.spacing.small};
 `;
@@ -17,7 +17,7 @@ const EventCard = ({ event }) => {
 
     return (
         <Card onClick={handleClick}>
-            <EventName>{event.name}</EventName>
+            <EventCardContent>{event.name}</EventCardContent>
         </Card>
     );
 };

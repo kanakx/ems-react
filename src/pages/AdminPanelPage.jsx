@@ -1,12 +1,20 @@
 import PageLayout from "../components/PageLayout.jsx";
-import {PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
+import {Card, PageSubtitle, PageTitle, StyledButton} from "../themes/SharedStyles.jsx";
 import {useNavigate} from "react-router-dom";
 
 const AdminPanelPage = () => {
     const navigate = useNavigate();
 
-    const handleManageEntitiesButton = () => {
-        navigate('/admin/entities');
+    const handleManageAttendees = () => {
+        navigate('/admin/attendees');
+    };
+
+    const handleManageAttendeeEvents = () => {
+        navigate('/admin/attendeeEvents');
+    };
+
+    const handleManageEvents = () => {
+        navigate('/admin/events');
     };
 
     const handleBackButton = () => {
@@ -16,9 +24,22 @@ const AdminPanelPage = () => {
     return (
         <PageLayout>
             <PageTitle>Admin Panel</PageTitle>
-            <StyledButton onClick={handleManageEntitiesButton}>
-                Manage entities
-            </StyledButton>
+
+            <Card>
+                <PageSubtitle>Manage entities</PageSubtitle>
+
+                <StyledButton onClick={handleManageAttendees}>
+                    Attendee
+                </StyledButton>
+
+                <StyledButton onClick={handleManageAttendeeEvents}>
+                    AttendeeEvents
+                </StyledButton>
+
+                <StyledButton onClick={handleManageEvents}>
+                    Events
+                </StyledButton>
+            </Card>
 
             <StyledButton onClick={handleBackButton}>
                 Back
