@@ -7,9 +7,9 @@ import {useEffect, useState} from "react";
 import {getAllEvents} from "../services/eventService.js";
 
 const EventsPage = () => {
-    const [events, setEvents] = useState([]);
     const navigate = useNavigate();
     const {isAuth, attendee} = useUserContext();
+    const [events, setEvents] = useState([]);
     const pageSize = 4;
 
     useEffect(() => {
