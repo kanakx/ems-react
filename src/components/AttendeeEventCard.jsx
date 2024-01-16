@@ -77,7 +77,6 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
 
                     </StyledFormSelect>
                 </SelectHorizontalGroup>
-                {console.log("Current Attendee Event on Save:", currentAttendeeEvent)}
                 <StyledButton onClick={() => onSave(currentAttendeeEvent.idAttendeeEvent, {
                     idAttendeeEvent: currentAttendeeEvent.idAttendeeEvent,
                     idAttendee: currentAttendeeEvent.idAttendee,

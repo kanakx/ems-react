@@ -34,7 +34,6 @@ const AttendeeEventsPage = () => {
     }, [lastUpdated]);
 
     const handleSaveAssociation = (idAttendeeEvent, attendeeEventDto) => {
-        console.log(attendeeEventDto);
         updateAttendeeEvent(idAttendeeEvent, attendeeEventDto)
             .then(() => {
                 console.log('Association updated successfully');
