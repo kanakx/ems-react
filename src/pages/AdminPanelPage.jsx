@@ -13,10 +13,6 @@ const AdminPanelPage = () => {
         navigate('/attendeeEvents');
     };
 
-    const handleManageEvents = () => {
-        navigate('/events');
-    };
-
     const handleBackButton = () => {
         navigate(-1);
     };
@@ -34,10 +30,6 @@ const AdminPanelPage = () => {
 
                 <StyledButton onClick={handleManageAttendeeEvents}>
                     AttendeeEvents
-                </StyledButton>
-
-                <StyledButton onClick={handleManageEvents}>
-                    Events
                 </StyledButton>
             </Card>
 

@@ -29,7 +29,6 @@ AttendeeCard.propTypes = {
         lastName: PropTypes.string.isRequired,
         attendeeEventDtoList: PropTypes.array.isRequired,
         userDto: PropTypes.shape({
-          idUser: PropTypes.number.isRequired,
           email: PropTypes.string.isRequired,
           userRole: PropTypes.string.isRequired
         })
