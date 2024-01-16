@@ -28,23 +28,18 @@ const AttendeesPage = () => {
             <PageTitle>Attendees</PageTitle>
             {isAuth && isAdmin ? (
                 <>
-                    {/*//TODO Form to add attendees just like events*/}
-                    <StyledButton onClick={() => navigate('/attendees/add')}>
-                        Add new
-                    </StyledButton>
-
                     <GenericItemPaginator
                         items={attendees}
                         pageSize={4}
                         renderItem={attendee => <AttendeeCard key={attendee.idAttendee} attendee={attendee} />}
-                        noItemsMessage="No events available"
+                        noItemsMessage="No attendees available"
                     />
                 </>
             ) : (
                 <PageSubtitle>Sign in to add events</PageSubtitle>
             )}
 
-            <StyledButton onClick={() => navigate('/')}>
+            <StyledButton onClick={() => navigate('/admin')}>
                 Back
             </StyledButton>
         </PageLayout>

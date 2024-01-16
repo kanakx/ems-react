@@ -22,16 +22,15 @@ const AttendeeForm = ({ onSubmit, initialEvent = {} }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!addAttendeeDto.name || !addAttendeeDto.startTimestamp || !addAttendeeDto.endTimestamp || !addAttendeeDto.locationName || !addAttendeeDto.type) {
+        if (!addAttendeeDto.firstName || !addAttendeeDto.lastName || !addAttendeeDto.email || !addAttendeeDto.userRole) {
             toast.warning('Please fill out all fields.');
             return;
         }
         onSubmit(addAttendeeDto);
     };
 
-    //TODO path to admin panel attendees
     const handleCancelButton = () => {
-        navigate('/');
+        navigate('/attendees');
     };
 
     return (
@@ -40,10 +39,10 @@ const AttendeeForm = ({ onSubmit, initialEvent = {} }) => {
 
             <StyledFormInput type="text" name="lastName" placeholder="Last name" value={addAttendeeDto.lastName} onChange={handleChange}/>
 
-            <StyledFormInput type="text" name="email" placeholder="Email" value={addAttendeeDto.userDto.email} onChange={handleChange}/>
+            <StyledFormInput type="text" name="email" placeholder="Email" value={addAttendeeDto.email} onChange={handleChange}/>
 
-            <StyledFormSelect name="type" value={addAttendeeDto.type} onChange={handleChange}>
-                <option value="">User role</option>
+            <StyledFormSelect name="userRole" value={addAttendeeDto.userRole} onChange={handleChange}>
+                <option value="userRole">User role</option>
                 <option value="USER">USER</option>
                 <option value="ADMIN">ADMIN</option>
             </StyledFormSelect>

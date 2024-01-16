@@ -1,9 +1,9 @@
 import {useNavigate} from "react-router-dom";
-import EventForm from "../components/EventForm.jsx";
 import {PageTitle} from "../themes/SharedStyles.jsx";
 import PageLayout from "../components/PageLayout.jsx";
 import {toast} from "react-toastify";
 import {saveAttendee} from "../services/attendeeService.js";
+import AttendeeForm from "../components/AttendeeForm.jsx";
 
 //TODO potentially generic component
 const AddAttendeePage = () => {
@@ -20,7 +20,7 @@ const AddAttendeePage = () => {
     return (
         <PageLayout>
             <PageTitle>Add new</PageTitle>
-            <EventForm onSubmit={handleSubmit} initialEvent={null} />
+            <AttendeeForm onSubmit={handleSubmit} initialEvent={null} />
         </PageLayout>
     );
 }

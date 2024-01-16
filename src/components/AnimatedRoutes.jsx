@@ -15,6 +15,7 @@ import AttendeesPage from "../pages/AttendeesPage.jsx";
 import AttendeeEventsPage from "../pages/AttendeeEventsPage.jsx";
 import AttendeeDetailsPage from "../pages/AttendeeDetailsPage.jsx";
 import EditAttendeePage from "../pages/EditAttendeePage.jsx";
+import AddAttendeePage from "../pages/AddAttendeePage.jsx";
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -120,15 +121,6 @@ const AnimatedRoutes = () => {
                         </ProtectedRoute>
                     </RedirectAnimation>
                 }/>
-
-
-                {/*<Route path="/attendees/add" element={*/}
-                {/*    <RedirectAnimation>*/}
-                {/*        <ProtectedRoute>*/}
-                {/*            <AddAttendeePage/>*/}
-                {/*        </ProtectedRoute>*/}
-                {/*    </RedirectAnimation>*/}
-                {/*}/>*/}
 
                 <Route path="/attendees/edit/:idAttendee" element={
                     <RedirectAnimation>
