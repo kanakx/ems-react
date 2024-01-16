@@ -14,6 +14,7 @@ const NoEventsMessage = styled.p`
     margin-top: ${props => props.theme.spacing.medium};
 `;
 
+//TODO potentially to delete
 const EventsPaginator = ({events, pageSize}) => {
     const [currentPage, setCurrentPage] = useState(0);
 

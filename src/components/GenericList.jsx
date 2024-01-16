@@ -2,8 +2,8 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 
 const ListContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `;
 
 const GenericList = ({items, renderItem}) => {

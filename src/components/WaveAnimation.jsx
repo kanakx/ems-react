@@ -32,7 +32,7 @@ const AnimatedRoute = ({ children }) => (
 );
 
 AnimatedRoute.propTypes = {
-    children: PropTypes.object.isRequired
+    children: PropTypes.array
 };
 
 export default AnimatedRoute;
