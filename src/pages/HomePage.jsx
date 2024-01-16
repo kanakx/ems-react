@@ -1,50 +1,49 @@
 import styled from 'styled-components';
-import LogoSVG from '../assets/logo.svg?react';
-
-const Container = styled.div`
-    text-align: center;
-`;
-
-const Header = styled.header`
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-`;
+import LogoSVG from '../assets/logoGray.svg?react';
+import {useNavigate} from "react-router-dom";
+import PageLayout from "../components/PageLayout.jsx";
+import {PageSubtitle, StyledButton} from "../themes/SharedStyles.jsx";
+import {useUserContext} from "../contexts/UserContext.jsx";
 
 const StyledLogo = styled(LogoSVG)`
     max-width: 150px;
     max-height: 150px;
-    fill: white;
+    margin: -20px;
 `;
 
-const IntroductionText = styled.p`
-    margin-top: 20px;
-`;
-
-const ExploreButton = styled.button`
-    background-color: #61dafb;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 20px;
+const Header = styled.p`
+    font-size: ${props => props.theme.typography.header};
+    margin-bottom: ${props => props.theme.spacing.medium};
 `;
 
 const HomePage = () => {
+    const navigate = useNavigate();
+    const {isAuth, attendee} = useUserContext();
+
+    const handleExploreEventsButton = () => {
+        navigate('/events');
+    };
+
+    const handleAboutButton = () => {
+        navigate('/about');
+    };
+
     return (
-        <Container>
-            <Header>
-                <StyledLogo alt="Logo" />
-                <IntroductionText>Welcome to Our Event Management System</IntroductionText>
-                <ExploreButton onClick={() => console.log('Navigate to events page')}>
-                    Explore Events
-                </ExploreButton>
-            </Header>
-        </Container>
+        <PageLayout>
+            <StyledLogo alt="Logo"/>
+            <Header>Event Management System</Header>
+
+            {isAuth && attendee && (
+                <PageSubtitle>Welcome, {attendee.firstName}</PageSubtitle>
+            )}
+
+            <StyledButton onClick={handleExploreEventsButton}>
+                Explore events
+            </StyledButton>
+            <StyledButton onClick={handleAboutButton}>
+                About
+            </StyledButton>
+        </PageLayout>
     );
 };
 
