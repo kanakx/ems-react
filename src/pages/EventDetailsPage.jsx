@@ -7,7 +7,6 @@ import Loading from "../components/Loading.jsx";
 import styled from "styled-components";
 import {FaCheck, FaEdit, FaTimes, FaTrashAlt} from "react-icons/fa";
 import PageLayout from "../components/PageLayout.jsx";
-import {getAttendeeEvents} from "../services/attendeeService.js";
 import {toast} from 'react-toastify';
 
 const EventName = styled.h3`
@@ -38,7 +37,6 @@ const EventDetailsPage = () => {
     const { isAuth, isAdmin, attendee } = useUserContext();
     const [event, setEvent] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [canEditAndDelete, setCanEditAndDelete] = useState(false);
     const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
     useEffect(() => {
@@ -47,17 +45,6 @@ const EventDetailsPage = () => {
         getEventById(idEvent)
             .then(eventData => {
                 setEvent(eventData);
-
-                if (isAuth && attendee) {
-                    return getAttendeeEvents(attendee.idAttendee).then(userEvents => {
-                        if (userEvents) {
-                            const canEdit = userEvents.some(userEvent =>
-                                userEvent.eventDto.idEvent === eventData.idEvent
-                            );
-                            setCanEditAndDelete(canEdit);
-                        }
-                    });
-                }
             })
             .finally(() => {
                 setIsLoading(false);
@@ -122,8 +109,7 @@ const EventDetailsPage = () => {
                     <Value>{event.description}</Value>
                 </DetailItem>
 
-                {/*//TODO check if this condition works as expected*/}
-                {(isAuth && canEditAndDelete) || isAdmin && (
+                {(isAuth || isAdmin) && (
                     <ActionButtonsGroup>
                         {showDeleteConfirmation ? (
                             <>
