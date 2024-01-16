@@ -19,13 +19,13 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
     const { attendee } = useUserContext();
 
     const [addEventDto, setAddEventDto] = useState(initialEvent || {
+        idAttendee: attendee.idAttendee,
         name: '',
         startTimestamp: '',
         endTimestamp: '',
         locationName: '',
         type: '',
-        description: '',
-        idAttendee: attendee.idAttendee
+        description: ''
     });
 
     const handleChange = (e) => {

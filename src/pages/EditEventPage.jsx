@@ -8,17 +8,17 @@ import PageLayout from "../components/PageLayout.jsx";
 import {toast} from "react-toastify";
 
 const EditEventPage = () => {
-    const { eventId } = useParams();
+    const { idEvent } = useParams();
     const navigate = useNavigate();
     const [eventData, setEventData] = useState(null);
 
     useEffect(() => {
-        getEventById(eventId)
+        getEventById(idEvent)
             .then(fetchedEvent => setEventData(fetchedEvent))
-    }, [eventId]);
+    }, [idEvent]);
 
     const handleSubmit = (updatedEventData) => {
-        updateEventById(eventId, updatedEventData)
+        updateEventById(idEvent, updatedEventData)
             .then(() => {
                 toast.success('Event updated successfully!');
                 setTimeout(() => navigate('/events'), 2000);
@@ -26,7 +26,7 @@ const EditEventPage = () => {
     };
 
     const handleBackButton = () => {
-        navigate(-1);
+        navigate('/events');
     };
 
     if (!eventData) return <Loading onBack={handleBackButton} />;
