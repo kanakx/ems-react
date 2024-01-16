@@ -34,7 +34,7 @@ const HomePage = () => {
             <Header>Event Management System</Header>
 
             {isAuth && attendee && (
-                <PageSubtitle>Welcome, {attendee.fullName}</PageSubtitle>
+                <PageSubtitle>Welcome, {attendee.firstName}</PageSubtitle>
             )}
 
             <StyledButton onClick={handleExploreEventsButton}>

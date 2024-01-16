@@ -21,7 +21,7 @@ const AdminPanelPage = () => {
                 </StyledButton>
             </Card>
 
-            <StyledButton onClick={() => navigate(-1)}>
+            <StyledButton onClick={() => navigate('/events')}>
                 Back
             </StyledButton>
         </PageLayout>

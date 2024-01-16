@@ -29,17 +29,23 @@ const EventsPage = () => {
             <PageTitle>Events</PageTitle>
             {isAuth ? (
                 <>
-                    <StyledButton onClick={() => navigate('/events/add')}>
-                        Add new
-                    </StyledButton>
-                    {events.length > 0 &&
-                        <GenericItemPaginator
-                            items={events}
-                            pageSize={4}
-                            renderItem={event => <EventCard key={event.idEvent} event={event} />}
-                            noItemsMessage="No events available"
-                        />
-                    }
+                    {(events && events.length > 0) ? (
+                        <>
+                            <StyledButton onClick={() => navigate('/events/add')}>
+                                Add new
+                            </StyledButton>
+                            {events.length > 0 &&
+                                <GenericItemPaginator
+                                    items={events}
+                                    pageSize={4}
+                                    renderItem={event => <EventCard key={event.idEvent} event={event}/>}
+                                    noItemsMessage="No events available"
+                                />
+                            }
+                        </>
+                    ) : (
+                        <PageSubtitle>Add your first event</PageSubtitle>
+                    )}
                 </>
             ) : (
                 <PageSubtitle>Sign in to add events</PageSubtitle>
