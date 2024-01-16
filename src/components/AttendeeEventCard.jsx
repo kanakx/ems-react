@@ -27,11 +27,11 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
 
     const handleChange = (e) => {
         if (e.target.name === "attendeeDto") {
-            setCurrentAttendeeEvent({ ...currentAttendeeEvent, idAttendee: parseInt(e.target.value, 10) });
+            setCurrentAttendeeEvent(prevState => ({ ...prevState, idAttendee: parseInt(e.target.value, 10) }));
         } else if (e.target.name === "eventDto") {
-            setCurrentAttendeeEvent({ ...currentAttendeeEvent, idEvent: parseInt(e.target.value, 10) });
+            setCurrentAttendeeEvent(prevState => ({ ...prevState, idEvent: parseInt(e.target.value, 10) }));
         } else if (e.target.name === "status") {
-            setCurrentAttendeeEvent({ ...currentAttendeeEvent, status: e.target.value})
+            setCurrentAttendeeEvent(prevState => ({ ...prevState, status: e.target.value }));
         }
     };
 
@@ -77,9 +77,16 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
 
                     </StyledFormSelect>
                 </SelectHorizontalGroup>
-                <StyledButton onClick={() => onSave(currentAttendeeEvent)}>
+                {console.log("Current Attendee Event on Save:", currentAttendeeEvent)}
+                <StyledButton onClick={() => onSave(currentAttendeeEvent.idAttendeeEvent, {
+                    idAttendeeEvent: currentAttendeeEvent.idAttendeeEvent,
+                    idAttendee: currentAttendeeEvent.idAttendee,
+                    idEvent: currentAttendeeEvent.idEvent,
+                    status: currentAttendeeEvent.status
+                })}>
                     Save
                 </StyledButton>
+
             </AttendeeEventCardContent>
         </Card>
     );
