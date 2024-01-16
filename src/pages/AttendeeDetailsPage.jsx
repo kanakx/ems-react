@@ -98,7 +98,6 @@ const AttendeeDetailsPage = () => {
                     <Value>{attendee.userDto.userRole}</Value>
                 </DetailItem>
 
-                {/*//TODO check if this condition works as expected*/}
                 {(isAuth && isAdmin) && (
                     <ActionButtonsGroup>
                         {showDeleteConfirmation ? (

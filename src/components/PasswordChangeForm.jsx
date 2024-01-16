@@ -24,7 +24,7 @@ const PasswordChangeForm = ({onFormClose}) => {
         if (passwords.newPassword !== passwords.confirmNewPassword) {
             toast.warning('New passwords do not match.');
         }
-        //TODO Add logic here for password update API call
+
         const passwordChangeDto = {
             currentPassword: passwords.currentPassword,
             newPassword: passwords.newPassword
