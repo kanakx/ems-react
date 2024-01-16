@@ -40,3 +40,8 @@ export const Card = styled.div`
     flex-direction: column;
     align-items: center;
 `;
+
+export const CardContent = styled.h3`
+    color: ${props => props.theme.colors.primary};
+    margin-bottom: ${props => props.theme.spacing.small};
+`;

@@ -8,23 +8,15 @@ export const getAuthorizationHeader = () => {
     return token ? {Authorization: `Bearer ${token}`} : {};
 };
 
-//TODO probably no more pagination. Adjust
-export const getAllEvents = (type, pageNo, pageSize) => {
-    return axios.get(API_URL, {
-            headers: getAuthorizationHeader(),
-            params: {
-                type: type,
-                pageNo: pageNo,
-                pageSize: pageSize
-            }
-        }
+export const getAllEvents = () => {
+    return axios.get(API_URL, {headers: getAuthorizationHeader()}
     )
         .then(handleApiResponse)
         .catch(handleApiError);
 };
 
-export const getEventById = (eventId) => {
-    return axios.get(`${API_URL}/${eventId}`, {headers: getAuthorizationHeader()})
+export const getEventById = (idEvent) => {
+    return axios.get(`${API_URL}/${idEvent}`, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
         .catch(error => handleApiError(error));
 };
@@ -35,14 +27,14 @@ export const saveEvent = (eventData) => {
         .catch(error => handleApiError(error));
 };
 
-export const updateEventById = (eventId, updatedEventData) => {
-    return axios.put(`${API_URL}/${eventId}`, updatedEventData, {headers: getAuthorizationHeader()})
+export const updateEventById = (idEvent, updatedEventData) => {
+    return axios.put(`${API_URL}/${idEvent}`, updatedEventData, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
         .catch(error => handleApiError(error));
 };
 
-export const deleteEventById = (eventId) => {
-    return axios.delete(`${API_URL}/${eventId}`, {headers: getAuthorizationHeader()})
+export const deleteEventById = (idEvent) => {
+    return axios.delete(`${API_URL}/${idEvent}`, {headers: getAuthorizationHeader()})
         .then(handleApiResponse)
         .catch(error => handleApiError(error));
 };

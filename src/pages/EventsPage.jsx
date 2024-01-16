@@ -21,7 +21,6 @@ const EventsPage = () => {
             .catch(error => console.log(error));
     }, []);
 
-    //TODO maybe some error page or something?
     if (!attendee) return <div>Please log in to view events</div>
 
     return (

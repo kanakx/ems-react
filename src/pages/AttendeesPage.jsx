@@ -20,7 +20,6 @@ const AttendeesPage = () => {
             .catch(error => console.log(error));
     }, []);
 
-    //TODO maybe some error page or something?
     if (!attendee) return <div>Please log in to view attendees</div>
 
     return (

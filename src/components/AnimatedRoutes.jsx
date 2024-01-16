@@ -81,7 +81,7 @@ const AnimatedRoutes = () => {
                     </RedirectAnimation>
                 }/>
 
-                <Route path="/attendeeEvents" element={
+                <Route path="/attendees-events" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
                             <AttendeeEventsPage/>
@@ -97,7 +97,7 @@ const AnimatedRoutes = () => {
                     </RedirectAnimation>
                 }/>
 
-                <Route path="/events/:eventId" element={
+                <Route path="/events/:idEvent" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
                             <EventDetailsPage/>
@@ -113,8 +113,7 @@ const AnimatedRoutes = () => {
                     </RedirectAnimation>
                 }/>
 
-                {/*//TODO Change to idEvent to maintain consistency*/}
-                <Route path="/events/edit/:eventId" element={
+                <Route path="/events/edit/:idEvent" element={
                     <RedirectAnimation>
                         <ProtectedRoute>
                             <EditEventPage/>

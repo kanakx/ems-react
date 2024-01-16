@@ -1,12 +1,6 @@
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {useNavigate} from "react-router-dom";
-import {Card} from "../themes/SharedStyles.jsx";
-
-const EventCardContent = styled.h3`
-    color: ${props => props.theme.colors.primary};
-    margin-bottom: ${props => props.theme.spacing.small};
-`;
+import {Card, CardContent} from "../themes/SharedStyles.jsx";
 
 const EventCard = ({ event }) => {
     const navigate = useNavigate();
@@ -17,7 +11,7 @@ const EventCard = ({ event }) => {
 
     return (
         <Card onClick={handleClick}>
-            <EventCardContent>{event.name}</EventCardContent>
+            <CardContent>{event.name}</CardContent>
         </Card>
     );
 };

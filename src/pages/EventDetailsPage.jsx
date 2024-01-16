@@ -34,8 +34,7 @@ const Value = styled.span`
 
 const EventDetailsPage = () => {
     const navigate = useNavigate();
-    //TODO change to idEvent
-    const { eventId } = useParams();
+    const { idEvent } = useParams();
     const { isAuth, isAdmin, attendee } = useUserContext();
     const [event, setEvent] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -45,7 +44,7 @@ const EventDetailsPage = () => {
     useEffect(() => {
         setIsLoading(true);
 
-        getEventById(eventId)
+        getEventById(idEvent)
             .then(eventData => {
                 setEvent(eventData);
 
@@ -64,10 +63,10 @@ const EventDetailsPage = () => {
                 setIsLoading(false);
             });
 
-    }, [eventId, attendee, isAuth]);
+    }, [idEvent, attendee, isAuth]);
 
     const handleEdit = () => {
-        navigate(`/events/edit/${eventId}`);
+        navigate(`/events/edit/${idEvent}`);
     };
 
     const handleDeleteClick = () => {
@@ -76,7 +75,7 @@ const EventDetailsPage = () => {
 
     const confirmDelete = () => {
         setShowDeleteConfirmation(false);
-        deleteEventById(eventId)
+        deleteEventById(idEvent)
             .then(() => {
                 toast.success('Event deleted successfully!');
                 setTimeout(() => navigate('/events'), 2000);

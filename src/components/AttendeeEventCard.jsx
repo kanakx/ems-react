@@ -1,14 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {Card, StyledButton} from "../themes/SharedStyles.jsx";
+import {Card, CardContent, StyledButton} from "../themes/SharedStyles.jsx";
 import {StyledFormSelect} from "../themes/FormStyles.jsx";
 import {useState} from "react";
-
-// TODO generic name in shared styles (the same in all 3 entities)
-const AttendeeEventCardContent = styled.h3`
-    color: ${props => props.theme.colors.primary};
-    margin-bottom: ${props => props.theme.spacing.small};
-`;
 
 const SelectHorizontalGroup = styled.div`
     display: flex;
@@ -37,7 +31,7 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
 
     return (
         <Card>
-            <AttendeeEventCardContent>
+            <CardContent>
                 <SelectHorizontalGroup>
                     <StyledFormSelect
                         name="attendeeDto"
@@ -86,7 +80,7 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
                     Save
                 </StyledButton>
 
-            </AttendeeEventCardContent>
+            </CardContent>
         </Card>
     );
 };

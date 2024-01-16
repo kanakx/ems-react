@@ -34,17 +34,14 @@ export const updateAttendeeById = (attendeeId, updatedAttendee) => {
 
 export const deleteAttendeeById = (attendeeId) => {
     return axios.delete(`${API_URL}/${attendeeId}`, {headers: getAuthorizationHeader()})
+        .then(handleApiResponse)
         .catch(error => handleApiError(error));
 };
 
-//TODO consistent handling. Check if it won't break anything (line 35)
 export const getAttendeeEvents = (attendeeId) => {
     return axios.get(`${API_URL}/${attendeeId}`, {headers: getAuthorizationHeader()})
         .then(response => {
-            return response.data.attendeeEventDtoList;
+            return response.attendeeEventDtoList;
         })
-        .catch(error => {
-            console.error('Error fetching attendee events:', error);
-            throw error;
-        });
+        .catch(error => handleApiError(error));
 };

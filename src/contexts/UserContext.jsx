@@ -38,7 +38,6 @@ export const UserContextProvider = ({children}) => {
             .then(response => {
                 localStorage.setItem('token', response.token);
                 const decodedToken = jwtDecode(response.token);
-                console.log(decodedToken);
 
                 const isUserAdmin = decodedToken.roles.includes('ADMIN');
                 setIsAdmin(isUserAdmin);
@@ -87,8 +86,7 @@ export const UserContextProvider = ({children}) => {
 
     const logoutUser = () => {
         return authService.logout()
-            .then(message => {
-                console.log(message);
+            .then(() => {
                 setAttendee(null);
                 setIsAuth(false);
             })
