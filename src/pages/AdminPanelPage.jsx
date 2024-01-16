@@ -5,18 +5,6 @@ import {useNavigate} from "react-router-dom";
 const AdminPanelPage = () => {
     const navigate = useNavigate();
 
-    const handleManageAttendees = () => {
-        navigate('/attendees');
-    };
-
-    const handleManageAttendeeEvents = () => {
-        navigate('/attendeeEvents');
-    };
-
-    const handleBackButton = () => {
-        navigate(-1);
-    };
-
     return (
         <PageLayout>
             <PageTitle>Admin Panel</PageTitle>
@@ -24,16 +12,16 @@ const AdminPanelPage = () => {
             <Card>
                 <PageSubtitle>Manage entities</PageSubtitle>
 
-                <StyledButton onClick={handleManageAttendees}>
+                <StyledButton onClick={() => navigate('/attendees')}>
                     Attendee
                 </StyledButton>
 
-                <StyledButton onClick={handleManageAttendeeEvents}>
+                <StyledButton onClick={() => navigate('/attendeeEvents')}>
                     AttendeeEvents
                 </StyledButton>
             </Card>
 
-            <StyledButton onClick={handleBackButton}>
+            <StyledButton onClick={() => navigate(-1)}>
                 Back
             </StyledButton>
         </PageLayout>
