@@ -37,9 +37,9 @@ const NavBar = () => {
         <StyledNavBar>
             {isAuth && attendee ? (
                 <>
+                    {isAdmin && <NavBarButton buttonText="Admin Panel" onClick={handleAdminPanelClick} />}
                     <NavBarButton buttonText={attendee.firstName} onClick={handleUserProfileButtonClick}/>
                     <NavBarButton buttonText="Sign Out" onClick={logoutUser} />
-                    {isAdmin && <NavBarButton buttonText="Admin Panel" onClick={handleAdminPanelClick} />}
                 </>
             ) : (
                 !(isOnLoginPage || isOnRegisterPage) && <NavBarButton buttonText="Sign In" onClick={handleSignInButtonClick} />

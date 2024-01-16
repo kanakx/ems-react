@@ -41,7 +41,6 @@ const AttendeeEventsPage = () => {
             })
             .catch(error => {
                 console.error('Error updating association', error);
-                // Handle error appropriately
             });
     };
 
