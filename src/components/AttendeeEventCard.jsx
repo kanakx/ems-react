@@ -19,9 +19,6 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
     const currentAttendeeEmail = allAttendees.find(a => a.id === attendeeEvent.idAttendee)?.userDto.email || null;
     const currentEventName = allEvents.find(e => e.id === attendeeEvent.idEvent)?.name || null;
 
-    console.log(attendeeEvent)
-    console.log(allAttendees)
-    console.log(allEvents)
     const [currentAttendeeEvent, setCurrentAttendeeEvent] = useState({
         ...attendeeEvent,
         userEmail: currentAttendeeEmail,
@@ -30,7 +27,11 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
 
 
     const handleChange = (e) => {
-        setCurrentAttendeeEvent({ ...currentAttendeeEvent, [e.target.name]: e.target.value });
+        if (e.target.name === "attendeeDto") {
+            setCurrentAttendeeEvent({ ...currentAttendeeEvent, idAttendee: parseInt(e.target.value, 10) });
+        } else if (e.target.name === "eventDto") {
+            setCurrentAttendeeEvent({ ...currentAttendeeEvent, idEvent: parseInt(e.target.value, 10) });
+        }
     };
 
     return (

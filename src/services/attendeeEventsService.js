@@ -1,6 +1,7 @@
 import axios from "axios";
 import {handleApiError, handleApiResponse} from "../utils/apiHandler.js";
 
+//TODO change url to -
 const API_URL = 'http://localhost:8080/attendeesEvents';
 
 export const getAuthorizationHeader = () => {
