@@ -11,7 +11,7 @@ export const StyledButton = styled.button`
 `;
 
 export const PageTitle = styled.h1`
-    margin-bottom: 0;
+    margin-bottom: -1rem;
     color: ${props => props.theme.colors.text};
 `;
 

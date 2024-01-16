@@ -59,11 +59,11 @@ const EventForm = ({ onSubmit, initialEvent = {} }) => {
                 <option value="MEETUP">MEETUP</option>
             </StyledFormSelect>
 
-            <FormLabel htmlFor="startTimestamp">Start timestamp:</FormLabel>
+            {/*<FormLabel htmlFor="startTimestamp">Start timestamp:</FormLabel>*/}
             <StyledFormInput type="datetime-local" name="startTimestamp" placeholder="Start Date"
                              value={addEventDto.startTimestamp} onChange={handleChange}/>
 
-            <FormLabel htmlFor="startTimestamp">End timestamp:</FormLabel>
+            {/*<FormLabel htmlFor="startTimestamp">End timestamp:</FormLabel>*/}
             <StyledFormInput type="datetime-local" name="endTimestamp" placeholder="End Date" value={addEventDto.endTimestamp}
                              onChange={handleChange}/>
 
