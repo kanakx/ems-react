@@ -36,7 +36,7 @@ const AttendeesPage = () => {
                     />
                 </>
             ) : (
-                <PageSubtitle>Sign in to add events</PageSubtitle>
+                <PageSubtitle>Sign in to manage attendees</PageSubtitle>
             )}
 
             <StyledButton onClick={() => navigate('/admin')}>

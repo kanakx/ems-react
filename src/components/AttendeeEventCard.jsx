@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {useNavigate} from "react-router-dom";
 import {Card} from "../themes/SharedStyles.jsx";
+import {StyledFormSelect} from "../themes/FormStyles.jsx";
+import {useState} from "react";
 
 // TODO generic name in shared styles (the same in all 3 entities)
 const AttendeeEventCardContent = styled.h3`
@@ -9,32 +10,54 @@ const AttendeeEventCardContent = styled.h3`
     margin-bottom: ${props => props.theme.spacing.small};
 `;
 
-const AttendeeEventCard = ({ attendeeEvent }) => {
-    const navigate = useNavigate();
+const SelectHorizontalGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
 
-    //TODO maybe here there is no need to create separate service... Just use those already existing to compose data?
-    const handleClick = () => {
-        navigate(`/attendeesEvents/${attendeeEvent.idAttendeeEvent}`);
+const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onChange, index }) => {
+    const [localAttendeeEvent, setLocalAttendeeEvent] = useState(attendeeEvent);
+
+    const handleChange = (e) => {
+        const updatedAttendeeEvent = { ...localAttendeeEvent, [e.target.name]: e.target.value };
+        setLocalAttendeeEvent(updatedAttendeeEvent);
+        onChange(updatedAttendeeEvent, index);
     };
 
     return (
-        <Card onClick={handleClick}>
-            <AttendeeEventCardContent>{'ATTENDEE EVENT INFO HERE'}</AttendeeEventCardContent>
+        <Card>
+            <AttendeeEventCardContent>
+                <SelectHorizontalGroup>
+                    <StyledFormSelect
+                        name="userEmail"
+                        value={localAttendeeEvent.userEmail}
+                        onChange={handleChange}
+                    >
+                        {allAttendees.map(attendee => (
+                            <option key={attendee.userDto.email} value={attendee.userDto.email}>{attendee.userDto.email}</option>
+                        ))}
+                    </StyledFormSelect>
+
+                    <StyledFormSelect
+                        name="eventName"
+                        value={localAttendeeEvent.eventName}
+                        onChange={handleChange}
+                    >
+                        {allEvents.map(event => (
+                            <option key={event.name} value={event.name}>{event.name}</option>
+                        ))}
+                    </StyledFormSelect>
+                </SelectHorizontalGroup>
+            </AttendeeEventCardContent>
         </Card>
     );
 };
 
 AttendeeEventCard.propTypes = {
-    attendee: PropTypes.shape({
-        idAttendee: PropTypes.number.isRequired,
-        firstName: PropTypes.string.isRequired,
-        lastName: PropTypes.string.isRequired,
-        attendeeEventDtoList: PropTypes.array.isRequired,
-        userDto: PropTypes.shape({
-            idUser: PropTypes.number.isRequired,
-            email: PropTypes.string.isRequired,
-            userRole: PropTypes.string.isRequired
-        })
+    attendeeEvent: PropTypes.shape({
+        idAttendeeEvent: PropTypes.number.isRequired,
+        userEmail: PropTypes.string.isRequired,
+        eventName: PropTypes.string.isRequired,
     }).isRequired
 };
 
