@@ -16,8 +16,8 @@ const SelectHorizontalGroup = styled.div`
 `;
 
 const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) => {
-    const currentAttendeeEmail = allAttendees.find(a => a.id === attendeeEvent.idAttendee)?.userDto.email || null;
-    const currentEventName = allEvents.find(e => e.id === attendeeEvent.idEvent)?.name || null;
+    const currentAttendeeEmail = allAttendees.find(a => a.id === attendeeEvent.idAttendee)?.userDto.email || '';
+    const currentEventName = allEvents.find(e => e.id === attendeeEvent.idEvent)?.name || '';
 
     const [currentAttendeeEvent, setCurrentAttendeeEvent] = useState({
         ...attendeeEvent,
@@ -25,12 +25,13 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
         eventName: currentEventName
     });
 
-
     const handleChange = (e) => {
         if (e.target.name === "attendeeDto") {
             setCurrentAttendeeEvent({ ...currentAttendeeEvent, idAttendee: parseInt(e.target.value, 10) });
         } else if (e.target.name === "eventDto") {
             setCurrentAttendeeEvent({ ...currentAttendeeEvent, idEvent: parseInt(e.target.value, 10) });
+        } else if (e.target.name === "status") {
+            setCurrentAttendeeEvent({ ...currentAttendeeEvent, status: e.target.value})
         }
     };
 
@@ -60,6 +61,20 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) =
                                 {event.name}
                             </option>
                         ))}
+                    </StyledFormSelect>
+
+                    <StyledFormSelect
+                        name="status"
+                        value={currentAttendeeEvent.status}
+                        onChange={handleChange}
+                    >
+                        <option value={currentAttendeeEvent.status}>{currentAttendeeEvent.status}</option>
+                        {currentAttendeeEvent.status === 'ACCEPTED' ? (
+                            <option value="DECLINED">DECLINED</option>
+                        ) : (
+                            <option value="ACCEPTED">ACCEPTED</option>
+                        )}
+
                     </StyledFormSelect>
                 </SelectHorizontalGroup>
                 <StyledButton onClick={() => onSave(currentAttendeeEvent)}>
