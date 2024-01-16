@@ -4,7 +4,7 @@ import {useUserContext} from "../contexts/UserContext.jsx";
 import PageLayout from "../components/PageLayout.jsx";
 import {useEffect, useState} from "react";
 import GenericItemPaginator from "../components/GenericItemPaginator.jsx";
-import {getAllAttendeeEvents} from "../services/attendeeEventsService.js";
+import {getAllAttendeeEvents, updateAttendeeEvent} from "../services/attendeeEventsService.js";
 import AttendeeEventCard from "../components/AttendeeEventCard.jsx";
 import {getAllAttendees} from "../services/attendeeService.js";
 import {getAllEvents} from "../services/eventService.js";
@@ -12,32 +12,37 @@ import {getAllEvents} from "../services/eventService.js";
 const AttendeeEventsPage = () => {
     const navigate = useNavigate();
     const {isAuth, isAdmin,  attendee} = useUserContext();
-    const [attendeeEventAssociations, setAttendeeEventAssociations] = useState([]);
-    const [attendees, setAttendees] = useState([]);
-    const [events, setEvents] = useState([]);
+    const [attendeeEvents, setAttendeeEvents] = useState([]);
+    const [allAttendees, setAllAttendees] = useState([]);
+    const [allEvents, setAllEvents] = useState([]);
+    const [lastUpdated, setLastUpdated] = useState(Date.now());
 
     useEffect(() => {
         getAllAttendeeEvents()
             .then(fetchedAttendeeEvents => {
-                setAttendeeEventAssociations(fetchedAttendeeEvents);
+                setAttendeeEvents(fetchedAttendeeEvents);
             })
             .catch(error => console.log(error));
 
         getAllAttendees()
-            .then(fetchedAttendees => setAttendees(fetchedAttendees))
+            .then(fetchedAttendees => setAllAttendees(fetchedAttendees))
             .catch(error => console.log(error));
 
         getAllEvents()
-            .then(fetchedEvents => setEvents(fetchedEvents))
+            .then(fetchedEvents => setAllEvents(fetchedEvents))
             .catch(error => console.log(error));
-    }, []);
+    }, [lastUpdated]);
 
-    const handleAttendeeEventChange = (updatedAssociation, attendeeEventIndex) => {
-        // Update the association in state and optionally send update to backend
-        const updatedAssociations = [...attendeeEventAssociations];
-        updatedAssociations[attendeeEventIndex] = updatedAssociation;
-        setAttendeeEventAssociations(updatedAssociations);
-        // Optionally send update request to backend here
+    const handleSaveAssociation = (idAttendeeEvent, attendeeEventDto) => {
+        updateAttendeeEvent(idAttendeeEvent, attendeeEventDto)
+            .then(() => {
+                console.log('Association updated successfully');
+                setLastUpdated(Date.now());
+            })
+            .catch(error => {
+                console.error('Error updating association', error);
+                // Handle error appropriately
+            });
     };
 
     if (!attendee) return <div>Please log in to view attendees events</div>
@@ -48,16 +53,15 @@ const AttendeeEventsPage = () => {
             {isAuth && isAdmin ? (
                 <>
                     <GenericItemPaginator
-                        items={attendeeEventAssociations}
-                        pageSize={4}
-                        renderItem={(attendeeEvent, index) => (
+                        items={attendeeEvents}
+                        pageSize={2}
+                        renderItem={(attendeeEvent) => (
                             <AttendeeEventCard
                                 key={attendeeEvent.idAttendeeEvent}
                                 attendeeEvent={attendeeEvent}
-                                allAttendees={attendees}
-                                allEvents={events}
-                                onChange={handleAttendeeEventChange}
-                                index={index}
+                                allAttendees={allAttendees}
+                                allEvents={allEvents}
+                                onSave={handleSaveAssociation}
                             />
                         )}
                         noItemsMessage="No attendee events available"
@@ -67,7 +71,7 @@ const AttendeeEventsPage = () => {
                 <PageSubtitle>Sign in to add attendee events</PageSubtitle>
             )}
 
-            <StyledButton onClick={() => navigate('/attendeeEvents')}>
+            <StyledButton onClick={() => navigate('/admin')}>
                 Back
             </StyledButton>
         </PageLayout>

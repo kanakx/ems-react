@@ -13,3 +13,15 @@ export const getAllAttendeeEvents = () => {
         .then(handleApiResponse)
         .catch(error => handleApiError(error));
 };
+
+export const updateAttendeeEvent = (idAttendeeEvent, attendeeEventDto) => {
+    return axios.put(`${API_URL}/${idAttendeeEvent}`, attendeeEventDto, {headers: getAuthorizationHeader()})
+        .then(handleApiResponse)
+        .catch(error => handleApiError(error));
+};
+
+export const deleteAttendeeEvent = (idAttendeeEvent) => {
+    return axios.delete(`${API_URL}/${idAttendeeEvent}`, {headers: getAuthorizationHeader()})
+        .then(handleApiResponse)
+        .catch(error => handleApiError(error));
+};

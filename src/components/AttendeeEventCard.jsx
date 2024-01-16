@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {Card} from "../themes/SharedStyles.jsx";
+import {Card, StyledButton} from "../themes/SharedStyles.jsx";
 import {StyledFormSelect} from "../themes/FormStyles.jsx";
 import {useState} from "react";
 
@@ -15,13 +15,22 @@ const SelectHorizontalGroup = styled.div`
     flex-direction: column;
 `;
 
-const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onChange, index }) => {
-    const [localAttendeeEvent, setLocalAttendeeEvent] = useState(attendeeEvent);
+const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onSave }) => {
+    const currentAttendeeEmail = allAttendees.find(a => a.id === attendeeEvent.idAttendee)?.userDto.email || null;
+    const currentEventName = allEvents.find(e => e.id === attendeeEvent.idEvent)?.name || null;
+
+    console.log(attendeeEvent)
+    console.log(allAttendees)
+    console.log(allEvents)
+    const [currentAttendeeEvent, setCurrentAttendeeEvent] = useState({
+        ...attendeeEvent,
+        userEmail: currentAttendeeEmail,
+        eventName: currentEventName
+    });
+
 
     const handleChange = (e) => {
-        const updatedAttendeeEvent = { ...localAttendeeEvent, [e.target.name]: e.target.value };
-        setLocalAttendeeEvent(updatedAttendeeEvent);
-        onChange(updatedAttendeeEvent, index);
+        setCurrentAttendeeEvent({ ...currentAttendeeEvent, [e.target.name]: e.target.value });
     };
 
     return (
@@ -29,36 +38,48 @@ const AttendeeEventCard = ({ attendeeEvent, allAttendees, allEvents, onChange, i
             <AttendeeEventCardContent>
                 <SelectHorizontalGroup>
                     <StyledFormSelect
-                        name="userEmail"
-                        value={localAttendeeEvent.userEmail}
+                        name="attendeeDto"
+                        value={currentAttendeeEvent.idAttendee}
                         onChange={handleChange}
                     >
                         {allAttendees.map(attendee => (
-                            <option key={attendee.userDto.email} value={attendee.userDto.email}>{attendee.userDto.email}</option>
+                            <option key={attendee.idAttendee} value={attendee.idAttendee}>
+                                {attendee.userDto.email}
+                            </option>
                         ))}
                     </StyledFormSelect>
 
                     <StyledFormSelect
-                        name="eventName"
-                        value={localAttendeeEvent.eventName}
+                        name="eventDto"
+                        value={currentAttendeeEvent.idEvent}
                         onChange={handleChange}
                     >
                         {allEvents.map(event => (
-                            <option key={event.name} value={event.name}>{event.name}</option>
+                            <option key={event.idEvent} value={event.idEvent}>
+                                {event.name}
+                            </option>
                         ))}
                     </StyledFormSelect>
                 </SelectHorizontalGroup>
+                <StyledButton onClick={() => onSave(currentAttendeeEvent)}>
+                    Save
+                </StyledButton>
             </AttendeeEventCardContent>
         </Card>
     );
 };
 
+
 AttendeeEventCard.propTypes = {
     attendeeEvent: PropTypes.shape({
         idAttendeeEvent: PropTypes.number.isRequired,
-        userEmail: PropTypes.string.isRequired,
-        eventName: PropTypes.string.isRequired,
-    }).isRequired
+        idAttendee: PropTypes.number.isRequired,
+        idEvent: PropTypes.number.isRequired,
+        status: PropTypes.string.isRequired
+    }).isRequired,
+    allAttendees: PropTypes.array.isRequired,
+    allEvents: PropTypes.array.isRequired,
+    onSave: PropTypes.func.isRequired
 };
 
 export default AttendeeEventCard;
