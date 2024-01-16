@@ -42,9 +42,12 @@ const AttendeeForm = ({ onSubmit, initialEvent = {} }) => {
             <StyledFormInput type="text" name="email" placeholder="Email" value={addAttendeeDto.email} onChange={handleChange}/>
 
             <StyledFormSelect name="userRole" value={addAttendeeDto.userRole} onChange={handleChange}>
-                <option value="userRole">User role</option>
-                <option value="USER">USER</option>
-                <option value="ADMIN">ADMIN</option>
+                <option value={addAttendeeDto.userRole}>{addAttendeeDto.userRole}</option>
+                {addAttendeeDto.userRole === 'USER' ? (
+                    <option value="ADMIN">ADMIN</option>
+                ) : (
+                    <option value="USER">USER</option>
+                )}
             </StyledFormSelect>
 
             <ActionButtonsGroup>
