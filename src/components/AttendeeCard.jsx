@@ -17,7 +17,7 @@ const AttendeeCard = ({ attendee }) => {
 
     return (
         <Card onClick={handleClick}>
-            <AttendeeCardContent>{attendee.firstName + " " + attendee.lastName}</AttendeeCardContent>
+            <AttendeeCardContent>{attendee.userDto.email}</AttendeeCardContent>
         </Card>
     );
 };

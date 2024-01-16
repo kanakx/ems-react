@@ -81,7 +81,6 @@ const AttendeeDetailsPage = () => {
     return (
         <PageLayout>
             <Card>
-                <AttendeeName>{'Attendee' + ' ' + attendee.idAttendee}</AttendeeName>
                 <DetailItem>
                     <Label>First name:</Label>
                     <Value>{attendee.firstName}</Value>
