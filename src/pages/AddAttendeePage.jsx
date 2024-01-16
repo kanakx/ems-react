@@ -5,7 +5,6 @@ import {toast} from "react-toastify";
 import {saveAttendee} from "../services/attendeeService.js";
 import AttendeeForm from "../components/AttendeeForm.jsx";
 
-//TODO potentially generic component
 const AddAttendeePage = () => {
     const navigate = useNavigate();
 

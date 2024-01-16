@@ -9,7 +9,6 @@ import PageLayout from "../components/PageLayout.jsx";
 import {deleteAttendeeById, getAttendeeById} from "../services/attendeeService.js";
 import {toast} from 'react-toastify';
 
-//TODO SAME
 const AttendeeName = styled.h3`
     color: ${props => props.theme.colors.primary};
     margin-bottom: ${props => props.theme.spacing.small};

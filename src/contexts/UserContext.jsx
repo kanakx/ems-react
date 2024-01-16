@@ -11,6 +11,7 @@ export const UserContextProvider = ({children}) => {
 
     const [isAuth, setIsAuth] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [idUser, setIdUser] = useState(null);
     const [attendee, setAttendee] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -43,6 +44,8 @@ export const UserContextProvider = ({children}) => {
                 setIsAdmin(isUserAdmin);
 
                 const idUser = decodedToken.sub;
+                setIdUser(idUser);
+
                 return getAttendeeById(idUser);
             })
             .then(fetchedAttendee => {

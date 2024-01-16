@@ -7,7 +7,6 @@ import {toast} from "react-toastify";
 import {getAttendeeById, updateAttendeeById} from "../services/attendeeService.js";
 import AttendeeForm from "../components/AttendeeForm.jsx";
 
-//TODO potentially generic component - pass functions to edit and delete
 const EditAttendeePage = () => {
     const {idAttendee} = useParams();
     const navigate = useNavigate();
