@@ -16,7 +16,7 @@ const AdminPanelPage = () => {
                     Attendee
                 </StyledButton>
 
-                <StyledButton onClick={() => navigate('/attendeeEvents')}>
+                <StyledButton onClick={() => navigate('/attendees-events')}>
                     AttendeeEvents
                 </StyledButton>
             </Card>

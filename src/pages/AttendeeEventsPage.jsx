@@ -53,7 +53,7 @@ const AttendeeEventsPage = () => {
                 <>
                     <GenericItemPaginator
                         items={attendeeEvents}
-                        pageSize={2}
+                        pageSize={1}
                         renderItem={(attendeeEvent) => (
                             <AttendeeEventCard
                                 key={attendeeEvent.idAttendeeEvent}
