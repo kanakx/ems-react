@@ -2,7 +2,7 @@
 
 ## Overview
 
-The EMS Frontend layer crafted to deliver reactive user experience. Built with React and Vite, it focuses on providing an intuitive interface for event browsing, registration, and administration. 
+The EMS Frontend layer crafted to deliver a reactive user experience. Built with React and Vite, it focuses on providing an intuitive interface for event browsing, registration, and administration. 
 
 ## Key Features
 
@@ -10,10 +10,8 @@ The EMS Frontend layer crafted to deliver reactive user experience. Built with R
 - **Admin Panel**: A powerful admin dashboard for managing events, users, and other system settings.
 - **User Profile Management**: Users can manage their profiles, track event participation, and customize their experience.
 - **JWT User Role Management**: Implements JSON Web Tokens (JWT) for secure user role management and access control.
-- **Multi-Language Functionality**: Supports multiple languages, enhancing accessibility and user engagement.
 
-## Related Services
+## Related Repos
 
-- [API Gateway](https://github.com/your-github/ems-api-gateway) - Routes requests to appropriate backend services.
-- [Data Service](https://github.com/your-github/ems-data-service) - Manages the storage, processing, and retrieval of business data.
-- [AuthService](https://github.com/your-github/ems-auth-service) - Handles authentication and authorization of users.
+- [ems-api-monolith](https://github.com/kanakx/ems-api-spring.git) - A comprehensive backend service combining all business logic and data management in a single application, ideal for streamlined deployment and maintenance.
+- [ems-api-microservices](https://github.com/kanakx/ems-api-microservices.git) - A set of independent microservices, each responsible for specific functionalities, promoting scalability and modular development.
